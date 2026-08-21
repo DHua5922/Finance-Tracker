@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@dhua5922/react-kit/style.css";
 import "./globals.css";
+import styles from "./layout.module.css";
 import Footer from "./_components/Footer";
+import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +25,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${styles.htmlRoot}`}
     >
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-50">
+      <body className={styles.bodyRoot}>
+        <a href={`#${MAIN_CONTENT_ID}`} className={styles.skipLink}>
+          Skip to main content
+        </a>
         {children}
         <Footer />
       </body>
