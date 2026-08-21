@@ -1,5 +1,6 @@
 import GetStartedButton from "@/features/auth/components/GetStartedButton";
 import Card from "@/shared/components/Card";
+import styles from "./Hero.module.css";
 
 const barHeights = [48, 64, 52, 70, 60, 82, 100];
 
@@ -21,7 +22,7 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <GetStartedButton className="rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300" />
+          <GetStartedButton className={styles.ctaButton} />
         </div>
 
         <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
@@ -31,7 +32,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-emerald-950/30">
+      <div className={styles.previewPanel}>
         <Card className="overflow-hidden border-slate-800 bg-slate-900 p-0">
           <DashboardHeader />
 
@@ -60,7 +61,7 @@ function MetricPill({ label, value }: { label: string; value: string }) {
 
 function DashboardHeader() {
   return (
-    <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
+    <div className={styles.dashboardHeader}>
       <div className="flex items-center gap-2">
         <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
@@ -78,14 +79,12 @@ function BalanceCard() {
     <div className="rounded-2xl bg-slate-800 p-4">
       <div className="flex items-center justify-between text-sm text-slate-300">
         <span>Monthly balance</span>
-        <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300">
-          +12.4%
-        </span>
+        <span className={styles.balanceChangeBadge}>+12.4%</span>
       </div>
 
       <div className="mt-3 text-3xl font-bold text-white">$24,680</div>
 
-      <div className="mt-5 h-24 rounded-xl bg-gradient-to-r from-emerald-500/20 via-sky-500/10 to-transparent p-3">
+      <div className={styles.chartWrapper}>
         <div className="flex h-full items-end gap-2">
           {barHeights.map((height) => (
             <span
