@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 import "@dhua5922/react-kit/style.css";
 import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
 import "./globals.css";
@@ -21,7 +22,10 @@ export const metadata: Metadata = {
   description: "Simple financial planning for modern life.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+interface Props {
+  children: ReactNode;
+}
+export default function RootLayout({ children }: Props) {
   return (
     <html
       lang="en"
