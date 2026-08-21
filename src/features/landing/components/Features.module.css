@@ -1,0 +1,13 @@
+@reference "../../../app/globals.css";
+
+.featureCard {
+  @apply bg-slate-900 p-6 text-left;
+}
+
+.featureIcon {
+  @apply mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-400/15 text-xl text-emerald-300;
+}
+
+.featureDescription {
+  @apply mt-3 text-slate-600;
+}

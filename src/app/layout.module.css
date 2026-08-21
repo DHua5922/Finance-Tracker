@@ -1,0 +1,17 @@
+@reference "./globals.css";
+
+.htmlRoot {
+  @apply h-full antialiased;
+}
+
+.bodyRoot {
+  @apply flex min-h-full flex-col bg-slate-950 text-slate-50;
+}
+
+.skipLink {
+  @apply sr-only;
+
+  &:focus-visible {
+    @apply not-sr-only absolute left-4 top-4 z-50 rounded-md bg-white px-4 py-2 font-medium text-slate-900;
+  }
+}

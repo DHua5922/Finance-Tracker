@@ -5,22 +5,30 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "quality:check": "pnpm lint && pnpm check:unused && pnpm typescript:check",
     "start": "next start",
     "lint": "biome check",
-    "format": "pnpm lint --write"
+    "format": "biome format --write",
+    "size": "pnpm build && size-limit",
+    "check:unused": "pnpm knip",
+    "typescript:check": "tsc -b"
   },
   "dependencies": {
+    "@dhua5922/react-kit": "^3.0.1",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
+    "@size-limit/preset-app": "^13.0.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "knip": "^6.32.2",
+    "size-limit": "^13.0.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

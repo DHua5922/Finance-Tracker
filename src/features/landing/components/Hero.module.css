@@ -1,0 +1,21 @@
+@reference "../../../app/globals.css";
+
+.ctaButton {
+  @apply rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300;
+}
+
+.previewPanel {
+  @apply rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-emerald-950/30;
+}
+
+.dashboardHeader {
+  @apply flex items-center justify-between border-b border-slate-800 px-4 py-3;
+}
+
+.balanceChangeBadge {
+  @apply rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300;
+}
+
+.chartWrapper {
+  @apply mt-5 h-24 rounded-xl bg-gradient-to-r from-emerald-500/20 via-sky-500/10 to-transparent p-3;
+}
