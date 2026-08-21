@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@dhua5922/react-kit':
+        specifier: ^3.0.1
+        version: 3.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next:
         specifier: 16.3.1
         version: 16.3.1(@types/node@20.19.43)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -126,6 +129,12 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@dhua5922/react-kit@3.0.1':
+    resolution: {integrity: sha512-9LJ3kePO5xnJpzCfu9XiT2nNygXpJ+12jXbAmi3MPi7qoZqdkTFXwiqf9Kd59YLJ3UGL33f80T+9TLBru9BT8A==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@emnapi/core@1.11.2':
     resolution: {integrity: sha512-TC8MkTuZUtcTSiFeuC0ksCh9QIJ5+F21MvZ4Wn4ORfYaFJ/0dsiudv5tVkejgwZlwQ39jL9WWDe2lz8x0WglOA==}
@@ -861,6 +870,9 @@ packages:
     resolution: {integrity: sha512-7hvf7/GW8e86rW0ptuwS3OcBGDjIi6SZva7hCyWC0yYry2cOPmLIjXAUHI6DK2HsnwJd9ifmt57i8eV2n4YNpw==}
     engines: {node: '>= 14'}
 
+  date-fns@4.4.0:
+    resolution: {integrity: sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==}
+
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
     engines: {node: '>=6.0'}
@@ -1410,6 +1422,12 @@ snapshots:
   '@biomejs/cli-win32-x64@2.4.2':
     optional: true
 
+  '@dhua5922/react-kit@3.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      date-fns: 4.4.0
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+
   '@emnapi/core@1.11.2':
     dependencies:
       '@emnapi/wasi-threads': 1.2.2
@@ -1939,6 +1957,8 @@ snapshots:
   csstype@3.2.3: {}
 
   data-uri-to-buffer@6.0.2: {}
+
+  date-fns@4.4.0: {}
 
   debug@4.4.3:
     dependencies:
