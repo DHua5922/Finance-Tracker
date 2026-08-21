@@ -6,7 +6,7 @@ export default function Label({
   ...props
 }: LabelHTMLAttributes<HTMLLabelElement>) {
   return (
-    // biome-ignore lint/a11y/noLabelWithoutControl: <explanation>
+    // biome-ignore lint/a11y/noLabelWithoutControl: reusable label wrapper is paired with controls at call sites
     <label
       className={cn("text-sm font-medium text-slate-700", className)}
       {...props}

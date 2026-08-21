@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 import { cn } from "../utilities/css";
 
 export default function Input({

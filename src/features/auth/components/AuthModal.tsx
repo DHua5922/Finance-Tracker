@@ -1,10 +1,10 @@
-import Modal from "@/shared/components/Modal";
-import SignUpForm from "./SignUpForm";
-import LoginForm from "./LoginForm";
-import type { ComponentProps } from "react";
-import { cn } from "@/shared/utilities/css";
-import Button from "@/shared/components/Button";
 import { Modal as DefaultModal } from "@dhua5922/react-kit";
+import type { ComponentProps } from "react";
+import Button from "@/shared/components/Button";
+import Modal from "@/shared/components/Modal";
+import { cn } from "@/shared/utilities/css";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
 interface Props extends ComponentProps<typeof Modal> {
   isLogin: boolean;
