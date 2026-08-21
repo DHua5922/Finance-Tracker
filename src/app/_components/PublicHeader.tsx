@@ -1,20 +1,17 @@
 import GetStartedButton from "@/features/auth/components/GetStartedButton";
+import styles from "./PublicHeader.module.css";
 
 export default function PublicHeader() {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-sm font-bold text-slate-950">
-            F
-          </div>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <div className={styles.brandRow}>
+          <div className={styles.brandBadge}>F</div>
 
-          <span className="text-lg font-semibold tracking-tight">
-            FinanceFlow
-          </span>
+          <span className={styles.brandText}>FinanceFlow</span>
         </div>
 
-        <GetStartedButton className="rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300" />
+        <GetStartedButton className={styles.ctaButton} />
       </nav>
     </header>
   );

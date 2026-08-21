@@ -5,7 +5,7 @@
 }
 
 .bodyRoot {
-  @apply flex min-h-full flex-col bg-slate-950 text-slate-50;
+  @apply flex min-h-full flex-col bg-background text-foreground;
 }
 
 .skipLink {

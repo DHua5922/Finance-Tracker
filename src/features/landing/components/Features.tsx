@@ -23,11 +23,11 @@ export default function Features() {
   return (
     <section id="features" className="py-8">
       <div className="mb-8 text-center">
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-emerald-300">
+        <p className="text-sm font-medium uppercase tracking-[0.25em] text-[var(--accent-foreground)]">
           features
         </p>
 
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--foreground)]">
           Everything you need to grow your money confidently.
         </h2>
       </div>

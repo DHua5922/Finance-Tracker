@@ -5,6 +5,7 @@ import "@dhua5922/react-kit/style.css";
 import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
 import "./globals.css";
 import Footer from "./_components/Footer";
+import ThemeToggle from "./_components/ThemeToggle";
 import styles from "./layout.module.css";
 
 const geistSans = Geist({
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 interface Props {
   children: ReactNode;
 }
+
 export default function RootLayout({ children }: Props) {
   return (
     <html
@@ -35,8 +37,11 @@ export default function RootLayout({ children }: Props) {
         <a href={`#${MAIN_CONTENT_ID}`} className={styles.skipLink}>
           Skip to main content
         </a>
+
         {children}
+
         <Footer />
+        <ThemeToggle />
       </body>
     </html>
   );

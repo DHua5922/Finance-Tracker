@@ -1,0 +1,13 @@
+@reference "../globals.css";
+
+.footer {
+  @apply border-t border-white/10 py-8;
+}
+
+.content {
+  @apply mx-auto flex max-w-6xl items-center justify-between px-6 text-sm text-[var(--muted-foreground)];
+}
+
+.contactButton {
+  @apply hover:text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-slate-600 focus:ring-offset-4;
+}
