@@ -1,10 +1,6 @@
-import Button from "@/shared/components/Button";
+import GetStartedButton from "@/features/auth/components/GetStartedButton";
 
-interface Props {
-  onClickGetStarted: () => void;
-}
-
-export default function PublicHeader({ onClickGetStarted }: Props) {
+export default function PublicHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -18,13 +14,7 @@ export default function PublicHeader({ onClickGetStarted }: Props) {
           </span>
         </div>
 
-        <Button
-          type="button"
-          className="rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300"
-          onClick={onClickGetStarted}
-        >
-          Get started
-        </Button>
+        <GetStartedButton className="rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300" />
       </nav>
     </header>
   );

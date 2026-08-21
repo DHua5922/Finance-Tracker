@@ -1,13 +1,9 @@
-import Button from "@/shared/components/Button";
+import GetStartedButton from "@/features/auth/components/GetStartedButton";
 import Card from "@/shared/components/Card";
-
-interface Props {
-  onClick: () => void;
-}
 
 const barHeights = [48, 64, 52, 70, 60, 82, 100];
 
-export default function Hero({ onClick }: Props) {
+export default function Hero() {
   return (
     <section className="grid items-center gap-10 pb-20 pt-8 lg:grid-cols-[1.2fr_0.8fr] lg:pt-16">
       <div>
@@ -25,39 +21,26 @@ export default function Hero({ onClick }: Props) {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <Button
-            type="button"
-            className="rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300"
-            onClick={() => onClick()}
-          >
-            Start free
-          </Button>
-
-          <button
-            type="button"
-            className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-base font-medium text-white transition hover:bg-white/10"
-          >
-            View demo
-          </button>
+          <GetStartedButton className="rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300" />
         </div>
 
         <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
-          <HeroStat label="faster planning" statText="2.4x" />
-          <HeroStat label="saved monthly" statText="$18k" />
-          <HeroStat label="user retention" statText="96%" />
+          <MetricPill label="faster planning" value="2.4x" />
+          <MetricPill label="saved monthly" value="$18k" />
+          <MetricPill label="user retention" value="96%" />
         </div>
       </div>
 
       <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-emerald-950/30">
         <Card className="overflow-hidden border-slate-800 bg-slate-900 p-0">
-          <Header />
+          <DashboardHeader />
 
           <div className="space-y-5 p-5">
-            <MonthlyBalance />
+            <BalanceCard />
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <SampleState label="Income" amount="$8,430" />
-              <SampleState label="Expenses" amount="$3,210" />
+              <StatCard label="Income" amount="$8,430" />
+              <StatCard label="Expenses" amount="$3,210" />
             </div>
           </div>
         </Card>
@@ -66,16 +49,16 @@ export default function Hero({ onClick }: Props) {
   );
 }
 
-function HeroStat({ label, statText }: { label: string; statText: string }) {
+function MetricPill({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-2xl font-bold text-white">{statText}</div>
+      <div className="text-2xl font-bold text-white">{value}</div>
       <div>{label}</div>
     </div>
   );
 }
 
-function Header() {
+function DashboardHeader() {
   return (
     <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
       <div className="flex items-center gap-2">
@@ -90,7 +73,7 @@ function Header() {
   );
 }
 
-function MonthlyBalance() {
+function BalanceCard() {
   return (
     <div className="rounded-2xl bg-slate-800 p-4">
       <div className="flex items-center justify-between text-sm text-slate-300">
@@ -117,7 +100,7 @@ function MonthlyBalance() {
   );
 }
 
-function SampleState({ amount, label }: { amount: string; label: string }) {
+function StatCard({ amount, label }: { amount: string; label: string }) {
   return (
     <div className="rounded-2xl bg-slate-800 p-4">
       <div className="text-sm text-slate-300">{label}</div>
