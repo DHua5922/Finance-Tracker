@@ -1,21 +1,135 @@
-@reference "../../../app/globals.css";
+.heroSection {
+  display: grid;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.badge {
+  display: inline-flex;
+  border: 1px solid rgb(52 211 153 / 0.3);
+  border-radius: 9999px;
+  background: rgb(52 211 153 / 0.1);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-foreground);
+}
+
+.heading {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+.description {
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--muted-foreground);
+}
 
 .ctaButton {
-  @apply rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300;
+  border-radius: 9999px;
+  background: #34d399;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #020617;
+
+  &:hover {
+    background: #6ee7b7;
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--focus-outline);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px var(--focus-halo);
+  }
+}
+
+.metricsRow {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
 }
 
 .previewPanel {
-  @apply rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-emerald-950/30;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.5rem;
+  background: rgb(15 23 42 / 0.8);
+  padding: 1.25rem;
+  box-shadow: 0 25px 50px -12px rgb(2 44 34 / 0.3);
 }
 
 .dashboardHeader {
-  @apply flex items-center justify-between border-b border-slate-800 px-4 py-3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e293b;
+  padding: 0.75rem 1rem;
 }
 
 .balanceChangeBadge {
-  @apply rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300;
+  border-radius: 9999px;
+  background: rgb(16 185 129 / 0.15);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: #6ee7b7;
+}
+
+.balanceHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #cbd5e1;
 }
 
 .chartWrapper {
-  @apply mt-5 h-24 rounded-xl bg-gradient-to-r from-emerald-500/20 via-sky-500/10 to-transparent p-3;
+  margin-top: 1.25rem;
+  height: 6rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    to right,
+    rgb(16 185 129 / 0.2),
+    rgb(14 165 233 / 0.1),
+    transparent
+  );
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .heading {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    grid-template-columns: 1.2fr 0.8fr;
+    padding-top: 4rem;
+  }
+
+  .heading {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
 }

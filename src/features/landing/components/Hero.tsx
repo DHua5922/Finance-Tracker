@@ -6,17 +6,15 @@ const barHeights = [48, 64, 52, 70, 60, 82, 100];
 
 export default function Hero() {
   return (
-    <section className="grid items-center gap-10 pb-20 pt-8 lg:grid-cols-[1.2fr_0.8fr] lg:pt-16">
+    <section className={styles.heroSection}>
       <div>
-        <span className="inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-emerald-300">
-          smarter money habits
-        </span>
+        <span className={styles.badge}>smarter money habits</span>
 
-        <h1 className="mt-6 max-w-xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 className={styles.heading}>
           Take control of your finances, one smart step at a time.
         </h1>
 
-        <p className="mt-5 max-w-lg text-lg text-slate-300">
+        <p className={styles.description}>
           Track spending, plan ahead, and build confidence with a simple
           dashboard designed to help you stay on top of every dollar.
         </p>
@@ -25,7 +23,7 @@ export default function Hero() {
           <GetStartedButton className={styles.ctaButton} />
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
+        <div className={styles.metricsRow}>
           <MetricPill label="faster planning" value="2.4x" />
           <MetricPill label="saved monthly" value="$18k" />
           <MetricPill label="user retention" value="96%" />
@@ -53,7 +51,7 @@ export default function Hero() {
 function MetricPill({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-2xl font-bold text-white">{value}</div>
+      <div className="text-2xl font-bold text-foreground">{value}</div>
       <div>{label}</div>
     </div>
   );
@@ -67,7 +65,7 @@ function DashboardHeader() {
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
       </div>
-      <span className="text-xs uppercase tracking-[0.2em] text-slate-700">
+      <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
         overview
       </span>
     </div>
@@ -77,7 +75,7 @@ function DashboardHeader() {
 function BalanceCard() {
   return (
     <div className="rounded-2xl bg-slate-800 p-4">
-      <div className="flex items-center justify-between text-sm text-slate-300">
+      <div className={styles.balanceHeader}>
         <span>Monthly balance</span>
         <span className={styles.balanceChangeBadge}>+12.4%</span>
       </div>
