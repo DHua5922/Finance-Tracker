@@ -67,3 +67,35 @@ jobs:
 
       - name: Check Bundle Size
         run: pnpm run size
+  
+  component-tests:
+    name: Component Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.PNPM_VERSION }}
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node ${{ env.NODE_VERSION }} Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install Dependencies
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          pnpm install --frozen-lockfile
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Production Bundle
+        run: pnpm build
+
+      - name: Run Component Tests
+        run: pnpm run test:component
