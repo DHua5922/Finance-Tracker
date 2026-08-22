@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
-import { afterEach } from "vitest";
+import { afterAll, afterEach, beforeAll } from "vitest";
+import { server } from "./server";
 
 if (typeof HTMLDialogElement !== "undefined") {
   if (!HTMLDialogElement.prototype.showModal) {
@@ -23,5 +24,14 @@ if (typeof HTMLDialogElement !== "undefined") {
 }
 
 afterEach(() => {
+  server.resetHandlers();
   cleanup();
+});
+
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: "error" });
+});
+
+afterAll(() => {
+  server.close();
 });

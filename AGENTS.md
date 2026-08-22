@@ -2,7 +2,7 @@
 
 # Project Rules for GitHub Copilot & Codex
 
-- **Tech Stack**: Next.js (App Router), TypeScript, Tailwind CSS, CSS Modules, React Testing Library, vitest, Mock Service Worker.
+- **Tech Stack**: Next.js (App Router), TypeScript, Tailwind CSS, CSS Modules, React Testing Library, vitest, Mock Service Worker (MSW).
 - **RSC Default**: Every page or layout is a React Server Component by default. Do not add 'use client' unless explicitly handling state hooks (useState), lifecycle hooks (useEffect), or DOM event handlers.
 - **Async Routing**: In this version of Next.js, `params` and `searchParams` in pages/layouts are Promises. You MUST `await` them before reading their properties.
 - **Component Colocation**: Keep sub-components, tests, and styles right next to the page route folder. Do not create a global `/components` folder unless the element is universally shared.
@@ -12,5 +12,7 @@
 - **CSS Structure**: Use inline tailwind CSS classnames in HTML5 elements by default. If a tailwind classname is too long or it is doing complex custom animations / interactions, move it to CSS modules and convert to CSS3. For selectors and interactions in CSS modules, use & and nest it. Make sure to account for dark and light mode.
 - **API Structure**: Place API calls in `api.ts` file for the feature. If `api.ts` file is too long, split that file into several files and group those files into a folder by noun.
 - **Zod Schema Structure**: If schemas are used in more than 1 file for that feature, place it in `schemas.ts`. If schemas.ts is too long, break it into separate files and group them in a single folder called `schemas`.
+- **Component Tests Structure**: Create a file using name: `{component name}.component.test.tsx`. Replace `{component name}` with name of component. Colocate the file with the component. In that file, write component tests without mocking anything. Make sure the component has logic worth testing. If there are more than 1 tests in the file, wrap in `describe` and label meaningfully.
+- **Integration Tests Structure**: Create a file using name: `{noun}.integrations.test.tsx`. Replace `{noun}` with the appropriate parent folder name in `features` folder. Make sure the integration test is testing the wiring (success, error, and loading scenarios) that are worth testing and not covered by the component tests. Place the file in `tests` folder. If that folder is already populated, create `integrations` folder within `tests` folder and place that integration test in the `integrations` folder. For setting up mock server, place them in `shared/test` folder. Separate mock endpoints from integration tests by colocating it. If there are more than one tests in the file, wrap it in `describe` and label meaningfully.
 
 <!-- END:nextjs-agent-rules -->
