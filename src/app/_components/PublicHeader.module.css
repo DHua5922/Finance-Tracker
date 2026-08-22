@@ -1,25 +1,33 @@
-@reference "../globals.css";
-
 .header {
-  @apply sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 text-slate-50 backdrop-blur-md;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(2 6 23 / 0.8);
+  color: #f8fafc;
+  backdrop-filter: blur(12px);
 }
 
 .nav {
-  @apply mx-auto flex max-w-6xl items-center justify-between px-6 py-4;
-}
-
-.brandRow {
-  @apply flex items-center gap-3;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 72rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
 }
 
 .brandBadge {
-  @apply flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-sm font-bold text-slate-950;
-}
-
-.brandText {
-  @apply text-lg font-semibold tracking-tight;
-}
-
-.ctaButton {
-  @apply rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300;
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: #10b981;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  color: #020617;
 }

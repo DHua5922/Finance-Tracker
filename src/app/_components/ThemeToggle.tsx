@@ -31,7 +31,9 @@ export default function ThemeToggle() {
 
   const buttonClassName = cn(
     styles.toggleButton,
-    isMounted && theme === "light" && styles.light,
+    isMounted &&
+      theme === "light" &&
+      "border-slate-300 bg-white text-slate-900 hover:bg-slate-100",
   );
 
   return (

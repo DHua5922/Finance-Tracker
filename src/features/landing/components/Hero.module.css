@@ -1,69 +1,129 @@
-@reference "../../../app/globals.css";
-
 .heroSection {
-  @apply grid items-center gap-10 pb-20 pt-8 lg:grid-cols-[1.2fr_0.8fr] lg:pt-16;
+  display: grid;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
 }
 
 .badge {
-  @apply inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent-foreground)];
+  display: inline-flex;
+  border: 1px solid rgb(52 211 153 / 0.3);
+  border-radius: 9999px;
+  background: rgb(52 211 153 / 0.1);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-foreground);
 }
 
 .heading {
-  @apply mt-6 max-w-xl text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl;
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
 }
 
 .description {
-  @apply mt-5 max-w-lg text-lg text-[var(--muted-foreground)];
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--muted-foreground);
 }
 
 .ctaButton {
-  @apply rounded-full bg-emerald-400 px-6 py-3 text-base text-slate-950 hover:bg-emerald-300;
+  border-radius: 9999px;
+  background: #34d399;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #020617;
+
+  &:hover {
+    background: #6ee7b7;
+  }
 }
 
 .metricsRow {
-  @apply mt-10 flex flex-wrap gap-6 text-sm text-[var(--muted-foreground)];
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
 }
 
 .previewPanel {
-  @apply rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-emerald-950/30;
-}
-
-.previewCard {
-  @apply overflow-hidden border-slate-800 bg-slate-900 p-0;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.5rem;
+  background: rgb(15 23 42 / 0.8);
+  padding: 1.25rem;
+  box-shadow: 0 25px 50px -12px rgb(2 44 34 / 0.3);
 }
 
 .dashboardHeader {
-  @apply flex items-center justify-between border-b border-slate-800 px-4 py-3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e293b;
+  padding: 0.75rem 1rem;
 }
 
 .balanceChangeBadge {
-  @apply rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300;
-}
-
-.balanceCard {
-  @apply rounded-2xl bg-slate-800 p-4;
+  border-radius: 9999px;
+  background: rgb(16 185 129 / 0.15);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: #6ee7b7;
 }
 
 .balanceHeader {
-  @apply flex items-center justify-between text-sm text-slate-300;
-}
-
-.balanceValue {
-  @apply mt-3 text-3xl font-bold text-white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #cbd5e1;
 }
 
 .chartWrapper {
-  @apply mt-5 h-24 rounded-xl bg-gradient-to-r from-emerald-500/20 via-sky-500/10 to-transparent p-3;
+  margin-top: 1.25rem;
+  height: 6rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    to right,
+    rgb(16 185 129 / 0.2),
+    rgb(14 165 233 / 0.1),
+    transparent
+  );
+  padding: 0.75rem;
 }
 
-.statCard {
-  @apply rounded-2xl bg-slate-800 p-4;
+@media (min-width: 640px) {
+  .heading {
+    font-size: 3rem;
+    line-height: 1;
+  }
 }
 
-.statLabel {
-  @apply text-sm text-slate-300;
-}
+@media (min-width: 1024px) {
+  .heroSection {
+    grid-template-columns: 1.2fr 0.8fr;
+    padding-top: 4rem;
+  }
 
-.statAmount {
-  @apply mt-2 text-2xl font-semibold text-white;
+  .heading {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
 }

@@ -1,13 +1,37 @@
-@reference "../globals.css";
-
 .footer {
-  @apply border-t border-white/10 py-8;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .content {
-  @apply mx-auto flex max-w-6xl items-center justify-between px-6 text-sm text-[var(--muted-foreground)];
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 72rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
 }
 
 .contactButton {
-  @apply hover:text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-slate-600 focus:ring-offset-4;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: var(--foreground);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px #475569;
+    outline: 4px solid transparent;
+    outline-offset: 4px;
+  }
 }

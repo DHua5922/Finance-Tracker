@@ -34,14 +34,14 @@ export default function Features() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {features.map((feature) => (
-          <Card key={feature.title} className={styles.featureCard}>
+          <Card key={feature.title} className="bg-slate-900 p-6 text-left">
             <div className={styles.featureIcon}>✓</div>
 
             <h3 className="text-xl font-semibold text-white">
               {feature.title}
             </h3>
 
-            <p className={styles.featureDescription}>{feature.description}</p>
+            <p className="mt-3 text-slate-300">{feature.description}</p>
           </Card>
         ))}
       </div>

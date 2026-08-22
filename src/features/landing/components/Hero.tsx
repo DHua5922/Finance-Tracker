@@ -31,7 +31,7 @@ export default function Hero() {
       </div>
 
       <div className={styles.previewPanel}>
-        <Card className={styles.previewCard}>
+        <Card className="overflow-hidden border-slate-800 bg-slate-900 p-0">
           <DashboardHeader />
 
           <div className="space-y-5 p-5">
@@ -74,13 +74,13 @@ function DashboardHeader() {
 
 function BalanceCard() {
   return (
-    <div className={styles.balanceCard}>
+    <div className="rounded-2xl bg-slate-800 p-4">
       <div className={styles.balanceHeader}>
         <span>Monthly balance</span>
         <span className={styles.balanceChangeBadge}>+12.4%</span>
       </div>
 
-      <div className={styles.balanceValue}>$24,680</div>
+      <div className="mt-3 text-3xl font-bold text-white">$24,680</div>
 
       <div className={styles.chartWrapper}>
         <div className="flex h-full items-end gap-2">
@@ -99,9 +99,9 @@ function BalanceCard() {
 
 function StatCard({ amount, label }: { amount: string; label: string }) {
   return (
-    <div className={styles.statCard}>
-      <div className={styles.statLabel}>{label}</div>
-      <div className={styles.statAmount}>{amount}</div>
+    <div className="rounded-2xl bg-slate-800 p-4">
+      <div className="text-sm text-slate-300">{label}</div>
+      <div className="mt-2 text-2xl font-semibold text-white">{amount}</div>
     </div>
   );
 }

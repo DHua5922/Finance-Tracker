@@ -31,9 +31,9 @@ export default function RootLayout({ children }: Props) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${styles.htmlRoot}`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className={styles.bodyRoot}>
+      <body className="flex min-h-full flex-col bg-background text-foreground">
         <a href={`#${MAIN_CONTENT_ID}`} className={styles.skipLink}>
           Skip to main content
         </a>

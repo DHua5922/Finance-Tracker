@@ -1,17 +1,29 @@
-@reference "./globals.css";
-
-.htmlRoot {
-  @apply h-full antialiased;
-}
-
-.bodyRoot {
-  @apply flex min-h-full flex-col bg-background text-foreground;
-}
-
 .skipLink {
-  @apply sr-only;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-  &:focus-visible {
-    @apply not-sr-only absolute left-4 top-4 z-50 rounded-md bg-white px-4 py-2 font-medium text-slate-900;
-  }
+.skipLink:focus-visible {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 50;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: #0f172a;
 }
