@@ -1,12 +1,16 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import SignUpForm from "../../components/SignUpForm";
 import {
+  mockErrorLogin,
   mockRegistrationFailure,
+  mockSuccessfulLogin,
   mockSuccessfulRegistration,
 } from "./auth.integrations.mock";
+import LoginForm from "../../components/LoginForm";
+import { redirect } from "next/navigation";
 
 let receivedRequestBody: unknown;
 
@@ -14,8 +18,20 @@ beforeEach(() => {
   receivedRequestBody = undefined;
 });
 
-describe("auth integration", () => {
-  it("submits signup form and sends expected payload", async () => {
+vi.mock("next/navigation", () => {
+  return {
+    redirect: vi.fn(),
+    // Include these if your components or actions use them
+    useRouter: () => ({
+      push: vi.fn(),
+      replace: vi.fn(),
+    }),
+    usePathname: () => "/",
+  };
+});
+
+describe("Registration", () => {
+  it("submits signup form", async () => {
     const user = userEvent.setup();
     mockSuccessfulRegistration((body) => {
       receivedRequestBody = body;
@@ -68,4 +84,29 @@ describe("auth integration", () => {
 
     expect(await screen.findByText("Email already exists")).toBeInTheDocument();
   });
+});
+
+describe("Login", () => {
+  it("should submit login form", async () => {
+    mockSuccessfulLogin();
+    await renderLoginForm();
+
+    expect(redirect).toHaveBeenCalledWith("/dashboard");
+  });
+
+  it("should show error message on login failure", async () => {
+    mockErrorLogin();
+    await renderLoginForm();
+
+    expect(await screen.findByText("Invalid credentials")).toBeInTheDocument();
+  });
+
+  async function renderLoginForm() {
+    const user = userEvent.setup();
+    render(<LoginForm />);
+
+    await user.type(screen.getByLabelText(/Email/i), "email@example.com");
+    await user.type(screen.getByLabelText(/Password/i), "test123");
+    await user.click(screen.getByRole("button", { name: "Log in" }));
+  }
 });

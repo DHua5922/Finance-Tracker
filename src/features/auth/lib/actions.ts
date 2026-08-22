@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import {
   createFetchInstance,
@@ -13,6 +14,12 @@ const userSchema = z.object({
   _id: z.string(),
   username: z.string(),
   email: z.email(),
+});
+type User = z.infer<typeof userSchema>;
+
+const logInUserFormDataSchema = z.object({
+  email: z.email(),
+  password: z.string(),
 });
 
 const authBackendFetch = createFetchInstance({
@@ -37,4 +44,36 @@ export async function signUpUserAction(values: unknown) {
   }
 
   return userSchema.parse(await response.json());
+}
+
+interface LogInActionResult {
+  isError?: boolean;
+  errorMessage?: string;
+}
+export async function logInAction(
+  _prevState: unknown,
+  formData: FormData,
+): Promise<LogInActionResult> {
+  const payload = logInUserFormDataSchema.parse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  const response = await authBackendFetch(
+    buildAuthApiUrl(AUTH_API_ROUTES.login),
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+    },
+  );
+  const isError = !response.ok;
+
+  if (isError) {
+    return {
+      isError,
+      errorMessage: await parseFetchErrorMessage(response),
+    };
+  }
+
+  redirect("/dashboard");
 }

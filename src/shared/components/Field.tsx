@@ -4,8 +4,8 @@ import Label from "./Label";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   label: string;
   required?: boolean;
-  isError: boolean;
-  errorMessage: string;
+  isError?: boolean;
+  errorMessage?: string;
   children: React.ReactNode;
   htmlFor: string;
 }
