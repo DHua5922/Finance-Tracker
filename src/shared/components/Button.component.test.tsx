@@ -1,16 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { expectNoA11yViolations } from "@/shared/test/setup";
 import Button from "./Button";
 
 describe("Button", () => {
-  it("renders children when not loading", () => {
-    render(<Button>Submit</Button>);
+  it("renders children when not loading", async () => {
+    const { container } = render(<Button>Submit</Button>);
 
     const button = screen.getByRole("button", { name: "Submit" });
 
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent("Submit");
     expect(button).toHaveAttribute("aria-busy", "false");
+    await expectNoA11yViolations(container);
   });
 
   it("renders loading text and hides children when loading", () => {

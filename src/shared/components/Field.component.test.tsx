@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { expectNoA11yViolations } from "@/shared/test/setup";
 import Field from "./Field";
 
 describe("Field", () => {
-  it("renders label and associates it to child input", () => {
-    render(
+  it("renders label and associates it to child input", async () => {
+    const { container } = render(
       <Field htmlFor="email" label="Email" isError={false} errorMessage="">
         <input id="email" type="email" />
       </Field>,
@@ -16,6 +17,7 @@ describe("Field", () => {
     expect(label).toBeInTheDocument();
     expect(label.tagName).toBe("LABEL");
     expect(input).toHaveAttribute("id", "email");
+    await expectNoA11yViolations(container);
   });
 
   it("renders required indicator when required is true", () => {

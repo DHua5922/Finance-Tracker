@@ -1,7 +1,27 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
-import { afterAll, afterEach, beforeAll } from "vitest";
+import * as axe from "axe-core";
+import { afterAll, afterEach, beforeAll, expect } from "vitest";
 import { server } from "./server";
+
+export async function expectNoA11yViolations(
+  container: HTMLElement | Document,
+) {
+  const results = await axe.run(container as HTMLElement | Document, {
+    rules: {
+      "color-contrast": { enabled: true },
+      "link-name": { enabled: true },
+      "button-name": { enabled: true },
+      label: { enabled: true },
+      "aria-allowed-attr": { enabled: true },
+      "aria-required-attr": { enabled: true },
+      "aria-valid-attr-value": { enabled: true },
+    },
+    tags: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+  });
+
+  expect(results.violations).toHaveLength(0);
+}
 
 if (typeof HTMLDialogElement !== "undefined") {
   if (!HTMLDialogElement.prototype.showModal) {

@@ -2,15 +2,17 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, it } from "vitest";
+import { expectNoA11yViolations } from "@/shared/test/setup";
 import AuthModal from "./AuthModal";
 
-it("renders login content by default", () => {
-  render(<AuthModalSample />);
+it("renders login content by default", async () => {
+  const { container } = render(<AuthModalSample />);
 
   expect(screen.getByText(/welcome back/i)).toBeInTheDocument();
   expect(screen.getByText("Log in to FinanceFlow")).toBeInTheDocument();
   expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
   expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+  await expectNoA11yViolations(container);
 });
 
 it("switches to signup mode from the top tab", async () => {

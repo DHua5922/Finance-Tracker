@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, it } from "vitest";
+import { expectNoA11yViolations } from "@/shared/test/setup";
 import SignUpForm from "./SignUpForm";
 
-it("renders all signup fields and submit button", () => {
-  render(<SignUpForm />);
+it("renders all signup fields and submit button", async () => {
+  const { container } = render(<SignUpForm />);
 
   expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
   expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
@@ -13,6 +14,7 @@ it("renders all signup fields and submit button", () => {
   expect(
     screen.getByRole("button", { name: "Create account" }),
   ).toBeInTheDocument();
+  await expectNoA11yViolations(container);
 });
 
 it("shows zod validation errors for required fields", async () => {
