@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { signUpUserApi } from "@/features/auth/api";
+import { signUpUserAction } from "@/features/auth/lib/actions";
 import { signUpUserFormDataSchema } from "@/features/auth/schemas";
 import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
@@ -39,7 +39,7 @@ function useSignUpForm() {
     setSubmitError(null);
 
     try {
-      await signUpUserApi(values);
+      await signUpUserAction(values);
       reset();
     } catch (error) {
       setSubmitError(

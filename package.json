@@ -8,6 +8,7 @@
     "quality:check": "pnpm lint && pnpm check:unused && pnpm typescript:check",
     "test:component": "vitest run --config src/shared/test/vitest.config.ts",
     "test:integrations": "vitest run --config src/shared/test/vitest.integrations.config.ts",
+    "test:e2e": "playwright test --config src/shared/test/playwright.config.ts",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
@@ -22,10 +23,12 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-hook-form": "^7.85.0",
+    "server-only": "^0.0.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
+    "@playwright/test": "^1.62.1",
     "@size-limit/preset-app": "^13.0.3",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^7.0.1",

@@ -2,7 +2,8 @@ import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import * as axe from "axe-core";
 import { afterAll, afterEach, beforeAll, expect } from "vitest";
-import { server } from "./server";
+
+import { server } from "../integration/server";
 
 export async function expectNoA11yViolations(
   container: HTMLElement | Document,

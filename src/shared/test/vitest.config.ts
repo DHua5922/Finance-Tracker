@@ -13,6 +13,6 @@ export default defineConfig({
     restoreMocks: true,
     mockReset: true,
     include: ["**/*.component.test.tsx"],
-    setupFiles: ["src/shared/test/setup.ts"],
+    setupFiles: ["src/shared/test/component/setup.ts"],
   },
 });

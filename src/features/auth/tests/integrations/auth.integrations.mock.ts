@@ -1,8 +1,10 @@
 import { HttpResponse, http } from "msw";
 
-import { server } from "@/shared/test/server";
+import { buildAuthApiUrl } from "@/features/auth/lib/config";
+import { server } from "@/shared/test/integration/server";
+import { AUTH_API_ROUTES } from "../../lib/constants";
 
-const REGISTER_URL = "*/api/v1/auth/register";
+const REGISTER_URL = `*${buildAuthApiUrl(AUTH_API_ROUTES.register)}`;
 
 export function mockSuccessfulRegistration(
   onRequest?: (body: unknown) => void,
