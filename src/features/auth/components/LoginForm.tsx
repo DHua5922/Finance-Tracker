@@ -1,11 +1,11 @@
+import { useId } from "react";
 import Input from "@/shared/components/Input";
 import Label from "@/shared/components/Label";
-import { useId } from "react";
 
 export default function LoginForm() {
   const emailInputId = useId();
   const passwordInputId = useId();
-  
+
   return (
     <form className="space-y-4">
       <div className="space-y-2">
