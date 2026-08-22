@@ -1,22 +1,48 @@
-import { useId } from "react";
+"use client";
+
+import { useActionState, useId } from "react";
+import { logInAction } from "@/features/auth/lib/actions";
+import Button from "@/shared/components/Button";
+import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
-import Label from "@/shared/components/Label";
 
 export default function LoginForm() {
   const emailInputId = useId();
   const passwordInputId = useId();
+  const [state, formAction, isPending] = useActionState(logInAction, {
+    isError: false,
+    errorMessage: "",
+  });
 
   return (
-    <form className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor={emailInputId}>Email</Label>
-        <Input id={emailInputId} type="email" placeholder="name@example.com" />
-      </div>
+    <form className="space-y-4" action={formAction}>
+      {state?.isError && (
+        <p className="text-red-500 text-sm" role="alert">
+          {state?.errorMessage}
+        </p>
+      )}
 
-      <div className="space-y-2">
-        <Label htmlFor={passwordInputId}>Password</Label>
-        <Input id={passwordInputId} type="password" placeholder="••••••••" />
-      </div>
+      <Field className="space-y-2" label="Email" htmlFor={emailInputId}>
+        <Input
+          id={emailInputId}
+          name="email"
+          type="email"
+          placeholder="name@example.com"
+        />
+      </Field>
+
+      <Field className="space-y-2" label="Password" htmlFor={passwordInputId}>
+        <Input
+          id={passwordInputId}
+          name="password"
+          type="password"
+          placeholder="••••••••"
+        />
+      </Field>
+
+      <Button type="submit" isLoading={isPending} loadingText="Logging in...">
+        Log in
+      </Button>
     </form>
   );
 }
