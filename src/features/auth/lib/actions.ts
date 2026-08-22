@@ -66,7 +66,7 @@ export async function logInAction(
       body: JSON.stringify(payload),
     },
   );
-  
+
   const isError = !response.ok;
   if (isError) {
     return {
