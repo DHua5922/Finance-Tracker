@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { createAuthApiFetch } from "./config";
 import { parseFetchErrorMessage } from "@/shared/utilities/api";
+import { createAuthApiFetch } from "./config";
 import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "./constants";
 
 const loginResponseSchema = z.object({

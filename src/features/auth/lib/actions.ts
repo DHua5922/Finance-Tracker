@@ -1,14 +1,13 @@
 "use server";
 
-import { buildAuthApiUrl } from "./config";
+import { z } from "zod";
 import {
   createFetchInstance,
   parseFetchErrorMessage,
 } from "@/shared/utilities/api";
 import { signUpUserFormDataSchema } from "../schemas";
-import { z } from "zod";
-import { AUTH_API_ROUTES, AUTH_API_BACKEND_BASE_URL } from "./constants";
-
+import { buildAuthApiUrl } from "./config";
+import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "./constants";
 
 const userSchema = z.object({
   _id: z.string(),

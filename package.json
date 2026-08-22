@@ -23,7 +23,6 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-hook-form": "^7.85.0",
-    "server-only": "^0.0.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -46,6 +45,13 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.11"
+  },
+  "knip": {
+    "entry": [
+      "src/app/**/*.{ts,tsx}",
+      "src/features/**/*.{ts,tsx}",
+      "src/shared/test/playwright.config.ts"
+    ]
   },
   "packageManager": "pnpm@11.20.0"
 }

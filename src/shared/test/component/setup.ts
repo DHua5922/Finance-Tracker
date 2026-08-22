@@ -8,18 +8,24 @@ import { server } from "../integration/server";
 export async function expectNoA11yViolations(
   container: HTMLElement | Document,
 ) {
-  const results = await axe.run(container as HTMLElement | Document, {
-    rules: {
-      "color-contrast": { enabled: true },
-      "link-name": { enabled: true },
-      "button-name": { enabled: true },
-      label: { enabled: true },
-      "aria-allowed-attr": { enabled: true },
-      "aria-required-attr": { enabled: true },
-      "aria-valid-attr-value": { enabled: true },
+  const results: axe.AxeResults = await axe.run(
+    container as axe.ElementContext,
+    {
+      rules: {
+        "color-contrast": { enabled: true },
+        "link-name": { enabled: true },
+        "button-name": { enabled: true },
+        label: { enabled: true },
+        "aria-allowed-attr": { enabled: true },
+        "aria-required-attr": { enabled: true },
+        "aria-valid-attr-value": { enabled: true },
+      },
+      runOnly: {
+        type: "tag",
+        values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+      },
     },
-    tags: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
-  });
+  );
 
   expect(results.violations).toHaveLength(0);
 }
