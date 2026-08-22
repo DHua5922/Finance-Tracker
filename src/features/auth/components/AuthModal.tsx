@@ -12,6 +12,16 @@ interface Props extends ComponentProps<typeof Modal> {
 }
 
 export default function AuthModal({ isLogin, setAuthMode, ...props }: Props) {
+  const loginButtonClassName = cn(
+    "rounded-lg px-3 py-2 text-sm font-medium transition",
+    isLogin ? "bg-white text-slate-900 shadow-sm" : "text-slate-600",
+  );
+
+  const signUpButtonClassName = cn(
+    "rounded-lg px-3 py-2 text-sm font-medium transition",
+    !isLogin ? "bg-white text-slate-900 shadow-sm" : "text-slate-600",
+  );
+
   return (
     <Modal
       className="w-[min(92vw,28rem)] rounded-2xl border border-slate-200 bg-white p-0 shadow-2xl"
@@ -23,10 +33,7 @@ export default function AuthModal({ isLogin, setAuthMode, ...props }: Props) {
         <button
           type="button"
           onClick={() => setAuthMode("login")}
-          className={cn(
-            "rounded-lg px-3 py-2 text-sm font-medium transition",
-            isLogin ? "bg-white text-slate-900 shadow-sm" : "text-slate-600",
-          )}
+          className={loginButtonClassName}
         >
           Login
         </button>
@@ -34,10 +41,7 @@ export default function AuthModal({ isLogin, setAuthMode, ...props }: Props) {
         <button
           type="button"
           onClick={() => setAuthMode("register")}
-          className={cn(
-            "rounded-lg px-3 py-2 text-sm font-medium transition",
-            !isLogin ? "bg-white text-slate-900 shadow-sm" : "text-slate-600",
-          )}
+          className={signUpButtonClassName}
         >
           Sign up
         </button>
@@ -69,15 +73,18 @@ function Footer({
   isLogin: boolean;
   setAuthMode: (mode: "login" | "register") => void;
 }) {
+  const onClick = () => setAuthMode(isLogin ? "register" : "login");
+
   return (
     <>
       <p className="text-sm text-slate-500">
         {isLogin ? "Need an account?" : "Already have an account?"}
       </p>
+
       <Button
         type="button"
         className="rounded-full bg-slate-900 px-5 text-white hover:bg-slate-700"
-        onClick={() => setAuthMode(isLogin ? "register" : "login")}
+        onClick={onClick}
       >
         {isLogin ? "Sign up" : "Log in"}
       </Button>
