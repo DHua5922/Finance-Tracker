@@ -51,7 +51,7 @@ export default function Hero() {
 function MetricPill({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-2xl font-bold text-[var(--foreground)]">{value}</div>
+      <div className="text-2xl font-bold text-foreground">{value}</div>
       <div>{label}</div>
     </div>
   );
