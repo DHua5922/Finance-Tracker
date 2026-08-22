@@ -1,6 +1,6 @@
-import { expectNoA11yViolations } from "@/shared/test/component/setup";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
+import { expectNoA11yViolations } from "@/shared/test/component/setup";
 import LoginForm from "./LoginForm";
 
 describe("LoginForm", () => {

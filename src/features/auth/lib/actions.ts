@@ -15,7 +15,6 @@ const userSchema = z.object({
   username: z.string(),
   email: z.email(),
 });
-type User = z.infer<typeof userSchema>;
 
 const logInUserFormDataSchema = z.object({
   email: z.email(),

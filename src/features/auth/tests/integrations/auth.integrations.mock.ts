@@ -50,7 +50,7 @@ export function mockRegistrationFailure(
 
 export function mockSuccessfulLogin() {
   server.use(
-    http.post(LOGIN_URL, async ({ request }) => {
+    http.post(LOGIN_URL, async () => {
       return HttpResponse.json(
         {
           _id: "user-1",

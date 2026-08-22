@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { redirect } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-
+import LoginForm from "../../components/LoginForm";
 import SignUpForm from "../../components/SignUpForm";
 import {
   mockErrorLogin,
@@ -9,8 +10,6 @@ import {
   mockSuccessfulLogin,
   mockSuccessfulRegistration,
 } from "./auth.integrations.mock";
-import LoginForm from "../../components/LoginForm";
-import { redirect } from "next/navigation";
 
 let receivedRequestBody: unknown;
 
