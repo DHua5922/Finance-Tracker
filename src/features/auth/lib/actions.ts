@@ -25,21 +25,55 @@ const authBackendFetch = createFetchInstance({
   },
 });
 
-export async function signUpUserAction(values: unknown) {
-  const payload = signUpUserFormDataSchema.parse(values);
+interface SignUpActionState {
+  isError: boolean;
+  errorMessage: string;
+  fieldErrors: Partial<
+    Record<keyof z.infer<typeof signUpUserFormDataSchema>, string[]>
+  >;
+}
+export async function signUpUserAction(
+  _prevState: SignUpActionState,
+  formData: FormData,
+): Promise<SignUpActionState> {
+  const result = signUpUserFormDataSchema.safeParse({
+    username: formData.get("username"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
+  });
+
+  if (!result.success) {
+    return {
+      isError: false,
+      errorMessage: "",
+      fieldErrors: result.error.flatten().fieldErrors,
+    };
+  }
+
   const response = await authBackendFetch(
     buildAuthApiUrl(AUTH_API_ROUTES.register),
     {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(result.data),
     },
   );
 
   if (!response.ok) {
-    throw new Error(await parseFetchErrorMessage(response));
+    return {
+      isError: true,
+      errorMessage: await parseFetchErrorMessage(response),
+      fieldErrors: {},
+    };
   }
 
-  return userSchema.parse(await response.json());
+  userSchema.parse(await response.json());
+
+  return {
+    isError: false,
+    errorMessage: "",
+    fieldErrors: {},
+  };
 }
 
 interface LogInActionResult {
