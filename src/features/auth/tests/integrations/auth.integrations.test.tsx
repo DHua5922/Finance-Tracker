@@ -29,6 +29,12 @@ vi.mock("next/navigation", () => {
   };
 });
 
+vi.mock("next/headers", () => ({
+  cookies: async () => ({
+    set: vi.fn(),
+  }),
+}));
+
 describe("Registration", () => {
   it("submits signup form", async () => {
     const user = userEvent.setup();
@@ -90,7 +96,9 @@ describe("Login", () => {
     mockSuccessfulLogin();
     await renderLoginForm();
 
-    expect(redirect).toHaveBeenCalledWith("/dashboard");
+    await waitFor(() => {
+      expect(redirect).toHaveBeenCalledWith("/dashboard");
+    });
   });
 
   it("should show error message on login failure", async () => {

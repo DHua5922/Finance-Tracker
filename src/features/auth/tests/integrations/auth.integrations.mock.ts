@@ -53,9 +53,15 @@ export function mockSuccessfulLogin() {
     http.post(LOGIN_URL, async () => {
       return HttpResponse.json(
         {
-          _id: "user-1",
-          username: "Jane",
-          email: "jane@example.com",
+          user: {
+            _id: "user-1",
+            username: "Jane",
+            email: "jane@example.com",
+          },
+          accessToken: "access-token",
+          refreshToken: "refresh-token",
+          accessTokenExpireTime: "15m",
+          refreshTokenExpireTime: "7d",
         },
         { status: 200 },
       );

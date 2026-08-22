@@ -1,5 +1,6 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import {
@@ -7,6 +8,7 @@ import {
   parseFetchErrorMessage,
 } from "@/shared/utilities/api";
 import { signUpUserFormDataSchema } from "../schemas";
+import convertTimeToMaxAge from "../utilities/convertTimeToMaxAge";
 import { buildAuthApiUrl } from "./config";
 import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "./constants";
 
@@ -14,11 +16,6 @@ const userSchema = z.object({
   _id: z.string(),
   username: z.string(),
   email: z.email(),
-});
-
-const logInUserFormDataSchema = z.object({
-  email: z.email(),
-  password: z.string(),
 });
 
 const authBackendFetch = createFetchInstance({
@@ -53,6 +50,10 @@ export async function logInAction(
   _prevState: unknown,
   formData: FormData,
 ): Promise<LogInActionResult> {
+  const logInUserFormDataSchema = z.object({
+    email: z.email(),
+    password: z.string(),
+  });
   const payload = logInUserFormDataSchema.parse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -65,8 +66,8 @@ export async function logInAction(
       body: JSON.stringify(payload),
     },
   );
+  
   const isError = !response.ok;
-
   if (isError) {
     return {
       isError,
@@ -74,5 +75,54 @@ export async function logInAction(
     };
   }
 
+  const logInResponseDataSchema = z.object({
+    user: userSchema,
+    accessToken: z.string(),
+    refreshToken: z.string(),
+    accessTokenExpireTime: z.string(),
+    refreshTokenExpireTime: z.string(),
+  });
+  const userSessionParams = logInResponseDataSchema.parse(
+    await response.json(),
+  );
+  setUserSession(userSessionParams);
+
   redirect("/dashboard");
+}
+
+interface UserSessionParams {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpireTime: string;
+  refreshTokenExpireTime: string;
+}
+async function setUserSession({
+  accessToken,
+  refreshToken,
+  accessTokenExpireTime,
+  refreshTokenExpireTime,
+}: UserSessionParams) {
+  const cookieStore = await cookies();
+  const secure = process.env.NODE_ENV === "production";
+  const path = "/";
+
+  cookieStore.set({
+    name: "accessToken",
+    value: accessToken,
+    httpOnly: true,
+    secure,
+    sameSite: "lax",
+    path,
+    maxAge: convertTimeToMaxAge(accessTokenExpireTime),
+  });
+
+  cookieStore.set({
+    name: "refreshToken",
+    value: refreshToken,
+    httpOnly: true,
+    secure,
+    sameSite: "strict",
+    path,
+    maxAge: convertTimeToMaxAge(refreshTokenExpireTime),
+  });
 }
