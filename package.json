@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "quality:check": "pnpm lint && pnpm check:unused && pnpm typescript:check",
+    "test:component": "vitest run --config src/shared/test/vitest.config.ts",
+    "test:integrations": "vitest run --config src/shared/test/vitest.integrations.config.ts",
+    "test:e2e": "playwright test --config src/shared/test/playwright.config.ts",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
@@ -15,22 +18,40 @@
   },
   "dependencies": {
     "@dhua5922/react-kit": "^3.0.1",
+    "@hookform/resolvers": "^5.9.1",
     "next": "16.3.1",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "react-hook-form": "^7.85.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
+    "@playwright/test": "^1.62.1",
     "@size-limit/preset-app": "^13.0.3",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-core": "^4.13.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "jsdom": "^30.0.1",
     "knip": "^6.32.2",
+    "msw": "^2.15.0",
     "size-limit": "^13.0.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  },
+  "knip": {
+    "entry": [
+      "src/app/**/*.{ts,tsx}",
+      "src/features/**/*.{ts,tsx}",
+      "src/shared/test/playwright.config.ts"
+    ]
   },
   "packageManager": "pnpm@11.20.0"
 }

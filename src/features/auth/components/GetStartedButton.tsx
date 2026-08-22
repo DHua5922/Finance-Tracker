@@ -19,21 +19,21 @@ export default function GetStartedButton({
   const [modalOpen, setModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
+  const buttonClassName = cn(
+    variant === "primary"
+      ? "rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300"
+      : "rounded-full border border-white/15 bg-white/5 px-5 text-white hover:bg-white/10",
+    className,
+  );
+
+  const onClick = () => {
+    setAuthMode("login");
+    setModalOpen(true);
+  };
+
   return (
     <>
-      <Button
-        type="button"
-        className={cn(
-          variant === "primary"
-            ? "rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300"
-            : "rounded-full border border-white/15 bg-white/5 px-5 text-white hover:bg-white/10",
-          className,
-        )}
-        onClick={() => {
-          setAuthMode("login");
-          setModalOpen(true);
-        }}
-      >
+      <Button type="button" className={buttonClassName} onClick={onClick}>
         {label}
       </Button>
 
