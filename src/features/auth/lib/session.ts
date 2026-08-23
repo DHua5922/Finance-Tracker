@@ -1,21 +1,44 @@
 import { cookies } from "next/headers";
 import type { z } from "zod";
-import type { authSessionSchema } from "../schemas";
+import type { tokensSchema } from "../schemas";
 import convertTimeToMaxAge from "../utilities/cookie";
+import { validateAccessTokenApi } from "./api";
 
-type UserSession = z.infer<typeof authSessionSchema>;
+const accessTokenName = "accessToken";
+const refreshTokenName = "refreshToken";
 
+type UserSessionStatus =
+  | "authenticated"
+  | "refresh-required"
+  | "unauthenticated";
+export async function getUserSessionStatus(): Promise<UserSessionStatus> {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(accessTokenName)?.value;
+
+  if (accessToken) {
+    try {
+      await validateAccessTokenApi(accessToken);
+      return "authenticated";
+    } catch {}
+  }
+
+  return cookieStore.has(refreshTokenName)
+    ? "refresh-required"
+    : "unauthenticated";
+}
+
+type Tokens = z.infer<typeof tokensSchema>;
 export async function setUserSession({
   accessToken,
   refreshToken,
   accessTokenExpireTime,
   refreshTokenExpireTime,
-}: UserSession) {
+}: Tokens) {
   const cookieStore = await cookies();
   const secure = process.env.NODE_ENV === "production";
 
   cookieStore.set({
-    name: "accessToken",
+    name: accessTokenName,
     value: accessToken,
     httpOnly: true,
     secure,
@@ -25,7 +48,7 @@ export async function setUserSession({
   });
 
   cookieStore.set({
-    name: "refreshToken",
+    name: refreshTokenName,
     value: refreshToken,
     httpOnly: true,
     secure,
@@ -33,4 +56,10 @@ export async function setUserSession({
     path: "/",
     maxAge: convertTimeToMaxAge(refreshTokenExpireTime),
   });
+}
+
+export async function clearUserSession() {
+  const cookieStore = await cookies();
+  cookieStore.delete(accessTokenName);
+  cookieStore.delete(refreshTokenName);
 }

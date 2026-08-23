@@ -1,7 +1,11 @@
 import GetStartedButton from "@/features/auth/components/GetStartedButton";
 import styles from "./PublicHeader.module.css";
 
-export default function PublicHeader() {
+interface Props {
+  showLogin?: boolean;
+}
+
+export default function PublicHeader({ showLogin = false }: Props) {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -13,7 +17,10 @@ export default function PublicHeader() {
           </span>
         </div>
 
-        <GetStartedButton className="rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300" />
+        <GetStartedButton
+          initiallyOpen={showLogin}
+          className="rounded-full bg-emerald-400 px-5 text-slate-950 hover:bg-emerald-300"
+        />
       </nav>
     </header>
   );

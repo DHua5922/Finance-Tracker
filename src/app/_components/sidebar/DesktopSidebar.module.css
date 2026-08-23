@@ -5,11 +5,12 @@
   background: var(--background);
   padding: 1rem;
   color: var(--foreground);
+  flex-direction: column;
 }
 
 @media (min-width: 48rem) {
   .desktopSidebar {
-    display: block;
+    display: flex;
     position: sticky;
     top: 4rem;
     z-index: 10;

@@ -1,16 +1,9 @@
 import { z } from "zod";
 
-export const userSchema = z.object({
-  _id: z.string(),
-  username: z.string(),
-  email: z.email(),
-});
-
-export const authSessionSchema = z.object({
-  user: userSchema,
+export const tokensSchema = z.object({
   accessToken: z.string(),
-  accessTokenExpireTime: z.string(),
   refreshToken: z.string(),
+  accessTokenExpireTime: z.string(),
   refreshTokenExpireTime: z.string(),
 });
 

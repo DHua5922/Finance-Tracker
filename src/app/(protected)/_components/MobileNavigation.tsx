@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import NavigationIcon from "@/app/_components/navigation/NavigationIcon";
 import MobileSidebar from "@/app/_components/sidebar/MobileSidebar";
@@ -8,6 +9,7 @@ import styles from "./MobileNavigation.module.css";
 
 interface Props {
   items: { href: string; label: string }[];
+  logoutButton: ReactNode;
 }
 
 function useFocusTrap() {
@@ -43,7 +45,7 @@ function useFocusTrap() {
   };
 }
 
-export default function MobileNavigation({ items }: Props) {
+export default function MobileNavigation({ items, logoutButton }: Props) {
   const {
     menuButtonRef,
     sidebarId,
@@ -82,6 +84,7 @@ export default function MobileNavigation({ items }: Props) {
         closeNavigation={closeNavigation}
         items={items}
         setIsOpen={setIsOpen}
+        logoutButton={logoutButton}
       />
     </>
   );
