@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useId } from "react";
-import { logInAction } from "@/features/auth/lib/actions";
+import { logInAction } from "@/features/auth/lib/actions/login";
 import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";

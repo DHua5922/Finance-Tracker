@@ -1,5 +1,24 @@
 import { z } from "zod";
 
+export const userSchema = z.object({
+  _id: z.string(),
+  username: z.string(),
+  email: z.email(),
+});
+
+export const authSessionSchema = z.object({
+  user: userSchema,
+  accessToken: z.string(),
+  accessTokenExpireTime: z.string(),
+  refreshToken: z.string(),
+  refreshTokenExpireTime: z.string(),
+});
+
+export const logInUserFormDataSchema = z.object({
+  email: z.email({ message: "Invalid email address" }),
+  password: z.string().min(1, { message: "Password is required" }),
+});
+
 export const signUpUserFormDataSchema = z
   .object({
     username: z.string().min(1, {
