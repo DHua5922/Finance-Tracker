@@ -4,9 +4,13 @@ import styles from "./PrivateHeader.module.css";
 
 interface Props {
   mobileNavigation: ReactNode;
+  logoutButton: ReactNode;
 }
 
-export default function PrivateHeader({ mobileNavigation }: Props) {
+export default function PrivateHeader({
+  mobileNavigation,
+  logoutButton,
+}: Props) {
   return (
     <header className={styles.header}>
       <div className="flex h-full items-center gap-3 px-4 sm:px-6">
@@ -18,6 +22,8 @@ export default function PrivateHeader({ mobileNavigation }: Props) {
             FinanceFlow
           </span>
         </Link>
+
+        {logoutButton}
       </div>
     </header>
   );

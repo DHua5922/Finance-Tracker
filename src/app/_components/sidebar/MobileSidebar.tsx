@@ -1,4 +1,4 @@
-import type { RefObject } from "react";
+import type { ReactNode, RefObject } from "react";
 import { cn } from "@/shared/utilities/css";
 import NavigationIcon from "../navigation/NavigationIcon";
 import NavLinks from "../navigation/NavLinks";
@@ -11,6 +11,7 @@ interface Props {
   closeNavigation: () => void;
   items: { href: string; label: string }[];
   setIsOpen: (isOpen: boolean) => void;
+  logoutButton: ReactNode;
 }
 
 export default function Sidebar({
@@ -20,6 +21,7 @@ export default function Sidebar({
   closeNavigation,
   items,
   setIsOpen,
+  logoutButton,
 }: Props) {
   return (
     <aside
@@ -44,6 +46,7 @@ export default function Sidebar({
         navigationItems={items}
         onClick={() => setIsOpen(false)}
       />
+      {logoutButton}
     </aside>
   );
 }

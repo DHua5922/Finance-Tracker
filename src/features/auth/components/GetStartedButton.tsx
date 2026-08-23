@@ -7,16 +7,18 @@ import { cn } from "@/shared/utilities/css";
 
 interface Props {
   className?: string;
+  initiallyOpen?: boolean;
   label?: string;
   variant?: "primary" | "secondary";
 }
 
 export default function GetStartedButton({
   className,
+  initiallyOpen = false,
   label = "Get started",
   variant = "primary",
 }: Props) {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(initiallyOpen);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
 
   const buttonClassName = cn(

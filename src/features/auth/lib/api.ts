@@ -1,9 +1,8 @@
-import type { z } from "zod";
+import { z } from "zod";
 import {
-  authSessionSchema,
   type logInUserFormDataSchema,
   type signUpUserFormDataSchema,
-  userSchema,
+  tokensSchema,
 } from "@/features/auth/schemas";
 import { throwIfResponseFailed } from "@/shared/utilities/api";
 import { createAuthApiFetch } from "./config";
@@ -12,6 +11,12 @@ import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "./constants";
 type LoginInput = z.infer<typeof logInUserFormDataSchema>;
 type SignUpUserInput = z.infer<typeof signUpUserFormDataSchema>;
 
+const userSchema = z.object({
+  _id: z.string(),
+  username: z.string(),
+  email: z.email(),
+});
+
 export async function loginUserApi(input: LoginInput) {
   const response = await createServerAuthApiFetch()(AUTH_API_ROUTES.login, {
     method: "POST",
@@ -19,6 +24,10 @@ export async function loginUserApi(input: LoginInput) {
   });
 
   await throwIfResponseFailed(response);
+
+  const authSessionSchema = tokensSchema.extend({
+    user: userSchema,
+  });
   return authSessionSchema.parse(await response.json());
 }
 
@@ -30,6 +39,29 @@ export async function signUpUserApi(input: SignUpUserInput) {
 
   await throwIfResponseFailed(response);
   return userSchema.parse(await response.json());
+}
+
+export async function validateAccessTokenApi(accessToken: string) {
+  const response = await createServerAuthApiFetch(accessToken)(
+    AUTH_API_ROUTES.secure,
+    { method: "POST" },
+  );
+
+  await throwIfResponseFailed(response);
+  return userSchema.parse(await response.json());
+}
+
+export async function refreshTokensApi(refreshToken: string) {
+  const response = await createServerAuthApiFetch()(
+    AUTH_API_ROUTES.refreshTokens,
+    {
+      method: "POST",
+      body: JSON.stringify({ refreshToken }),
+    },
+  );
+
+  await throwIfResponseFailed(response);
+  return tokensSchema.parse(await response.json());
 }
 
 interface CloseAccountArgs {

@@ -11,10 +11,13 @@ describe("ProtectedShell", () => {
     for (const link of screen.getAllByRole("link", { name: "Expenses" })) {
       expect(link).toHaveAttribute("href", "/expense");
     }
+
     for (const link of screen.getAllByRole("link", { name: "Income" })) {
       expect(link).toHaveAttribute("href", "/income");
     }
+
     expect(screen.getByRole("main")).toHaveTextContent("Page content");
+    expect(screen.getAllByRole("button", { name: "Log out" })).toHaveLength(2);
     await expectNoA11yViolations(container);
   });
 

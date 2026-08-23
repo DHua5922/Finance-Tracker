@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
+import { getUserSessionStatus } from "@/features/auth/lib/session";
 import ProtectedShell from "./_components/ProtectedShell";
 
 interface Props {
@@ -13,8 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default async function ProtectedLayout({ children }: Props) {
-  const cookieStore = await cookies();
-  if (!cookieStore.has("accessToken")) redirect("/");
+  const sessionStatus = await getUserSessionStatus();
+  if (sessionStatus !== "authenticated")
+    redirect("/api/auth/refresh?returnTo=/dashboard");
 
   return <ProtectedShell>{children}</ProtectedShell>;
 }

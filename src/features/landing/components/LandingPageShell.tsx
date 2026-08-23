@@ -3,10 +3,14 @@ import Features from "@/features/landing/components/Features";
 import Hero from "@/features/landing/components/Hero";
 import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
 
-export default function LandingPageShell() {
+interface Props {
+  showLogin?: boolean;
+}
+
+export default function LandingPageShell({ showLogin = false }: Props) {
   return (
     <>
-      <PublicHeader />
+      <PublicHeader showLogin={showLogin} />
 
       <main
         id={MAIN_CONTENT_ID}

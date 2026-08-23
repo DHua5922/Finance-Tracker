@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { redirect } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import LogoutButton from "@/app/_components/LogoutButton";
 import LoginForm from "../../components/LoginForm";
 import SignUpForm from "../../components/SignUpForm";
 import {
@@ -31,12 +32,13 @@ vi.mock("next/navigation", () => {
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
+    delete: vi.fn(),
     set: vi.fn(),
   }),
 }));
 
 describe("Registration", () => {
-  it("submits signup form", async () => {
+  it("should submit signup form successfully", async () => {
     const user = userEvent.setup();
     mockSuccessfulRegistration((body) => {
       receivedRequestBody = body;
@@ -69,7 +71,7 @@ describe("Registration", () => {
     expect(screen.getByLabelText(/Confirm password/i)).toHaveValue("");
   });
 
-  it("shows backend error message when register request fails", async () => {
+  it("should show backend error message when registration fails", async () => {
     const user = userEvent.setup();
     mockRegistrationFailure(undefined, (body) => {
       receivedRequestBody = body;
@@ -92,7 +94,7 @@ describe("Registration", () => {
 });
 
 describe("Login", () => {
-  it("should submit login form", async () => {
+  it("should log in successfully", async () => {
     mockSuccessfulLogin();
     await renderLoginForm();
 
@@ -116,4 +118,17 @@ describe("Login", () => {
     await user.type(screen.getByLabelText(/Password/i), "test123");
     await user.click(screen.getByRole("button", { name: "Log in" }));
   }
+});
+
+describe("Logout", () => {
+  it("should clear the session and redirect home", async () => {
+    const user = userEvent.setup();
+    render(<LogoutButton placement="desktop-header" />);
+
+    await user.click(screen.getByRole("button", { name: "Log out" }));
+
+    await waitFor(() => {
+      expect(redirect).toHaveBeenCalledWith("/");
+    });
+  });
 });
