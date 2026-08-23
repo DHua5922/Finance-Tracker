@@ -1,0 +1,48 @@
+.iconButton {
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  padding: 0.5rem;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, var(--foreground) 10%, transparent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--focus-halo);
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 4rem 0 0;
+  z-index: 20;
+  border: 0;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
+}
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 48rem) {
+  .backdrop {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop {
+    transition: none;
+  }
+}

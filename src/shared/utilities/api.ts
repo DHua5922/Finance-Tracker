@@ -53,3 +53,9 @@ export async function parseFetchErrorMessage(
 
   return parsedMessage || responseText || fallbackMessage;
 }
+
+export async function throwIfResponseFailed(response: Response) {
+  if (!response.ok) {
+    throw new Error(await parseFetchErrorMessage(response));
+  }
+}

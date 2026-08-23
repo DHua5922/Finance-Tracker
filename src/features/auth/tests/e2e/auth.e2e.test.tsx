@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 import { closeAccountApi, loginUserApi } from "../../lib/api";
-import { AUTH_API_BACKEND_BASE_URL } from "../../lib/constants";
 
 test("user can sign up and the created account is cleaned up", async ({
   page,
@@ -37,13 +36,7 @@ test("user can sign up and the created account is cleaned up", async ({
   await expect(authDialog.getByLabel(/email/i)).toHaveValue("");
 
   // Playwright tests execute in Node, so this auth flow stays server-side.
-  const loginPayload = await loginUserApi(
-    {
-      email,
-      password,
-    },
-    AUTH_API_BACKEND_BASE_URL,
-  );
+  const loginPayload = await loginUserApi({ email, password });
   const accessToken = loginPayload.accessToken;
   const userId = loginPayload.user?._id;
 
@@ -54,13 +47,7 @@ test("user can sign up and the created account is cleaned up", async ({
     return;
   }
 
-  const closeResponse = await closeAccountApi(
-    {
-      userId,
-      accessToken,
-    },
-    AUTH_API_BACKEND_BASE_URL,
-  );
+  const closeResponse = await closeAccountApi({ userId, accessToken });
 
   expect(closeResponse.status).not.toBe(401);
   expect(closeResponse.status).toBeLessThan(500);
