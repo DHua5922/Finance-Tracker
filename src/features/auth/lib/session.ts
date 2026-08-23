@@ -11,16 +11,21 @@ type UserSessionStatus =
   | "authenticated"
   | "refresh-required"
   | "unauthenticated";
+
+export async function getAuthenticatedUser() {
+  const accessToken = (await cookies()).get(accessTokenName)?.value;
+  if (!accessToken) return null;
+
+  try {
+    return await validateAccessTokenApi(accessToken);
+  } catch {
+    return null;
+  }
+}
+
 export async function getUserSessionStatus(): Promise<UserSessionStatus> {
   const cookieStore = await cookies();
-  const accessToken = cookieStore.get(accessTokenName)?.value;
-
-  if (accessToken) {
-    try {
-      await validateAccessTokenApi(accessToken);
-      return "authenticated";
-    } catch {}
-  }
+  if (await getAuthenticatedUser()) return "authenticated";
 
   return cookieStore.has(refreshTokenName)
     ? "refresh-required"
