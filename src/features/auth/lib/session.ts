@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import type { z } from "zod";
 import type { authSessionSchema } from "../schemas";
-import convertTimeToMaxAge from "../utilities/convertTimeToMaxAge";
+import convertTimeToMaxAge from "../utilities/cookie";
 
 type UserSession = z.infer<typeof authSessionSchema>;
 

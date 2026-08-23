@@ -1,8 +1,8 @@
 import type { RefObject } from "react";
 import { cn } from "@/shared/utilities/css";
+import NavigationIcon from "../navigation/NavigationIcon";
 import NavLinks from "../navigation/NavLinks";
 import styles from "./MobileSidebar.module.css";
-import NavigationIcon from "../navigation/NavigationIcon";
 
 interface Props {
   sidebarId: string;
