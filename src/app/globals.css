@@ -6,6 +6,7 @@
   --foreground: #f8fafc;
   --muted-foreground: #cbd5e1;
   --accent-foreground: #6ee7b7;
+  --danger-foreground: #f87171;
   --focus-outline: #f8fafc;
   --focus-halo: rgb(15 23 42 / 0.7);
 }
@@ -15,6 +16,7 @@
   --foreground: #020617;
   --muted-foreground: #334155;
   --accent-foreground: #047857;
+  --danger-foreground: #b91c1c;
   --focus-outline: #0f172a;
   --focus-halo: rgb(148 163 184 / 0.55);
 }
