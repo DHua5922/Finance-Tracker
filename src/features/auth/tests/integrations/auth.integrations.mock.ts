@@ -60,8 +60,8 @@ export function mockSuccessfulLogin() {
           },
           accessToken: "access-token",
           refreshToken: "refresh-token",
-          accessTokenExpireTime: "15m",
-          refreshTokenExpireTime: "7d",
+          accessTokenExpirationTime: "15m",
+          refreshTokenExpirationTime: "7d",
         },
         { status: 200 },
       );

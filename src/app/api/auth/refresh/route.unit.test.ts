@@ -11,14 +11,11 @@ vi.mock("@/features/auth/lib/api", () => ({
   validateAccessTokenApi: vi.fn(),
 }));
 
-const createUnexpiredToken = () =>
-  `header.${Buffer.from(JSON.stringify({ exp: 4_000_000_000 })).toString(
-    "base64url",
-  )}.signature`;
-
 const refreshedTokens = {
-  accessToken: createUnexpiredToken(),
-  refreshToken: createUnexpiredToken(),
+  accessToken: "new-access-token",
+  refreshToken: "new-refresh-token",
+  accessTokenExpirationTime: "1m",
+  refreshTokenExpirationTime: "7d",
 };
 
 test("should replace both token cookies after a successful refresh", async () => {
@@ -51,10 +48,12 @@ test("should replace both token cookies after a successful refresh", async () =>
     value: refreshedTokens.accessToken,
     httpOnly: true,
     path: "/",
+    maxAge: 60,
   });
   expect(response.cookies.get("refreshToken")).toMatchObject({
     value: refreshedTokens.refreshToken,
     httpOnly: true,
     path: "/",
+    maxAge: 604_800,
   });
 });

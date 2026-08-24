@@ -3,8 +3,8 @@ import { z } from "zod";
 export const tokensSchema = z.object({
   accessToken: z.string(),
   refreshToken: z.string(),
-  accessTokenExpireTime: z.string(),
-  refreshTokenExpireTime: z.string(),
+  accessTokenExpirationTime: z.string(),
+  refreshTokenExpirationTime: z.string(),
 });
 
 export const logInUserFormDataSchema = z.object({
