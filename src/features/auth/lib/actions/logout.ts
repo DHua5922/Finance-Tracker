@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/dist/server/request/cookies";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { accessTokenName, refreshTokenName } from "../session";
 
