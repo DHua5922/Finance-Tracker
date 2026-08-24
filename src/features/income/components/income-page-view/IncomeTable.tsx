@@ -1,4 +1,5 @@
 import type { Income } from "../../database/dal";
+import UpsertIncomeButton from "../upsert-income-modal/UpsertIncomeButton";
 import styles from "./IncomeTable.module.css";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -72,9 +73,7 @@ function TableRows({ incomes }: { incomes: Income[] }) {
 
           <td>
             <div className={styles.actions}>
-              <button type="button" disabled>
-                Edit
-              </button>
+              <UpsertIncomeButton income={income} />
 
               <button type="button" disabled>
                 Delete

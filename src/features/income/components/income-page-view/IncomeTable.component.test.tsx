@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 import { expectNoA11yViolations } from "@/shared/test/component/setup";
 import type { Income } from "../../database/dal";
@@ -15,7 +16,7 @@ const incomes: Income[] = [
 ];
 
 describe("IncomeTable", () => {
-  test("shows formatted income data and disabled actions", async () => {
+  test("shows formatted income data and row actions", async () => {
     const rowHeader = "Monthly salary";
 
     const { container } = render(
@@ -38,13 +39,24 @@ describe("IncomeTable", () => {
       within(dataRow as HTMLTableRowElement).getByRole("button", {
         name: "Edit",
       }),
-    ).toBeDisabled();
+    ).toBeEnabled();
     expect(
       within(dataRow as HTMLTableRowElement).getByRole("button", {
         name: "Delete",
       }),
     ).toBeDisabled();
     await expectNoA11yViolations(container);
+  });
+
+  test("opens a prefilled edit form", async () => {
+    const user = userEvent.setup();
+    render(<IncomeTable incomes={incomes} hasSearchQuery={false} />);
+
+    await user.click(screen.getByRole("button", { name: "Edit" }));
+
+    expect(screen.getByRole("dialog", { name: "Edit income" })).toBeVisible();
+    expect(screen.getByLabelText(/^Income name/)).toHaveValue("Monthly salary");
+    expect(screen.getByLabelText(/^Amount/)).toHaveValue(5000.5);
   });
 
   test("shows the first-use empty state", () => {
