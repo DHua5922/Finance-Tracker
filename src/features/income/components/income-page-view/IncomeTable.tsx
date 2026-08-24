@@ -1,4 +1,5 @@
 import type { Income } from "../../database/dal";
+import DeleteIncomeButton from "../delete-income-modal/DeleteIncomeButton";
 import UpsertIncomeButton from "../upsert-income-modal/UpsertIncomeButton";
 import styles from "./IncomeTable.module.css";
 
@@ -75,9 +76,7 @@ function TableRows({ incomes }: { incomes: Income[] }) {
             <div className={styles.actions}>
               <UpsertIncomeButton income={income} />
 
-              <button type="button" disabled>
-                Delete
-              </button>
+              <DeleteIncomeButton income={income} />
             </div>
           </td>
         </tr>
