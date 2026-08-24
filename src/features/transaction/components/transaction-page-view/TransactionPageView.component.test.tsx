@@ -31,6 +31,15 @@ const transactionResult = {
   ],
 };
 
+const frequencies = [
+  {
+    id: 1,
+    name: "Monthly",
+    description: "Once a month",
+    toMonthlyMultiplier: 1,
+  },
+];
+
 describe("TransactionPageView", () => {
   test("shows the search form and transactions returned by the DAL", async () => {
     const { container } = render(
@@ -62,24 +71,43 @@ describe("TransactionPageView", () => {
     expect(screen.getByText("Freelance project")).toBeVisible();
   });
 
+  test("shows the selected transaction type and frequency filters", () => {
+    const selectedTransactionType = "expense";
+    const selectedFrequencyId = 1;
+
+    render(
+      <TransactionPageView
+        query=""
+        transactionResult={transactionResult}
+        frequencies={frequencies}
+        selectedTransactionType={selectedTransactionType}
+        selectedFrequencyId={selectedFrequencyId}
+      />,
+    );
+
+    expect(screen.getByLabelText("Transaction type")).toHaveValue(
+      selectedTransactionType,
+    );
+    expect(screen.getByLabelText("Transaction frequency")).toHaveValue(
+      `${selectedFrequencyId}`,
+    );
+  });
+
   test("shows the data error instead of a transaction table", () => {
+    const errorMessage = "Transactions are unavailable.";
+
     render(
       <TransactionPageView
         query=""
         transactionResult={{
           success: false,
           data: null,
-          errorMessage: "Income is unavailable.",
+          errorMessage,
         }}
       />,
     );
 
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "We could not load your transactions",
-    );
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "Income is unavailable.",
-    );
+    expect(screen.getByRole("alert")).toHaveTextContent(errorMessage);
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
   });
 });

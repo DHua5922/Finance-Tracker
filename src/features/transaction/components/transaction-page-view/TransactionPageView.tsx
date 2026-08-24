@@ -9,10 +9,14 @@ export default function TransactionPageView({
   query,
   transactionResult,
   frequencies = [],
+  selectedTransactionType = null,
+  selectedFrequencyId = null,
 }: {
   query: string;
   transactionResult: Awaited<ReturnType<typeof getTransactionsDal>>;
   frequencies?: TransactionFrequency[];
+  selectedTransactionType?: "income" | "expense" | null;
+  selectedFrequencyId?: number | null;
 }) {
   const transactions = transactionResult.success
     ? filterTransactions(transactionResult.data, query)
@@ -35,7 +39,12 @@ export default function TransactionPageView({
         />
       </header>
 
-      <TableControls query={query} />
+      <TableControls
+        query={query}
+        frequencies={frequencies}
+        selectedTransactionType={selectedTransactionType}
+        selectedFrequencyId={selectedFrequencyId}
+      />
 
       {transactionResult.success ? (
         <TransactionTable
@@ -53,10 +62,20 @@ export default function TransactionPageView({
   );
 }
 
-function TableControls({ query }: { query: string }) {
+function TableControls({
+  query,
+  frequencies,
+  selectedTransactionType,
+  selectedFrequencyId,
+}: {
+  query: string;
+  frequencies: TransactionFrequency[];
+  selectedTransactionType: "income" | "expense" | null;
+  selectedFrequencyId: number | null;
+}) {
   return (
     <search>
-      <form className="flex items-stretch gap-3" action="/transaction">
+      <form className="flex flex-wrap items-end gap-3" action="/transaction">
         <label className="sr-only" htmlFor="transaction-search">
           Search transactions
         </label>
@@ -69,6 +88,35 @@ function TableControls({ query }: { query: string }) {
           defaultValue={query}
           placeholder="Search transactions"
         />
+
+        <label className="flex flex-col gap-1 text-sm font-semibold">
+          Transaction type
+          <select
+            className={styles.filterSelect}
+            name="transactionType"
+            defaultValue={selectedTransactionType ?? ""}
+          >
+            <option value="">All types</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </label>
+
+        <label className="flex flex-col gap-1 text-sm font-semibold">
+          Transaction frequency
+          <select
+            className={styles.filterSelect}
+            name="frequencyId"
+            defaultValue={selectedFrequencyId ?? ""}
+          >
+            <option value="">All frequencies</option>
+            {frequencies.map((frequency) => (
+              <option key={frequency.id} value={frequency.id}>
+                {frequency.name}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <button className={styles.searchButton} type="submit">
           Search

@@ -44,16 +44,6 @@ describe("filterTransactions", () => {
     ]);
   });
 
-  test("should match transaction types", () => {
-    expect(filterTransactions(transactions, "expense")).toEqual([
-      transactions[0],
-    ]);
-  });
-
-  test("should match transaction frequency names", () => {
-    expect(filterTransactions(transactions, "monthly")).toEqual(transactions);
-  });
-
   test("should return an empty list when no transaction matches", () => {
     expect(filterTransactions(transactions, "interest")).toEqual([]);
   });

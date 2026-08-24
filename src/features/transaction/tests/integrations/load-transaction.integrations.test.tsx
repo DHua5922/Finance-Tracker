@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import TransactionPage from "@/app/(protected)/transaction/page";
 import { db } from "@/shared/database/config";
@@ -31,14 +31,14 @@ const databaseRows = [
   },
   {
     id: "2",
-    transaction_type: "income",
+    transaction_type: "expense",
     name: "Freelance project",
     description: "Website design",
     amount: "750",
     unit_amount: "750",
     transaction_date: "2026-01-20T12:00:00Z",
-    trx_freq_id: "1",
-    transaction_frequency_name: "Monthly",
+    trx_freq_id: "2",
+    transaction_frequency_name: "Weekly",
     to_monthly_multiplier: "1",
     monthly_amount: "750",
   },
@@ -50,6 +50,12 @@ const frequencyRows = [
     name: "Monthly",
     description: "Once a month",
     to_monthly_multiplier: "1",
+  },
+  {
+    id: "2",
+    name: "Weekly",
+    description: "Once a week",
+    to_monthly_multiplier: "4.345",
   },
 ];
 
@@ -88,6 +94,50 @@ describe("Get Transactions", () => {
     expect(
       screen.getByRole("searchbox", { name: "Search transactions" }),
     ).toHaveValue(searchQuery);
+  });
+
+  test("should wire the selected transaction type to the transaction results", async () => {
+    const transactionType = "expense";
+
+    vi.mocked(db.execute)
+      .mockResolvedValueOnce([databaseRows[1]] as never)
+      .mockResolvedValueOnce(frequencyRows as never);
+
+    render(
+      await TransactionPage({
+        searchParams: Promise.resolve({ transactionType }),
+      }),
+    );
+
+    expect(screen.getByLabelText("Transaction type")).toHaveValue(
+      transactionType,
+    );
+    expect(screen.getByText("Freelance project")).toBeVisible();
+    expect(
+      within(screen.getByRole("table")).getByText("Expense"),
+    ).toBeVisible();
+    expect(screen.queryByText("Monthly salary")).not.toBeInTheDocument();
+  });
+
+  test("should wire the selected frequency to the transaction results", async () => {
+    const frequencyId = "2";
+
+    vi.mocked(db.execute)
+      .mockResolvedValueOnce([databaseRows[1]] as never)
+      .mockResolvedValueOnce(frequencyRows as never);
+
+    render(
+      await TransactionPage({
+        searchParams: Promise.resolve({ frequencyId }),
+      }),
+    );
+
+    expect(screen.getByLabelText("Transaction frequency")).toHaveValue(
+      frequencyId,
+    );
+    expect(screen.getByText("Freelance project")).toBeVisible();
+    expect(within(screen.getByRole("table")).getByText("Weekly")).toBeVisible();
+    expect(screen.queryByText("Monthly salary")).not.toBeInTheDocument();
   });
 
   test("should show an error when the transaction database query fails", async () => {
