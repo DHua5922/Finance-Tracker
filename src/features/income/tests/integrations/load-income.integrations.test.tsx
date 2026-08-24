@@ -32,7 +32,7 @@ const databaseRows = [
   },
 ];
 
-describe("Income", () => {
+describe("Get Income", () => {
   beforeEach(() => {
     mockAuthenticatedIncomeUser();
   });

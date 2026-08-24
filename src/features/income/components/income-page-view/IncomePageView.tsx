@@ -1,5 +1,6 @@
 import type { getIncomeDal } from "../../database/dal";
 import { filterIncomes } from "../../utilities/filterIncomes";
+import UpsertIncomeButton from "../upsert-income-modal/UpsertIncomeButton";
 import styles from "./IncomePageView.module.css";
 import IncomeTable from "./IncomeTable";
 
@@ -16,12 +17,16 @@ export default function IncomePageView({
 
   return (
     <div className={styles.page}>
-      <header>
-        <p className={styles.eyebrow}>Money received</p>
-        <h1 className={styles.heading}>Income</h1>
-        <p className="mt-3 text-muted-foreground">
-          Search and review your recorded income.
-        </p>
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className={styles.eyebrow}>Money received</p>
+          <h1 className={styles.heading}>Income</h1>
+          <p className="mt-3 text-muted-foreground">
+            Search and review your recorded income.
+          </p>
+        </div>
+
+        <UpsertIncomeButton />
       </header>
 
       <TableControls query={query} />

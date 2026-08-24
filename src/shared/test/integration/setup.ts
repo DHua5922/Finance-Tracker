@@ -6,6 +6,18 @@ import { server } from "./server";
 
 process.env.AUTH_API_BACKEND_BASE_URL ??= "http://localhost:8080";
 
+if (typeof HTMLDialogElement !== "undefined") {
+  HTMLDialogElement.prototype.showModal ??= function showModal() {
+    this.open = true;
+  };
+  HTMLDialogElement.prototype.show ??= function show() {
+    this.open = true;
+  };
+  HTMLDialogElement.prototype.close ??= function close() {
+    this.open = false;
+  };
+}
+
 afterEach(() => {
   server.resetHandlers();
   cleanup();
