@@ -1,6 +1,6 @@
-import type { Income } from "../database/dal";
+import type { Transaction } from "../lib/database/get-trx-dal";
 
-export function filterIncomes(incomes: Income[], query: string) {
+export function filterIncomes(incomes: Transaction[], query: string) {
   const normalizedQuery = query.trim().toLocaleLowerCase();
   if (!normalizedQuery) return incomes;
 

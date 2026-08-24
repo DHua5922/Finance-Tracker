@@ -1,19 +1,19 @@
-import type { getIncomeDal } from "../../database/dal";
-import { filterIncomes } from "../../utilities/filterIncomes";
-import UpsertIncomeButton from "../upsert-income-modal/UpsertIncomeButton";
+import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
+import type { getTransactionsDal } from "../../lib/database/get-trx-dal";
+import UpsertTransactionButton from "../upsert-transaction-modal/UpsertTransactionButton";
 import styles from "./IncomePageView.module.css";
 import IncomeTable from "./IncomeTable";
 
 export default function IncomePageView({
   query,
   incomeResult,
+  frequencies = [],
 }: {
   query: string;
-  incomeResult: Awaited<ReturnType<typeof getIncomeDal>>;
+  incomeResult: Awaited<ReturnType<typeof getTransactionsDal>>;
+  frequencies?: TransactionFrequency[];
 }) {
-  const incomes = incomeResult.success
-    ? filterIncomes(incomeResult.data, query)
-    : [];
+  const incomes = incomeResult.success ? incomeResult.data : [];
 
   return (
     <div className={styles.page}>
@@ -26,13 +26,20 @@ export default function IncomePageView({
           </p>
         </div>
 
-        <UpsertIncomeButton />
+        <UpsertTransactionButton
+          transactionType="income"
+          frequencies={frequencies}
+        />
       </header>
 
       <TableControls query={query} />
 
       {incomeResult.success ? (
-        <IncomeTable incomes={incomes} hasSearchQuery={query.length > 0} />
+        <IncomeTable
+          incomes={incomes}
+          hasSearchQuery={query.length > 0}
+          frequencies={frequencies}
+        />
       ) : (
         <section className={styles.errorPanel} role="alert">
           <h2>We could not load your income</h2>

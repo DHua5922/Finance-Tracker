@@ -2,11 +2,11 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useId } from "react";
-import type { Income } from "../../database/dal";
+import type { Transaction } from "../../lib/database/get-trx-dal";
 import DeleteIncomeForm from "./DeleteIncomeForm";
 
 interface Props {
-  income: Income;
+  income: Transaction;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }

@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import type { Income } from "../../database/dal";
+import type { Transaction } from "../../lib/database/get-trx-dal";
 import DeleteIncomeModal from "./DeleteIncomeModal";
 
-export default function DeleteIncomeButton({ income }: { income: Income }) {
+export default function DeleteIncomeButton({
+  income,
+}: {
+  income: Transaction;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

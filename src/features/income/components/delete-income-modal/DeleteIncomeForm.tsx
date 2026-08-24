@@ -5,7 +5,7 @@ import Button from "@/shared/components/Button";
 import {
   type DeleteIncomeActionState,
   deleteIncomeAction,
-} from "../../lib/actions/delete-income";
+} from "../../lib/actions/delete-trx";
 
 interface Props {
   incomeId: number;

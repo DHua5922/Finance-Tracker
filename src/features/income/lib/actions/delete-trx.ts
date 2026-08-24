@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getAuthenticatedUser } from "@/features/auth/lib/session";
-import { deleteIncomeDal } from "../../database/dal";
+import { deleteTransactionDal } from "../database/delete-trx-dal";
 
 export interface DeleteIncomeActionState {
   isError: boolean;
@@ -38,7 +38,7 @@ export async function deleteIncomeAction(
     };
   }
 
-  const deleteResult = await deleteIncomeDal(result.data);
+  const deleteResult = await deleteTransactionDal(result.data, user._id);
 
   if (!deleteResult.success) {
     return {

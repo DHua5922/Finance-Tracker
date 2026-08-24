@@ -24,21 +24,42 @@ vi.mock("next/cache", () => ({
 const databaseRows = [
   {
     id: "1",
+    transaction_type: "income",
     name: "Monthly salary",
     description: "Main job",
     amount: "5000.50",
-    income_date: "2026-01-15T12:00:00Z",
+    unit_amount: "5000.50",
+    transaction_date: "2026-01-15T12:00:00Z",
+    trx_freq_id: "1",
+    transaction_frequency_name: "Monthly",
+    to_monthly_multiplier: "1",
+    monthly_amount: "5000.50",
   },
   {
     id: "2",
+    transaction_type: "income",
     name: "Freelance project",
     description: "Website design",
     amount: "750",
-    income_date: "2026-01-20T12:00:00Z",
+    unit_amount: "750",
+    transaction_date: "2026-01-20T12:00:00Z",
+    trx_freq_id: "1",
+    transaction_frequency_name: "Monthly",
+    to_monthly_multiplier: "1",
+    monthly_amount: "750",
   },
 ];
 
-describe("Upsert Income", () => {
+const frequencyRows = [
+  {
+    id: "1",
+    name: "Monthly",
+    description: "Once a month",
+    to_monthly_multiplier: "1",
+  },
+];
+
+describe("Upsert Transaction", () => {
   beforeEach(() => {
     mockAuthenticatedIncomeUser();
   });
@@ -47,22 +68,27 @@ describe("Upsert Income", () => {
     const user = userEvent.setup();
     const insertedIncome = {
       id: "3",
+      transaction_type: "income",
       name: "Bank interest",
       description: "Savings account",
       amount: "25.50",
-      income_date: "2026-02-01T12:00:00Z",
+      transaction_date: "2026-02-01T12:00:00Z",
+      trx_freq_id: "1",
+      created_at: "2026-02-01T12:00:00Z",
+      updated_at: "2026-02-01T12:00:00Z",
     };
 
     vi.mocked(db.execute)
       .mockResolvedValueOnce(databaseRows as never)
+      .mockResolvedValueOnce(frequencyRows as never)
       .mockResolvedValueOnce([insertedIncome] as never);
 
     render(await IncomePage({ searchParams: Promise.resolve({}) }));
 
-    await user.click(screen.getByRole("button", { name: "Add income" }));
-    const dialog = screen.getByRole("dialog", { name: "Add income" });
+    await user.click(screen.getByRole("button", { name: "Add transaction" }));
+    const dialog = screen.getByRole("dialog", { name: "Add transaction" });
     await user.type(
-      within(dialog).getByLabelText(/^Income name/),
+      within(dialog).getByLabelText(/^Transaction name/),
       "Bank interest",
     );
     await user.type(
@@ -71,19 +97,23 @@ describe("Upsert Income", () => {
     );
     await user.type(within(dialog).getByLabelText(/^Amount/), "25.50");
     await user.type(
-      within(dialog).getByLabelText(/^Income date/),
+      within(dialog).getByLabelText(/^Transaction date/),
       "2026-02-01",
     );
+    await user.selectOptions(
+      within(dialog).getByLabelText(/^Transaction frequency/),
+      "1",
+    );
     await user.click(
-      within(dialog).getByRole("button", { name: "Add income" }),
+      within(dialog).getByRole("button", { name: "Add transaction" }),
     );
 
     await waitFor(() => {
       expect(
-        screen.queryByRole("dialog", { name: "Add income" }),
+        screen.queryByRole("dialog", { name: "Add transaction" }),
       ).not.toBeInTheDocument();
     });
-    expect(db.execute).toHaveBeenCalledTimes(2);
+    expect(db.execute).toHaveBeenCalledTimes(3);
     expect(revalidatePath).toHaveBeenCalledWith("/income");
     expect(revalidatePath).toHaveBeenCalledWith("/dashboard");
   });
@@ -94,23 +124,28 @@ describe("Upsert Income", () => {
 
     vi.mocked(db.execute)
       .mockResolvedValueOnce(databaseRows as never)
+      .mockResolvedValueOnce(frequencyRows as never)
       .mockRejectedValueOnce(new Error(errorMessage));
 
     render(await IncomePage({ searchParams: Promise.resolve({}) }));
 
-    await user.click(screen.getByRole("button", { name: "Add income" }));
-    const dialog = screen.getByRole("dialog", { name: "Add income" });
+    await user.click(screen.getByRole("button", { name: "Add transaction" }));
+    const dialog = screen.getByRole("dialog", { name: "Add transaction" });
     await user.type(
-      within(dialog).getByLabelText(/^Income name/),
+      within(dialog).getByLabelText(/^Transaction name/),
       "Bank interest",
     );
     await user.type(within(dialog).getByLabelText(/^Amount/), "25.50");
     await user.type(
-      within(dialog).getByLabelText(/^Income date/),
+      within(dialog).getByLabelText(/^Transaction date/),
       "2026-02-01",
     );
+    await user.selectOptions(
+      within(dialog).getByLabelText(/^Transaction frequency/),
+      "1",
+    );
     await user.click(
-      within(dialog).getByRole("button", { name: "Add income" }),
+      within(dialog).getByRole("button", { name: "Add transaction" }),
     );
 
     expect(await within(dialog).findByRole("alert")).toHaveTextContent(

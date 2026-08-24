@@ -2,16 +2,20 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 import { expectNoA11yViolations } from "@/shared/test/component/setup";
-import type { Income } from "../../database/dal";
+import type { Transaction } from "../../lib/database/get-trx-dal";
 import IncomeTable from "./IncomeTable";
 
-const incomes: Income[] = [
+const incomes: Transaction[] = [
   {
     id: 1,
     name: "Monthly salary",
     description: "Main job",
-    amount: 5000.5,
-    incomeDate: new Date(2026, 0, 15),
+    unitAmount: 5000.5,
+    transactionType: "income",
+    transactionDate: new Date(2026, 0, 15),
+    transactionFrequencyId: 1,
+    transactionFrequencyName: "Monthly",
+    monthlyAmount: 5000.5,
   },
 ];
 
@@ -23,11 +27,33 @@ describe("IncomeTable", () => {
       <IncomeTable incomes={incomes} hasSearchQuery={false} />,
     );
 
-    expect(screen.getByRole("table", { name: "Income records" })).toBeVisible();
+    expect(
+      screen.getByRole("table", { name: "Transaction records" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction type" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction name" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction description" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction amount" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction date" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("columnheader", { name: "Transaction frequency" }),
+    ).toBeVisible();
     expect(screen.getByRole("rowheader", { name: rowHeader })).toBeVisible();
+    expect(screen.getByText("Income")).toBeVisible();
     expect(screen.getByText("Main job")).toBeVisible();
     expect(screen.getByText("$5,000.50")).toBeVisible();
     expect(screen.getByText("Jan 15, 2026")).toBeVisible();
+    expect(screen.getByText("Monthly")).toBeVisible();
 
     const dataRow = screen
       .getByRole("rowheader", {
@@ -54,9 +80,13 @@ describe("IncomeTable", () => {
 
     await user.click(screen.getByRole("button", { name: "Edit" }));
 
-    expect(screen.getByRole("dialog", { name: "Edit income" })).toBeVisible();
-    expect(screen.getByLabelText(/^Income name/)).toHaveValue(incomes[0].name);
-    expect(screen.getByLabelText(/^Amount/)).toHaveValue(incomes[0].amount);
+    expect(
+      screen.getByRole("dialog", { name: "Edit transaction" }),
+    ).toBeVisible();
+    expect(screen.getByLabelText(/^Transaction name/)).toHaveValue(
+      incomes[0].name,
+    );
+    expect(screen.getByLabelText(/^Amount/)).toHaveValue(incomes[0].unitAmount);
   });
 
   test("should open a delete confirmation for the selected income", async () => {

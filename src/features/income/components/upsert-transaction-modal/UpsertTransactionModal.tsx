@@ -2,21 +2,26 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useId } from "react";
-import type { Income } from "../../database/dal";
-import UpsertIncomeForm from "./UpsertIncomeForm";
+import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
+import type { Transaction } from "../../lib/database/get-trx-dal";
+import UpsertTransactionForm from "./UpsertTransactionForm";
 
 interface Props {
-  income?: Income;
+  transaction?: Transaction;
+  transactionType?: "income" | "expense";
+  frequencies?: TransactionFrequency[];
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export default function UpsertIncomeModal({
-  income,
+export default function UpsertTransactionModal({
+  transaction,
+  transactionType = "income",
+  frequencies = [],
   open,
   onOpenChange,
 }: Props) {
-  const isEditing = Boolean(income);
+  const isEditing = Boolean(transaction);
   const titleId = useId();
 
   return (
@@ -32,18 +37,20 @@ export default function UpsertIncomeModal({
             {isEditing ? "Update record" : "New record"}
           </p>
           <Modal.Title id={titleId} className="mt-2 text-2xl font-semibold">
-            {isEditing ? "Edit income" : "Add income"}
+            {isEditing ? "Edit transaction" : "Add transaction"}
           </Modal.Title>
         </div>
         <Modal.CloseButton
-          aria-label="Close income form"
+          aria-label="Close transaction form"
           className="rounded-md border border-foreground/15 px-2 py-1 text-muted-foreground hover:bg-foreground/10"
         />
       </Modal.Header>
 
       <Modal.Body className="p-6">
-        <UpsertIncomeForm
-          income={income}
+        <UpsertTransactionForm
+          transaction={transaction}
+          transactionType={transactionType}
+          frequencies={frequencies}
           onSuccess={() => onOpenChange(false)}
         />
       </Modal.Body>

@@ -1,21 +1,29 @@
 import { describe, expect, test } from "vitest";
-import type { Income } from "../database/dal";
+import type { Transaction } from "../lib/database/get-trx-dal";
 import { filterIncomes } from "./filterIncomes";
 
-const incomes: Income[] = [
+const incomes: Transaction[] = [
   {
     id: 1,
     name: "Monthly salary",
     description: "Main job",
-    amount: 5000,
-    incomeDate: new Date("2026-01-15T12:00:00Z"),
+    unitAmount: 5000,
+    transactionType: "income",
+    transactionDate: new Date("2026-01-15T12:00:00Z"),
+    transactionFrequencyId: 1,
+    transactionFrequencyName: "Monthly",
+    monthlyAmount: 5000,
   },
   {
     id: 2,
     name: "Freelance project",
     description: "Website design",
-    amount: 750,
-    incomeDate: new Date("2026-01-20T12:00:00Z"),
+    unitAmount: 750,
+    transactionType: "income",
+    transactionDate: new Date("2026-01-20T12:00:00Z"),
+    transactionFrequencyId: 1,
+    transactionFrequencyName: "Monthly",
+    monthlyAmount: 750,
   },
 ];
 

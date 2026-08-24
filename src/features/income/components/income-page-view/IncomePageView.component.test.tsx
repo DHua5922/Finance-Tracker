@@ -10,23 +10,35 @@ const incomeResult = {
       id: 1,
       name: "Monthly salary",
       description: "Main job",
-      amount: 5000,
-      incomeDate: new Date(2026, 0, 15),
+      unitAmount: 5000,
+      transactionType: "income" as const,
+      transactionDate: new Date(2026, 0, 15),
+      transactionFrequencyId: 1,
+      transactionFrequencyName: "Monthly",
+      monthlyAmount: 5000,
     },
     {
       id: 2,
       name: "Freelance project",
       description: "Website design",
-      amount: 750,
-      incomeDate: new Date(2026, 0, 20),
+      unitAmount: 750,
+      transactionType: "income" as const,
+      transactionDate: new Date(2026, 0, 20),
+      transactionFrequencyId: 1,
+      transactionFrequencyName: "Monthly",
+      monthlyAmount: 750,
     },
   ],
 };
 
 describe("IncomePageView", () => {
-  test("shows the search form and matching income", async () => {
+  test("shows the search form and transactions returned by the DAL", async () => {
+    const filteredIncomeResult = {
+      ...incomeResult,
+      data: [incomeResult.data[0]],
+    };
     const { container } = render(
-      <IncomePageView query="salary" incomeResult={incomeResult} />,
+      <IncomePageView query="salary" incomeResult={filteredIncomeResult} />,
     );
 
     expect(screen.getByRole("heading", { name: "Income" })).toBeVisible();

@@ -3,34 +3,43 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getAuthenticatedUser } from "@/features/auth/lib/session";
-import { upsertIncomeDal } from "../../database/dal";
+import { upsertTransactionDal } from "../database/upsert-trx-dal";
 
-const upsertIncomeFormDataSchema = z.object({
+const upsertTransactionFormDataSchema = z.object({
   id: z.coerce.number().int().nonnegative(),
-  name: z.string().trim().min(1, "Enter an income name").max(100),
-  description: z.string().trim().max(500),
+  transactionType: z.literal("income").or(z.literal("expense")),
+  name: z.string().trim().min(1, "Enter a transaction name"),
+  description: z.preprocess(
+    (description) => description ?? "",
+    z.string().trim(),
+  ),
   amount: z.coerce.number().positive("Enter an amount greater than zero"),
-  incomeDate: z.coerce.date({ error: "Enter a valid date" }),
+  transactionDate: z.coerce.date({ error: "Enter a valid date" }),
+  transactionFrequencyId: z.coerce.number().int().positive(),
 });
-type UpsertIncomeFormData = keyof z.infer<typeof upsertIncomeFormDataSchema>;
+type UpsertTransactionFormData = keyof z.infer<
+  typeof upsertTransactionFormDataSchema
+>;
 
-export interface UpsertIncomeActionState {
+export interface UpsertTransactionActionState {
   isError: boolean;
   isSuccess: boolean;
   errorMessage: string;
-  fieldErrors: Partial<Record<UpsertIncomeFormData, string[]>>;
+  fieldErrors: Partial<Record<UpsertTransactionFormData, string[]>>;
 }
 
-export async function upsertIncomeAction(
-  _previousState: UpsertIncomeActionState,
+export async function upsertTransactionAction(
+  _previousState: UpsertTransactionActionState,
   formData: FormData,
-): Promise<UpsertIncomeActionState> {
-  const result = upsertIncomeFormDataSchema.safeParse({
+): Promise<UpsertTransactionActionState> {
+  const result = upsertTransactionFormDataSchema.safeParse({
     id: formData.get("id"),
+    transactionType: formData.get("transactionType"),
     name: formData.get("name"),
     description: formData.get("description"),
     amount: formData.get("amount"),
-    incomeDate: formData.get("incomeDate"),
+    transactionDate: formData.get("transactionDate"),
+    transactionFrequencyId: formData.get("transactionFrequencyId"),
   });
 
   if (!result.success) {
@@ -52,7 +61,7 @@ export async function upsertIncomeAction(
     };
   }
 
-  const upsertResult = await upsertIncomeDal({
+  const upsertResult = await upsertTransactionDal({
     ...result.data,
     userId: user._id,
   });

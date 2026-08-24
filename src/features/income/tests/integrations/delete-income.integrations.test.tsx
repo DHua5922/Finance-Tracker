@@ -23,11 +23,26 @@ vi.mock("next/cache", () => ({
 
 const databaseRow = {
   id: "1",
+  transaction_type: "income",
   name: "Monthly salary",
   description: "Main job",
   amount: "5000.50",
-  income_date: "2026-01-15T12:00:00Z",
+  unit_amount: "5000.50",
+  transaction_date: "2026-01-15T12:00:00Z",
+  trx_freq_id: "1",
+  transaction_frequency_name: "Monthly",
+  to_monthly_multiplier: "1",
+  monthly_amount: "5000.50",
 };
+
+const frequencyRows = [
+  {
+    id: "1",
+    name: "Monthly",
+    description: "Once a month",
+    to_monthly_multiplier: "1",
+  },
+];
 
 describe("Delete Income", () => {
   beforeEach(() => {
@@ -40,6 +55,7 @@ describe("Delete Income", () => {
 
     vi.mocked(db.execute)
       .mockResolvedValueOnce([databaseRow] as never)
+      .mockResolvedValueOnce(frequencyRows as never)
       .mockResolvedValueOnce([databaseRow] as never);
 
     render(await IncomePage({ searchParams: Promise.resolve({}) }));
@@ -56,7 +72,7 @@ describe("Delete Income", () => {
         screen.queryByRole("dialog", { name: dialogName }),
       ).not.toBeInTheDocument();
     });
-    expect(db.execute).toHaveBeenCalledTimes(2);
+    expect(db.execute).toHaveBeenCalledTimes(3);
     expect(revalidatePath).toHaveBeenCalledWith("/income");
     expect(revalidatePath).toHaveBeenCalledWith("/dashboard");
   });
@@ -67,6 +83,7 @@ describe("Delete Income", () => {
 
     vi.mocked(db.execute)
       .mockResolvedValueOnce([databaseRow] as never)
+      .mockResolvedValueOnce(frequencyRows as never)
       .mockRejectedValueOnce(new Error(errorMessage));
 
     render(await IncomePage({ searchParams: Promise.resolve({}) }));
@@ -88,7 +105,9 @@ describe("Delete Income", () => {
     const user = userEvent.setup();
     const dialogName = "Delete income";
 
-    vi.mocked(db.execute).mockResolvedValueOnce([databaseRow] as never);
+    vi.mocked(db.execute)
+      .mockResolvedValueOnce([databaseRow] as never)
+      .mockResolvedValueOnce(frequencyRows as never);
     render(await IncomePage({ searchParams: Promise.resolve({}) }));
 
     await user.click(screen.getByRole("button", { name: "Delete" }));
@@ -98,7 +117,7 @@ describe("Delete Income", () => {
     expect(
       screen.queryByRole("dialog", { name: dialogName }),
     ).not.toBeInTheDocument();
-    expect(db.execute).toHaveBeenCalledOnce();
+    expect(db.execute).toHaveBeenCalledTimes(2);
     expect(revalidatePath).not.toHaveBeenCalled();
   });
 });
