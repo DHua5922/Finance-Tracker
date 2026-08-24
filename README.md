@@ -47,6 +47,7 @@ savings.
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Mock Service Worker](https://mswjs.io/)
 - [Playwright](https://playwright.dev/)
+- [Axe](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) for browser accessibility checks
 - [Biome](https://biomejs.dev/)
 
 ## Getting started
@@ -142,6 +143,7 @@ The home page sends signed-in users to the dashboard.
 | `pnpm test:component` | Runs component tests. |
 | `pnpm test:integrations` | Runs integration tests. |
 | `pnpm test:e2e` | Runs end-to-end tests with Playwright. |
+| `pnpm test:accessibility` | Checks the transaction page and form with Playwright and Axe. |
 | `pnpm size` | Builds the app and checks the JavaScript size limit. |
 
 ## Automated Testing
@@ -153,6 +155,8 @@ The test suite is split by purpose:
 - Integration tests check how features work across their main parts. HTTP calls
   use MSW, so tests do not depend on a live auth service.
 - End-to-end tests check important user flows in a browser.
+- Accessibility tests use Axe in Chromium. They currently check only the
+  transaction page and add-transaction form against WCAG A and AA rules.
 
 Run all local test groups with:
 
@@ -161,6 +165,7 @@ pnpm test:unit
 pnpm test:component
 pnpm test:integrations
 pnpm test:e2e
+pnpm test:accessibility
 ```
 
 GitHub Actions also runs quality checks, bundle size checks, and test jobs.
@@ -174,6 +179,7 @@ pnpm quality:check
 pnpm test:unit
 pnpm test:component
 pnpm test:integrations
+pnpm test:accessibility
 ```
 
 The production JavaScript limit is 200 KB for each file matched by the bundle

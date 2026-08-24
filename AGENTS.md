@@ -1,3 +1,5 @@
+<!-- DO NOT DELETE THIS FILE -->
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # Project Rules for GitHub Copilot & Codex
@@ -18,5 +20,3 @@
 - **E2E Tests Structure**: Create a file using name: `{noun}.e2e.test.tsx`. Replace `{noun}` with the appropriate parent folder name in `features` folder. Make sure the e2e test is testing very important workflows (success scenarios) that are worth testing and cannot be covered by integration tests. Place the file in `tests` folder. If that folder is already populated, create `e2e` folder within `tests` folder and place that e2e test in the `e2e` folder. When labeling the test, label it by behavior. Start with `should`. If a test ends up being too long, break it into functions.
 - **Database Code / DAL Structure**: Anything that will be used globally, such as database configuration, should be placed in `shared/database`. DAL calls to Supabase for a specific feature should be placed in `features/{feature name}/database/dal.ts`. If the code in `dal.ts` is too long, split that file into files using `{dal function name}.dal.ts` and group them by `dal` folder.
 - **Utilities Code Structure**: Anything pure functions that will be used in more than 1 file or needs to be extracted out should be placed in `utilities` folder and named as `{function name}.utilities.ts`.
-
-<!-- END:nextjs-agent-rules -->
