@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/features/auth/lib/session";
 import DashboardPageView from "@/features/dashboard/components/dashboard-page-view/DashboardPageView";
 import { getDashboardStatsDal } from "@/features/dashboard/database/dal";
-import TransactionFrequencyChooser from "@/features/transaction-frequency/components/transaction-frequency-chooser/TransactionFrequencyChooser";
+import TransactionFrequencyChooser from "@/features/transaction-frequency/components/TransactionFrequencyChooser";
 import { getTransactionFrequenciesDal } from "@/features/transaction-frequency/database/dal";
 import { getSelectedFrequencyId } from "@/features/transaction-frequency/utilities/getSelectedFrequencyId";
 

@@ -1,4 +1,4 @@
-import type { TransactionFrequenciesResult } from "../../database/dal";
+import type { TransactionFrequenciesResult } from "../database/dal";
 import styles from "./TransactionFrequencyChooser.module.css";
 
 interface Props {
