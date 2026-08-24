@@ -65,11 +65,7 @@ describe("Registration", () => {
         confirmPassword: "secure-password",
       });
     });
-
-    expect(screen.getByLabelText(/Username/i)).toHaveValue("");
-    expect(screen.getByLabelText(/Email/i)).toHaveValue("");
-    expect(screen.getByLabelText(/^Password/i)).toHaveValue("");
-    expect(screen.getByLabelText(/Confirm password/i)).toHaveValue("");
+    expect(redirect).toHaveBeenCalledWith("/dashboard");
   });
 
   it("should show backend error message when registration fails", async () => {
@@ -91,6 +87,12 @@ describe("Registration", () => {
     await user.click(screen.getByRole("button", { name: "Create account" }));
 
     expect(await screen.findByText("Email already exists")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Username/i)).toHaveValue("Jane");
+    expect(screen.getByLabelText(/Email/i)).toHaveValue("jane@example.com");
+    expect(screen.getByLabelText(/^Password/i)).toHaveValue("secure-password");
+    expect(screen.getByLabelText(/Confirm password/i)).toHaveValue(
+      "secure-password",
+    );
   });
 });
 
@@ -109,6 +111,8 @@ describe("Login", () => {
     await renderLoginForm();
 
     expect(await screen.findByText("Invalid credentials")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Email/i)).toHaveValue("email@example.com");
+    expect(screen.getByLabelText(/Password/i)).toHaveValue("test123");
   });
 
   async function renderLoginForm() {

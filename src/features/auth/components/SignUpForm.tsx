@@ -7,16 +7,28 @@ import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
 import { cn } from "@/shared/utilities/css";
 
+const initialState: Parameters<typeof signUpUserAction>[0] = {
+  isError: false,
+  errorMessage: "",
+  values: {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  },
+  fieldErrors: {},
+};
+
 export default function SignUpForm() {
   const usernameInputId = useId();
   const emailInputId = useId();
   const passwordInputId = useId();
   const confirmPasswordInputId = useId();
-  const [state, formAction, isPending] = useActionState(signUpUserAction, {
-    isError: false,
-    errorMessage: "",
-    fieldErrors: {},
-  });
+  const [actionState, formAction, isPending] = useActionState(
+    signUpUserAction,
+    initialState,
+  );
+  const state = actionState ?? initialState;
 
   return (
     <form className="space-y-4" action={formAction}>
@@ -38,6 +50,7 @@ export default function SignUpForm() {
           id={usernameInputId}
           name="username"
           type="text"
+          defaultValue={state.values.username || undefined}
           placeholder="Jane Doe"
           aria-invalid={Boolean(state.fieldErrors.username)}
           className={cn(
@@ -59,6 +72,7 @@ export default function SignUpForm() {
           id={emailInputId}
           name="email"
           type="email"
+          defaultValue={state.values.email || undefined}
           placeholder="name@example.com"
           aria-invalid={Boolean(state.fieldErrors.email)}
           className={cn(
@@ -80,6 +94,7 @@ export default function SignUpForm() {
           id={passwordInputId}
           name="password"
           type="password"
+          defaultValue={state.values.password || undefined}
           placeholder="••••••••"
           aria-invalid={Boolean(state.fieldErrors.password)}
           className={cn(
@@ -101,6 +116,7 @@ export default function SignUpForm() {
           id={confirmPasswordInputId}
           name="confirmPassword"
           type="password"
+          defaultValue={state.values.confirmPassword || undefined}
           placeholder="••••••••"
           aria-invalid={Boolean(state.fieldErrors.confirmPassword)}
           className={cn(

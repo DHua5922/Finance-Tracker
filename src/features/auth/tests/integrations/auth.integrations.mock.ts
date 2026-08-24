@@ -19,9 +19,15 @@ export function mockSuccessfulRegistration(
 
       return HttpResponse.json(
         {
-          _id: "user-1",
-          username: "Jane",
-          email: "jane@example.com",
+          user: {
+            _id: "user-1",
+            username: "Jane",
+            email: "jane@example.com",
+          },
+          accessToken: "access-token",
+          refreshToken: "refresh-token",
+          accessTokenExpireTime: "15m",
+          refreshTokenExpireTime: "7d",
         },
         { status: 201 },
       );
@@ -60,8 +66,8 @@ export function mockSuccessfulLogin() {
           },
           accessToken: "access-token",
           refreshToken: "refresh-token",
-          accessTokenExpirationTime: "15m",
-          refreshTokenExpirationTime: "7d",
+          accessTokenExpireTime: "15m",
+          refreshTokenExpireTime: "7d",
         },
         { status: 200 },
       );

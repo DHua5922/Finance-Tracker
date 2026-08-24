@@ -14,8 +14,8 @@ vi.mock("@/features/auth/lib/api", () => ({
 const refreshedTokens = {
   accessToken: "new-access-token",
   refreshToken: "new-refresh-token",
-  accessTokenExpirationTime: "1m",
-  refreshTokenExpirationTime: "7d",
+  accessTokenExpireTime: "1m",
+  refreshTokenExpireTime: "7d",
 };
 
 test("should replace both token cookies after a successful refresh", async () => {

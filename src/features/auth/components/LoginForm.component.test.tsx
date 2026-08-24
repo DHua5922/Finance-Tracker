@@ -7,8 +7,8 @@ describe("LoginForm", () => {
   test("should render the form correctly", () => {
     render(<LoginForm />);
 
-    expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Email/i)).toHaveValue("");
+    expect(screen.getByLabelText(/Password/i)).toHaveValue("");
     expect(screen.getByRole("button", { name: /Log in/i })).toBeInTheDocument();
   });
 
