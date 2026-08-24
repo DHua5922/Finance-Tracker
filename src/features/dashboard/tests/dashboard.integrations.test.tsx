@@ -22,22 +22,34 @@ describe("Dashboard", () => {
 
   test("loads the authenticated user's dashboard statistics", async () => {
     mockAuthenticatedDashboardUser();
-    vi.mocked(db.execute).mockResolvedValue([
-      {
-        expenses_count: "4",
-        total_expenses_amount: "750.25",
-        income_count: "2",
-        total_income_amount: "2000",
-        net_savings: "1249.75",
-      },
-    ] as never);
+    vi.mocked(db.execute)
+      .mockResolvedValueOnce([
+        {
+          id: "1",
+          name: "Monthly",
+          description: "One month",
+          to_monthly_multiplier: "1",
+        },
+      ] as never)
+      .mockResolvedValueOnce([
+        {
+          expenses_count: "4",
+          total_expenses_amount: "750.25",
+          income_count: "2",
+          total_income_amount: "2000",
+          net_savings: "1249.75",
+        },
+      ] as never);
 
     render(await DashboardPage());
 
     expect(
       screen.getByRole("heading", { name: "Welcome back, Jane" }),
     ).toBeInTheDocument();
-    expect(db.execute).toHaveBeenCalledOnce();
+    expect(db.execute).toHaveBeenCalledTimes(2);
+    expect(
+      screen.getByRole("combobox", { name: "Transaction frequency" }),
+    ).toHaveValue("1");
     expect(screen.getByText("$2,000.00")).toBeInTheDocument();
     expect(screen.getByText("$750.25")).toBeInTheDocument();
     expect(screen.getByText("$1,249.75")).toBeInTheDocument();
@@ -47,7 +59,16 @@ describe("Dashboard", () => {
   test("shows the dashboard error state when its database query fails", async () => {
     const errorMessage = "Your dashboard data is temporarily unavailable.";
     const databaseError = new Error(errorMessage);
-    vi.mocked(db.execute).mockRejectedValue(databaseError);
+    vi.mocked(db.execute)
+      .mockResolvedValueOnce([
+        {
+          id: "1",
+          name: "Monthly",
+          description: "One month",
+          to_monthly_multiplier: "1",
+        },
+      ] as never)
+      .mockRejectedValueOnce(databaseError);
 
     render(await DashboardPage());
 

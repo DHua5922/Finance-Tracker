@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { getDashboardStatsDal } from "../../database/dal";
 import { DashboardContent } from "../dashboard-content/DashboardContent";
 import styles from "./DashboardPageView.module.css";
@@ -6,9 +7,11 @@ import styles from "./DashboardPageView.module.css";
 export default function DashboardPageView({
   username,
   statsResult,
+  frequencyChooser,
 }: {
   username: string;
   statsResult: Awaited<ReturnType<typeof getDashboardStatsDal>>;
+  frequencyChooser?: ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-8">
@@ -31,6 +34,8 @@ export default function DashboardPageView({
           </Link>
         </nav>
       </header>
+
+      {frequencyChooser}
 
       {statsResult.success ? (
         <DashboardContent stats={statsResult.data} />

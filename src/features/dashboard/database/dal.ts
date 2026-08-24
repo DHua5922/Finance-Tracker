@@ -19,10 +19,11 @@ type DashboardStatsResult =
 
 export async function getDashboardStatsDal(
   userId: string,
+  frequencyId: number,
 ): Promise<DashboardStatsResult> {
   try {
     const result = await db.execute(
-      sql`SELECT * FROM get_dashboard_stats(${userId})`,
+      sql`SELECT * FROM get_dashboard_stats(${userId}, ${frequencyId})`,
     );
 
     return {
