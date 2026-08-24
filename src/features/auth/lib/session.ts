@@ -4,13 +4,15 @@ import type { tokensSchema } from "../schemas";
 import convertTimeToMaxAge from "../utilities/cookie";
 import { validateAccessTokenApi } from "./api";
 
-const accessTokenName = "accessToken";
-const refreshTokenName = "refreshToken";
+export const accessTokenName = "accessToken";
+export const refreshTokenName = "refreshToken";
 
 type UserSessionStatus =
   | "authenticated"
   | "refresh-required"
   | "unauthenticated";
+
+type Tokens = z.infer<typeof tokensSchema>;
 
 export async function getAuthenticatedUser() {
   const accessToken = (await cookies()).get(accessTokenName)?.value;
@@ -32,39 +34,41 @@ export async function getUserSessionStatus(): Promise<UserSessionStatus> {
     : "unauthenticated";
 }
 
-type Tokens = z.infer<typeof tokensSchema>;
-export async function setUserSession({
+export async function setUserSession(tokens: Tokens) {
+  const cookieStore = await cookies();
+
+  for (const sessionCookie of createUserSessionCookies(tokens))
+    cookieStore.set(sessionCookie);
+}
+
+export function createUserSessionCookies({
   accessToken,
   refreshToken,
   accessTokenExpireTime,
   refreshTokenExpireTime,
 }: Tokens) {
-  const cookieStore = await cookies();
   const secure = process.env.NODE_ENV === "production";
 
-  cookieStore.set({
-    name: accessTokenName,
-    value: accessToken,
-    httpOnly: true,
-    secure,
-    sameSite: "lax",
-    path: "/",
-    maxAge: convertTimeToMaxAge(accessTokenExpireTime),
-  });
-
-  cookieStore.set({
-    name: refreshTokenName,
-    value: refreshToken,
-    httpOnly: true,
-    secure,
-    sameSite: "strict",
-    path: "/",
-    maxAge: convertTimeToMaxAge(refreshTokenExpireTime),
-  });
+  return [
+    {
+      name: accessTokenName,
+      value: accessToken,
+      httpOnly: true,
+      secure,
+      sameSite: "lax" as const,
+      path: "/",
+      maxAge: convertTimeToMaxAge(accessTokenExpireTime),
+    },
+    {
+      name: refreshTokenName,
+      value: refreshToken,
+      httpOnly: true,
+      secure,
+      sameSite: "strict" as const,
+      path: "/",
+      maxAge: convertTimeToMaxAge(refreshTokenExpireTime),
+    },
+  ];
 }
 
-export async function clearUserSession() {
-  const cookieStore = await cookies();
-  cookieStore.delete(accessTokenName);
-  cookieStore.delete(refreshTokenName);
-}
+

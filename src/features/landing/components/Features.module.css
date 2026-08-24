@@ -1,3 +1,10 @@
+.featureCard {
+  border-color: var(--border);
+  background: var(--surface);
+  padding: 1.5rem;
+  text-align: left;
+}
+
 .featureIcon {
   margin-bottom: 1rem;
   display: flex;
@@ -9,5 +16,5 @@
   background: rgb(52 211 153 / 0.15);
   font-size: 1.25rem;
   line-height: 1.75rem;
-  color: #6ee7b7;
+  color: var(--accent-foreground);
 }
