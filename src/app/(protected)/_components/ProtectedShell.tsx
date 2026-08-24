@@ -10,10 +10,7 @@ interface Props {
   children: ReactNode;
 }
 
-const navigationItems = [
-  { href: "/expense", label: "Expenses" },
-  { href: "/income", label: "Income" },
-];
+const navigationItems = [{ href: "/transaction", label: "Transactions" }];
 
 export default function ProtectedShell({ children }: Props) {
   return (

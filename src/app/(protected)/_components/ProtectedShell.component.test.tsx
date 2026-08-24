@@ -8,12 +8,8 @@ describe("ProtectedShell", () => {
   it("renders accessible protected navigation", async () => {
     const { container } = render(<ProtectedShell>Page content</ProtectedShell>);
 
-    for (const link of screen.getAllByRole("link", { name: "Expenses" })) {
-      expect(link).toHaveAttribute("href", "/expense");
-    }
-
-    for (const link of screen.getAllByRole("link", { name: "Income" })) {
-      expect(link).toHaveAttribute("href", "/income");
+    for (const link of screen.getAllByRole("link", { name: "Transactions" })) {
+      expect(link).toHaveAttribute("href", "/transaction");
     }
 
     expect(screen.getByRole("main")).toHaveTextContent("Page content");

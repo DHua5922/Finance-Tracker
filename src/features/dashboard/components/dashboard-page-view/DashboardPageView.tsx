@@ -25,12 +25,12 @@ export default function DashboardPageView({
         </div>
 
         <nav className={styles.actions} aria-label="Quick actions">
-          <Link href="/income" className={styles.primaryAction}>
-            Add income
+          <Link href="/transaction" className={styles.primaryAction}>
+            Add transaction
           </Link>
 
-          <Link href="/expense" className={styles.secondaryAction}>
-            Record expense
+          <Link href="/transaction" className={styles.secondaryAction}>
+            View transactions
           </Link>
         </nav>
       </header>
