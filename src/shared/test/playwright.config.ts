@@ -2,7 +2,8 @@ import path from "node:path";
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: path.resolve(__dirname, "../../features/auth/tests/e2e"),
+  testDir: path.resolve(__dirname, "../../features"),
+  testMatch: "**/tests/e2e/*.e2e.test.{ts,tsx}",
   globalSetup: path.resolve(__dirname, "./e2e/setup.ts"),
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
