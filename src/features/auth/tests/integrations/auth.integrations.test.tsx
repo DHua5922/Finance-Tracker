@@ -13,6 +13,7 @@ import {
 } from "./auth.integrations.mock";
 
 let receivedRequestBody: unknown;
+const { deleteCookie } = vi.hoisted(() => ({ deleteCookie: vi.fn() }));
 
 beforeEach(() => {
   receivedRequestBody = undefined;
@@ -32,7 +33,7 @@ vi.mock("next/navigation", () => {
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
-    delete: vi.fn(),
+    delete: deleteCookie,
     set: vi.fn(),
   }),
 }));
@@ -130,5 +131,7 @@ describe("Logout", () => {
     await waitFor(() => {
       expect(redirect).toHaveBeenCalledWith("/");
     });
+    expect(deleteCookie).toHaveBeenCalledWith("accessToken");
+    expect(deleteCookie).toHaveBeenCalledWith("refreshToken");
   });
 });

@@ -3,7 +3,11 @@ import {
   refreshTokensApi,
   validateAccessTokenApi,
 } from "@/features/auth/lib/api";
-import { clearUserSession, setUserSession } from "@/features/auth/lib/session";
+import {
+  accessTokenName,
+  createUserSessionCookies,
+  refreshTokenName,
+} from "@/features/auth/lib/session";
 
 const allowedReturnPaths = new Set(["/dashboard", "/transaction"]);
 
@@ -19,11 +23,18 @@ export async function GET(request: NextRequest) {
     try {
       const refreshedTokens = await refreshTokensApi(refreshToken);
       await validateAccessTokenApi(refreshedTokens.accessToken);
-      await setUserSession(refreshedTokens);
-      return NextResponse.redirect(new URL(returnPath, request.url));
+      const response = NextResponse.redirect(new URL(returnPath, request.url));
+
+      for (const sessionCookie of createUserSessionCookies(refreshedTokens)) {
+        response.cookies.set(sessionCookie);
+      }
+
+      return response;
     } catch {}
   }
 
-  await clearUserSession();
-  return NextResponse.redirect(new URL("/?login=1", request.url));
+  const response = NextResponse.redirect(new URL("/?login=1", request.url));
+  response.cookies.delete(accessTokenName);
+  response.cookies.delete(refreshTokenName);
+  return response;
 }

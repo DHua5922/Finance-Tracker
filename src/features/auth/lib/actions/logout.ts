@@ -1,9 +1,13 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { clearUserSession } from "../session";
+import { accessTokenName, refreshTokenName } from "../session";
 
 export async function logOutAction() {
-  await clearUserSession();
+  const cookieStore = await cookies();
+  cookieStore.delete(accessTokenName);
+  cookieStore.delete(refreshTokenName);
+
   redirect("/");
 }
