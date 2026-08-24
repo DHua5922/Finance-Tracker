@@ -33,14 +33,10 @@ const transactionResult = {
 
 describe("TransactionPageView", () => {
   test("shows the search form and transactions returned by the DAL", async () => {
-    const filteredIncomeResult = {
-      ...transactionResult,
-      data: [transactionResult.data[0]],
-    };
     const { container } = render(
       <TransactionPageView
         query="salary"
-        transactionResult={filteredIncomeResult}
+        transactionResult={transactionResult}
       />,
     );
 

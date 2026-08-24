@@ -75,7 +75,7 @@ describe("Get Transactions", () => {
     const searchQuery = "website";
 
     vi.mocked(db.execute)
-      .mockResolvedValueOnce([databaseRows[1]] as never)
+      .mockResolvedValueOnce(databaseRows as never)
       .mockResolvedValueOnce(frequencyRows as never);
     render(
       await TransactionPage({

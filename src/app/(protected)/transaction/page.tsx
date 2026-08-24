@@ -16,8 +16,8 @@ export default async function TransactionPage({ searchParams }: Props) {
   const [transactionResult, frequenciesResult] = await Promise.all([
     getTransactionsDal({
       userId: user._id,
-      name: query,
-      description: query,
+      name: "",
+      description: "",
       transactionFrequencyId: null,
       transactionType: null,
     }),

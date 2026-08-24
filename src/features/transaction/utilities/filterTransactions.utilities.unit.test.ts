@@ -8,7 +8,7 @@ const transactions: Transaction[] = [
     name: "Monthly salary",
     description: "Main job",
     unitAmount: 5000,
-    transactionType: "income",
+    transactionType: "expense",
     transactionDate: new Date("2026-01-15T12:00:00Z"),
     transactionFrequencyId: 1,
     transactionFrequencyName: "Monthly",
@@ -32,19 +32,29 @@ describe("filterTransactions", () => {
     expect(filterTransactions(transactions, "   ")).toBe(transactions);
   });
 
-  test("should match income names without caring about case or outside spaces", () => {
+  test("should match names without caring about case or outside spaces", () => {
     expect(filterTransactions(transactions, "  SALARY ")).toEqual([
       transactions[0],
     ]);
   });
 
-  test("should match income descriptions", () => {
+  test("should match descriptions", () => {
     expect(filterTransactions(transactions, "website")).toEqual([
       transactions[1],
     ]);
   });
 
-  test("should return an empty list when no income matches", () => {
+  test("should match transaction types", () => {
+    expect(filterTransactions(transactions, "expense")).toEqual([
+      transactions[0],
+    ]);
+  });
+
+  test("should match transaction frequency names", () => {
+    expect(filterTransactions(transactions, "monthly")).toEqual(transactions);
+  });
+
+  test("should return an empty list when no transaction matches", () => {
     expect(filterTransactions(transactions, "interest")).toEqual([]);
   });
 });

@@ -1,5 +1,6 @@
 import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
 import type { getTransactionsDal } from "../../lib/database/get-trx.dal";
+import { filterTransactions } from "../../utilities/filterTransactions.utilities";
 import UpsertTransactionButton from "../upsert-transaction-modal/UpsertTransactionButton";
 import styles from "./TransactionPageView.module.css";
 import TransactionTable from "./TransactionTable";
@@ -13,7 +14,9 @@ export default function TransactionPageView({
   transactionResult: Awaited<ReturnType<typeof getTransactionsDal>>;
   frequencies?: TransactionFrequency[];
 }) {
-  const transactions = transactionResult.success ? transactionResult.data : [];
+  const transactions = transactionResult.success
+    ? filterTransactions(transactionResult.data, query)
+    : [];
 
   return (
     <div className={styles.page}>
