@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import type { z } from "zod";
 import type { tokensSchema } from "../schemas";
 import convertTimeToMaxAge from "../utilities/cookie";
-import { validateAccessTokenApi } from "./api";
+import { getMeApi } from "./api/auth.api";
 
 export const accessTokenName = "accessToken";
 export const refreshTokenName = "refreshToken";
@@ -20,7 +20,7 @@ export async function getAuthenticatedUser() {
   if (!accessToken) return null;
 
   try {
-    return await validateAccessTokenApi(accessToken);
+    return await getMeApi(accessToken);
   } catch {
     return null;
   }

@@ -1,15 +1,17 @@
 import { z } from "zod";
 import {
   type logInUserFormDataSchema,
+  type resetPasswordFormDataSchema,
   type signUpUserFormDataSchema,
   tokensSchema,
 } from "@/features/auth/schemas";
 import { throwIfResponseFailed } from "@/shared/utilities/api";
-import { createAuthApiFetch } from "./config";
-import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "./constants";
+import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "../constants";
+import { createAuthApiFetch } from "./config.api";
 
 type LoginInput = z.infer<typeof logInUserFormDataSchema>;
 type SignUpUserInput = z.infer<typeof signUpUserFormDataSchema>;
+type ResetPasswordInput = z.infer<typeof resetPasswordFormDataSchema>;
 
 const userSchema = z.object({
   _id: z.string(),
@@ -42,10 +44,44 @@ export async function signUpUserApi(input: SignUpUserInput) {
   return authSessionSchema.parse(await response.json());
 }
 
-export async function validateAccessTokenApi(accessToken: string) {
+export async function getMeApi(accessToken: string) {
   const response = await createServerAuthApiFetch(accessToken)(
-    AUTH_API_ROUTES.secure,
-    { method: "POST" },
+    AUTH_API_ROUTES.me,
+    { method: "GET" },
+  );
+
+  await throwIfResponseFailed(response);
+  return userSchema.parse(await response.json());
+}
+
+export async function getAccessTokenByEmailApi(email: string) {
+  const response = await createServerAuthApiFetch()(
+    AUTH_API_ROUTES.accessTokenByEmail,
+    {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    },
+  );
+
+  await throwIfResponseFailed(response);
+  return z
+    .object({
+      accessToken: z.string(),
+      accessTokenExpireTime: z.string().regex(/^\d+[mhd]$/),
+    })
+    .parse(await response.json());
+}
+
+export async function resetPasswordApi(
+  accessToken: string,
+  input: ResetPasswordInput,
+) {
+  const response = await createServerAuthApiFetch(accessToken)(
+    AUTH_API_ROUTES.resetPassword,
+    {
+      method: "POST",
+      body: JSON.stringify(input),
+    },
   );
 
   await throwIfResponseFailed(response);

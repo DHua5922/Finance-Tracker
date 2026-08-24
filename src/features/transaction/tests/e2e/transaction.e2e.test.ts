@@ -3,7 +3,7 @@ import {
   closeAccountApi,
   loginUserApi,
   signUpUserApi,
-} from "@/features/auth/lib/api";
+} from "@/features/auth/lib/api/auth.api";
 
 test.setTimeout(60_000);
 

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useId } from "react";
-import { logInAction } from "@/features/auth/lib/actions/login";
+import { logInAction } from "@/features/auth/lib/actions/login.action";
 import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
@@ -49,7 +50,21 @@ export default function LoginForm() {
         />
       </Field>
 
-      <Button type="submit" isLoading={isPending} loadingText="Logging in...">
+      <div className="text-right">
+        <Link
+          href="/forgot-password"
+          className="text-sm text-slate-700 underline underline-offset-2 hover:text-slate-950"
+        >
+          Forgot password?
+        </Link>
+      </div>
+
+      <Button
+        type="submit"
+        className="w-full"
+        isLoading={isPending}
+        loadingText="Logging in..."
+      >
         Log in
       </Button>
     </form>

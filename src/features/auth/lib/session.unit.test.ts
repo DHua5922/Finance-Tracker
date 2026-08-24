@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { validateAccessTokenApi } from "./api";
+import { getMeApi } from "./api/auth.api";
 import { getUserSessionStatus, requireAuthenticatedUser } from "./session";
 
 const { cookieValues } = vi.hoisted(() => ({
@@ -17,7 +17,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-vi.mock("./api");
+vi.mock("./api/auth.api");
 
 vi.mock("next/navigation", () => ({
   redirect: vi.fn(),
@@ -30,22 +30,20 @@ beforeEach(() => {
 describe("getUserSessionStatus", () => {
   it("should return authenticated when the access token is valid", async () => {
     cookieValues.set("accessToken", "valid-access-token");
-    vi.mocked(validateAccessTokenApi).mockResolvedValue({
+    vi.mocked(getMeApi).mockResolvedValue({
       _id: "user-1",
       username: "Jane",
       email: "jane@example.com",
     });
 
     await expect(getUserSessionStatus()).resolves.toBe("authenticated");
-    expect(validateAccessTokenApi).toHaveBeenCalledWith("valid-access-token");
+    expect(getMeApi).toHaveBeenCalledWith("valid-access-token");
   });
 
   it("should require a refresh when access-token validation fails", async () => {
     cookieValues.set("accessToken", "expired-access-token");
     cookieValues.set("refreshToken", "valid-refresh-token");
-    vi.mocked(validateAccessTokenApi).mockRejectedValue(
-      new Error("Token expired"),
-    );
+    vi.mocked(getMeApi).mockRejectedValue(new Error("Token expired"));
 
     await expect(getUserSessionStatus()).resolves.toBe("refresh-required");
   });
@@ -54,14 +52,12 @@ describe("getUserSessionStatus", () => {
     cookieValues.set("refreshToken", "valid-refresh-token");
 
     await expect(getUserSessionStatus()).resolves.toBe("refresh-required");
-    expect(validateAccessTokenApi).not.toHaveBeenCalled();
+    expect(getMeApi).not.toHaveBeenCalled();
   });
 
   it("should return unauthenticated when no usable tokens exist", async () => {
     cookieValues.set("accessToken", "invalid-access-token");
-    vi.mocked(validateAccessTokenApi).mockRejectedValue(
-      new Error("Invalid token"),
-    );
+    vi.mocked(getMeApi).mockRejectedValue(new Error("Invalid token"));
 
     await expect(getUserSessionStatus()).resolves.toBe("unauthenticated");
   });
@@ -75,7 +71,7 @@ describe("requireAuthenticatedUser", () => {
       email: "jane@example.com",
     };
     cookieValues.set("accessToken", "valid-access-token");
-    vi.mocked(validateAccessTokenApi).mockResolvedValue(user);
+    vi.mocked(getMeApi).mockResolvedValue(user);
 
     await expect(requireAuthenticatedUser("/dashboard")).resolves.toBe(user);
   });

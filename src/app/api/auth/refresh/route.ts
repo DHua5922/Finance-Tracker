@@ -1,8 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import {
-  refreshTokensApi,
-  validateAccessTokenApi,
-} from "@/features/auth/lib/api";
+import { getMeApi, refreshTokensApi } from "@/features/auth/lib/api/auth.api";
 import {
   accessTokenName,
   createUserSessionCookies,
@@ -22,7 +19,7 @@ export async function GET(request: NextRequest) {
   if (refreshToken) {
     try {
       const refreshedTokens = await refreshTokensApi(refreshToken);
-      await validateAccessTokenApi(refreshedTokens.accessToken);
+      await getMeApi(refreshedTokens.accessToken);
       const response = NextResponse.redirect(new URL(returnPath, request.url));
 
       for (const sessionCookie of createUserSessionCookies(refreshedTokens)) {

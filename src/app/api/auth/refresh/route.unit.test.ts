@@ -1,14 +1,11 @@
 import { NextRequest } from "next/server";
 import { expect, test, vi } from "vitest";
-import {
-  refreshTokensApi,
-  validateAccessTokenApi,
-} from "@/features/auth/lib/api";
+import { getMeApi, refreshTokensApi } from "@/features/auth/lib/api/auth.api";
 import { GET } from "./route";
 
-vi.mock("@/features/auth/lib/api", () => ({
+vi.mock("@/features/auth/lib/api/auth.api", () => ({
   refreshTokensApi: vi.fn(),
-  validateAccessTokenApi: vi.fn(),
+  getMeApi: vi.fn(),
 }));
 
 const refreshedTokens = {
@@ -20,7 +17,7 @@ const refreshedTokens = {
 
 test("should replace both token cookies after a successful refresh", async () => {
   vi.mocked(refreshTokensApi).mockResolvedValue(refreshedTokens);
-  vi.mocked(validateAccessTokenApi).mockResolvedValue({
+  vi.mocked(getMeApi).mockResolvedValue({
     _id: "user-1",
     username: "Jane",
     email: "jane@example.com",
@@ -38,9 +35,7 @@ test("should replace both token cookies after a successful refresh", async () =>
   const response = await GET(request);
 
   expect(refreshTokensApi).toHaveBeenCalledWith("old-refresh-token");
-  expect(validateAccessTokenApi).toHaveBeenCalledWith(
-    refreshedTokens.accessToken,
-  );
+  expect(getMeApi).toHaveBeenCalledWith(refreshedTokens.accessToken);
   expect(response.headers.get("location")).toBe(
     "http://localhost:3000/transaction",
   );

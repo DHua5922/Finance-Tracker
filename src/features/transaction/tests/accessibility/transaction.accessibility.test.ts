@@ -4,7 +4,7 @@ import {
   closeAccountApi,
   loginUserApi,
   signUpUserApi,
-} from "@/features/auth/lib/api";
+} from "@/features/auth/lib/api/auth.api";
 
 test("transaction page and form have no WCAG A or AA violations", async ({
   page,

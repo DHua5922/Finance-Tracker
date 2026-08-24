@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { logInUserFormDataSchema } from "../../schemas";
-import { loginUserApi } from "../api";
+import { loginUserApi } from "../api/auth.api";
 import { setUserSession } from "../session";
 
 interface LogInActionState {

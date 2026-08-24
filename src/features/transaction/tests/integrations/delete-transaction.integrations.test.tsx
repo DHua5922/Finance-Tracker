@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import TransactionPage from "@/app/(protected)/transaction/page";
 import { db } from "@/shared/database/config";
-import { mockAuthenticatedTransactionUser } from "./transaction.integrations.mock";
+import { mockAuthenticatedUser } from "@/shared/test/integration/auth.mock";
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
@@ -46,7 +46,7 @@ const frequencyRows = [
 
 describe("Delete Transaction", () => {
   beforeEach(() => {
-    mockAuthenticatedTransactionUser();
+    mockAuthenticatedUser();
   });
 
   test("should delete the selected transaction and refresh related data", async () => {
