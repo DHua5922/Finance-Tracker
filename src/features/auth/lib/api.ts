@@ -17,6 +17,10 @@ const userSchema = z.object({
   email: z.email(),
 });
 
+const authSessionSchema = tokensSchema.extend({
+  user: userSchema,
+});
+
 export async function loginUserApi(input: LoginInput) {
   const response = await createServerAuthApiFetch()(AUTH_API_ROUTES.login, {
     method: "POST",
@@ -25,9 +29,6 @@ export async function loginUserApi(input: LoginInput) {
 
   await throwIfResponseFailed(response);
 
-  const authSessionSchema = tokensSchema.extend({
-    user: userSchema,
-  });
   return authSessionSchema.parse(await response.json());
 }
 
@@ -38,7 +39,7 @@ export async function signUpUserApi(input: SignUpUserInput) {
   });
 
   await throwIfResponseFailed(response);
-  return userSchema.parse(await response.json());
+  return authSessionSchema.parse(await response.json());
 }
 
 export async function validateAccessTokenApi(accessToken: string) {

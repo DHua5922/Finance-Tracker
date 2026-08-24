@@ -44,8 +44,8 @@ export async function setUserSession(tokens: Tokens) {
 export function createUserSessionCookies({
   accessToken,
   refreshToken,
-  accessTokenExpirationTime,
-  refreshTokenExpirationTime,
+  accessTokenExpireTime,
+  refreshTokenExpireTime,
 }: Tokens) {
   const secure = process.env.NODE_ENV === "production";
 
@@ -57,7 +57,7 @@ export function createUserSessionCookies({
       secure,
       sameSite: "lax" as const,
       path: "/",
-      maxAge: convertTimeToMaxAge(accessTokenExpirationTime),
+      maxAge: convertTimeToMaxAge(accessTokenExpireTime),
     },
     {
       name: refreshTokenName,
@@ -66,7 +66,7 @@ export function createUserSessionCookies({
       secure,
       sameSite: "strict" as const,
       path: "/",
-      maxAge: convertTimeToMaxAge(refreshTokenExpirationTime),
+      maxAge: convertTimeToMaxAge(refreshTokenExpireTime),
     },
   ];
 }

@@ -6,13 +6,20 @@ import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
 
+const initialState: Parameters<typeof logInAction>[0] = {
+  isError: false,
+  errorMessage: "",
+  values: { email: "", password: "" },
+};
+
 export default function LoginForm() {
   const emailInputId = useId();
   const passwordInputId = useId();
-  const [state, formAction, isPending] = useActionState(logInAction, {
-    isError: false,
-    errorMessage: "",
-  });
+  const [actionState, formAction, isPending] = useActionState(
+    logInAction,
+    initialState,
+  );
+  const state = actionState ?? initialState;
 
   return (
     <form className="space-y-4" action={formAction}>
@@ -27,6 +34,7 @@ export default function LoginForm() {
           id={emailInputId}
           name="email"
           type="email"
+          defaultValue={state.values.email || undefined}
           placeholder="name@example.com"
         />
       </Field>
@@ -36,6 +44,7 @@ export default function LoginForm() {
           id={passwordInputId}
           name="password"
           type="password"
+          defaultValue={state.values.password || undefined}
           placeholder="••••••••"
         />
       </Field>

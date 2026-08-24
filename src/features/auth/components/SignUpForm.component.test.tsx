@@ -7,10 +7,10 @@ import SignUpForm from "./SignUpForm";
 it("renders all signup fields and submit button", async () => {
   const { container } = render(<SignUpForm />);
 
-  expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/^Password/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/Confirm password/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/Username/i)).toHaveValue("");
+  expect(screen.getByLabelText(/Email/i)).toHaveValue("");
+  expect(screen.getByLabelText(/^Password/i)).toHaveValue("");
+  expect(screen.getByLabelText(/Confirm password/i)).toHaveValue("");
   expect(
     screen.getByRole("button", { name: "Create account" }),
   ).toBeInTheDocument();
