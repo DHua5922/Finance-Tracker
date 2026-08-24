@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import DashboardPage from "@/app/(protected)/dashboard/page";
 import { db } from "@/shared/database/config";
-import { mockAuthenticatedDashboardUser } from "./dashboard.integrations.mock";
+import { mockAuthenticatedUser } from "@/shared/test/integration/auth.mock";
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
@@ -17,11 +17,10 @@ vi.mock("@/shared/database/config", () => ({
 
 describe("Dashboard", () => {
   beforeEach(() => {
-    mockAuthenticatedDashboardUser();
+    mockAuthenticatedUser();
   });
 
   test("loads the authenticated user's dashboard statistics", async () => {
-    mockAuthenticatedDashboardUser();
     vi.mocked(db.execute)
       .mockResolvedValueOnce([
         {

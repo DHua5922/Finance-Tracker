@@ -2,7 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import TransactionPage from "@/app/(protected)/transaction/page";
 import { db } from "@/shared/database/config";
-import { mockAuthenticatedTransactionUser } from "./transaction.integrations.mock";
+import { mockAuthenticatedUser } from "@/shared/test/integration/auth.mock";
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
@@ -61,7 +61,7 @@ const frequencyRows = [
 
 describe("Get Transactions", () => {
   beforeEach(() => {
-    mockAuthenticatedTransactionUser();
+    mockAuthenticatedUser();
   });
 
   test("should load and parse the authenticated user's transactions", async () => {

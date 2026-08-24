@@ -1,8 +1,10 @@
 export const AUTH_API_ROUTES = {
   register: "/register",
   login: "/login",
+  accessTokenByEmail: "/access-token-by-email",
   refreshTokens: "/tokens/new",
-  secure: "/secure",
+  me: "/me",
+  resetPassword: "/reset-password",
   closeAccount: (userId: string) => `/close-account/${userId}`,
 } as const;
 

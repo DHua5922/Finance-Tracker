@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { signUpUserFormDataSchema } from "../../schemas";
-import { signUpUserApi } from "../api";
+import { signUpUserApi } from "../api/auth.api";
 import { setUserSession } from "../session";
 
 interface SignUpActionState {

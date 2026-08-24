@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { closeAccountApi, loginUserApi } from "../../lib/api";
+import { closeAccountApi, loginUserApi } from "../../lib/api/auth.api";
 
 test("user can sign up and the created account is cleaned up", async ({
   page,

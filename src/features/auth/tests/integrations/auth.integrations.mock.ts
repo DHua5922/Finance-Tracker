@@ -1,6 +1,6 @@
 import { HttpResponse, http } from "msw";
 
-import { buildAuthApiUrl } from "@/features/auth/lib/config";
+import { buildAuthApiUrl } from "@/features/auth/lib/api/config.api";
 import { server } from "@/shared/test/integration/server";
 import { AUTH_API_ROUTES } from "../../lib/constants";
 
