@@ -24,7 +24,7 @@ export default async function TransactionPage({ searchParams }: Props) {
   const transactionFrequencyId = getTransactionFrequencyId(
     resolvedSearchParams.frequencyId,
   );
-  
+
   const [transactionResult, frequenciesResult] = await Promise.all([
     getTransactionsDal({
       userId: user._id,

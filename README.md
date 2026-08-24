@@ -1,7 +1,8 @@
 # Finance Tracker
 
-Finance Tracker is a web app for tracking income and expenses. It gives each
-user a private dashboard with totals for income, expenses, and net savings.
+Finance Tracker is a web app for tracking income and expenses in one place. It
+gives each user a private dashboard with totals for income, expenses, and net
+savings.
 
 ## Table of contents
 
@@ -27,9 +28,12 @@ user a private dashboard with totals for income, expenses, and net savings.
 - Refresh an expired access token once before returning to the login page.
 - Log out from the private header or mobile menu.
 - View income, expense, and net savings totals on the dashboard.
-- Use protected pages for the dashboard, income, and expenses.
+- View income and expenses together on the protected transactions page.
+- Add, edit, and delete transactions.
+- Search transactions by name or description.
+- Filter transactions by type and frequency.
 - Switch between light and dark themes.
-- Use a responsive sidebar on desktop and mobile screens.
+- Use the sidebar on desktop or the navigation menu on mobile screens.
 
 ## Tech stack
 
@@ -77,7 +81,7 @@ DATABASE_URL=postgresql://username:password@localhost:5432/finance_tracker
 is not set, the app uses `http://localhost:8080`.
 
 `DATABASE_URL` is required. It must point to the PostgreSQL database used for
-dashboard data.
+dashboard and transaction data.
 
 Do not commit `.env` files. They may contain private values.
 
@@ -98,7 +102,9 @@ src/
 ├── features/            Code grouped by app feature
 │   ├── auth/            Login, sign-up, session, and auth tests
 │   ├── dashboard/       Dashboard UI, database access, and tests
-│   └── landing/         Public home page UI
+│   ├── landing/         Public home page UI
+│   ├── transaction/     Transaction UI, actions, database access, and tests
+│   └── transaction-frequency/  Transaction frequency data and controls
 └── shared/              Shared components, database setup, tests, and tools
 ```
 
