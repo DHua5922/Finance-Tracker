@@ -31,10 +31,9 @@ describe("DashboardPageView", () => {
     expect(
       screen.getByRole("progressbar", { name: "Savings rate" }),
     ).toHaveAttribute("aria-valuenow", "60");
-    expect(screen.getByRole("link", { name: "Add income" })).toHaveAttribute(
-      "href",
-      "/income",
-    );
+    expect(
+      screen.getByRole("link", { name: "Add transaction" }),
+    ).toHaveAttribute("href", "/transaction");
     await expectNoA11yViolations(container);
   });
 

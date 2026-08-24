@@ -25,14 +25,14 @@ export function DashboardContent({ stats }: { stats: DashboardStats }) {
             label="Total income"
             count={stats.income_count}
             amount={stats.total_income_amount}
-            href="/income"
+            href="/transaction"
             valueAccent="accent"
           />
           <StatCard
             label="Total expenses"
             count={stats.expenses_count}
             amount={stats.total_expenses_amount}
-            href="/expense"
+            href="/transaction"
             valueAccent="danger"
           />
           <StatCard

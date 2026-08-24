@@ -1,0 +1,29 @@
+.select {
+  border: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+  border-radius: 0.5rem;
+  background: var(--background);
+  padding: 0.625rem 0.75rem;
+  color: var(--foreground);
+
+  &:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+}
+
+.button {
+  border-radius: 0.5rem;
+  background: #34d399;
+  padding: 0.625rem 1rem;
+  font-weight: 700;
+  color: #020617;
+
+  &:hover {
+    background: #6ee7b7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+}

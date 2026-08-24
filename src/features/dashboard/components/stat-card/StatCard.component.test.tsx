@@ -11,7 +11,7 @@ describe("StatCard", () => {
         label={label}
         amount={1234.5}
         count={2}
-        href="/income"
+        href="/transaction"
         valueAccent="accent"
       />,
     );
@@ -21,7 +21,7 @@ describe("StatCard", () => {
     expect(screen.getByText("2 transactions")).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /view total income/i }),
-    ).toHaveAttribute("href", "/income");
+    ).toHaveAttribute("href", "/transaction");
     await expectNoA11yViolations(container);
   });
 

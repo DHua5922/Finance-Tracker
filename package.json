@@ -10,6 +10,7 @@
     "test:component": "vitest run --config src/shared/test/vitest.component.config.ts",
     "test:integrations": "vitest run --config src/shared/test/vitest.integrations.config.ts",
     "test:e2e": "playwright test --config src/shared/test/playwright.config.ts",
+    "test:accessibility": "playwright test --config src/shared/test/playwright.accessibility.config.ts",
     "start": "next start",
     "lint": "biome check",
     "format": "biome check --write",
@@ -28,6 +29,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@biomejs/biome": "2.4.2",
     "@playwright/test": "^1.62.1",
     "@size-limit/preset-app": "^13.0.3",

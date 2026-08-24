@@ -5,7 +5,7 @@ import {
 } from "@/features/auth/lib/api";
 import { clearUserSession, setUserSession } from "@/features/auth/lib/session";
 
-const allowedReturnPaths = new Set(["/dashboard", "/expense", "/income"]);
+const allowedReturnPaths = new Set(["/dashboard", "/transaction"]);
 
 export async function GET(request: NextRequest) {
   const requestedReturnPath = request.nextUrl.searchParams.get("returnTo");
