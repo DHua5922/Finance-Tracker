@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import type { z } from "zod";
 import type { tokensSchema } from "../schemas";
 import convertTimeToMaxAge from "../utilities/cookie";
@@ -23,6 +24,13 @@ export async function getAuthenticatedUser() {
   } catch {
     return null;
   }
+}
+
+export async function requireAuthenticatedUser(returnTo: string) {
+  const user = await getAuthenticatedUser();
+  if (user) return user;
+
+  redirect(`/api/auth/refresh?returnTo=${encodeURIComponent(returnTo)}`);
 }
 
 export async function getUserSessionStatus(): Promise<UserSessionStatus> {
