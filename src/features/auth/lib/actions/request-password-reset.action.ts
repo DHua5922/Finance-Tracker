@@ -28,7 +28,7 @@ export async function requestPasswordResetAction(
   try {
     const { accessToken, accessTokenExpireTime } =
       await getAccessTokenByEmailApi(result.data.email);
-      
+
     await sendPasswordResetEmail(
       result.data.email,
       accessToken,

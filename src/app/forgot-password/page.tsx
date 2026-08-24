@@ -21,7 +21,7 @@ export default function ForgotPasswordPage() {
         <div className="mt-8 rounded-2xl border border-slate-300 bg-white p-6 text-slate-950 shadow-sm">
           <RequestPasswordResetForm />
         </div>
-        
+
         <Link
           href="/?login=1"
           className="mt-6 inline-block text-sm text-accent-foreground underline"

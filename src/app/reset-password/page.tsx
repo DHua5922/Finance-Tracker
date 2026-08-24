@@ -13,7 +13,7 @@ export default async function ResetPasswordPage({ searchParams }: Props) {
   return (
     <>
       <PublicHeader />
-      
+
       <main
         id={MAIN_CONTENT_ID}
         className="mx-auto w-full max-w-md flex-1 px-6 py-16"
