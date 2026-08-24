@@ -47,7 +47,7 @@ export async function getIncomeDal(userId: string): Promise<IncomeResult> {
   }
 }
 
-export interface UpsertIncomeParams {
+interface UpsertIncomeParams {
   id: number;
   userId: string;
   name: string;
@@ -55,13 +55,13 @@ export interface UpsertIncomeParams {
   amount: number;
   incomeDate: Date;
 }
-type UpsertIncomeResult =
+type IncomeMutationResult =
   | { success: true; data: Income }
   | { success: false; data: null; errorMessage: string };
 
 export async function upsertIncomeDal(
   upsertInputParams: UpsertIncomeParams,
-): Promise<UpsertIncomeResult> {
+): Promise<IncomeMutationResult> {
   const upsertParams = z
     .object({
       id: z.number(),
@@ -95,8 +95,31 @@ export async function upsertIncomeDal(
       data: null,
       errorMessage: parseDatabaseErrorMessage(
         error,
-        "Your income data is temporarily unavailable.",
+        upsertParams.id ? "Cannot update income." : "Cannot create income.",
       ),
+    };
+  }
+}
+
+export async function deleteIncomeDal(
+  id: number,
+): Promise<IncomeMutationResult> {
+  const incomeId = z.number().int().positive().parse(id);
+
+  try {
+    const result = await db.execute(
+      sql`SELECT * FROM delete_income(${incomeId})`,
+    );
+
+    return {
+      success: true,
+      data: incomeSchema.parse(result[0]),
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+      errorMessage: parseDatabaseErrorMessage(error, "Cannot delete income."),
     };
   }
 }

@@ -16,7 +16,7 @@ const incomes: Income[] = [
 ];
 
 describe("IncomeTable", () => {
-  test("shows formatted income data and row actions", async () => {
+  test("should show formatted income data and row actions", async () => {
     const rowHeader = "Monthly salary";
 
     const { container } = render(
@@ -44,22 +44,39 @@ describe("IncomeTable", () => {
       within(dataRow as HTMLTableRowElement).getByRole("button", {
         name: "Delete",
       }),
-    ).toBeDisabled();
+    ).toBeEnabled();
     await expectNoA11yViolations(container);
   });
 
-  test("opens a prefilled edit form", async () => {
+  test("should open a prefilled edit form", async () => {
     const user = userEvent.setup();
     render(<IncomeTable incomes={incomes} hasSearchQuery={false} />);
 
     await user.click(screen.getByRole("button", { name: "Edit" }));
 
     expect(screen.getByRole("dialog", { name: "Edit income" })).toBeVisible();
-    expect(screen.getByLabelText(/^Income name/)).toHaveValue("Monthly salary");
-    expect(screen.getByLabelText(/^Amount/)).toHaveValue(5000.5);
+    expect(screen.getByLabelText(/^Income name/)).toHaveValue(incomes[0].name);
+    expect(screen.getByLabelText(/^Amount/)).toHaveValue(incomes[0].amount);
   });
 
-  test("shows the first-use empty state", () => {
+  test("should open a delete confirmation for the selected income", async () => {
+    const user = userEvent.setup();
+    render(<IncomeTable incomes={incomes} hasSearchQuery={false} />);
+
+    await user.click(screen.getByRole("button", { name: "Delete" }));
+
+    const dialog = screen.getByRole("dialog", { name: "Delete income" });
+    expect(dialog).toBeVisible();
+    expect(dialog).toHaveTextContent(incomes[0].name);
+    expect(
+      within(dialog).getByRole("button", { name: "Delete income" }),
+    ).toBeEnabled();
+    expect(
+      within(dialog).getByRole("button", { name: "Cancel" }),
+    ).toBeEnabled();
+  });
+
+  test("should show the first-use empty state", () => {
     render(<IncomeTable incomes={[]} hasSearchQuery={false} />);
 
     expect(
@@ -68,7 +85,7 @@ describe("IncomeTable", () => {
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
   });
 
-  test("shows the search empty state", () => {
+  test("should show the search empty state", () => {
     render(<IncomeTable incomes={[]} hasSearchQuery />);
 
     expect(
