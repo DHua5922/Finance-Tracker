@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
-import { getUserSessionStatus } from "@/features/auth/lib/session";
+import PublicHeader from "@/app/_components/header/PublicHeader";
+import GetStartedButton from "@/features/auth/components/GetStartedButton";
 import LandingPageShell from "@/features/landing/components/LandingPageShell";
+import { getUserSessionStatus } from "@/shared/session/session";
 
 interface Props {
   searchParams: Promise<{ login?: string }>;
@@ -16,7 +18,8 @@ export default async function Home({ searchParams }: Props) {
   const showLogin = (await searchParams).login === "1";
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <LandingPageShell showLogin={showLogin} />
+      <PublicHeader showLogin={showLogin} />
+      <LandingPageShell primaryAction={<GetStartedButton />} />
     </div>
   );
 }

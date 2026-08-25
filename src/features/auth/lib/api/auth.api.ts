@@ -1,18 +1,25 @@
 import { z } from "zod";
-import {
-  type logInUserFormDataSchema,
-  type resetPasswordFormDataSchema,
-  type signUpUserFormDataSchema,
-  tokensSchema,
+import type {
+  logInUserFormDataSchema,
+  resetPasswordFormDataSchema,
+  signUpUserFormDataSchema,
 } from "@/features/auth/schemas";
 import { userSchema } from "@/shared/api/user.api";
+import { API_BACKEND_BASE_URL } from "@/shared/constants/api.constants";
 import { throwIfResponseFailed } from "@/shared/utilities/api.utilities";
-import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "../constants";
+import { AUTH_API_ROUTES } from "../constants";
 import { createAuthApiFetch } from "./config.api";
 
 type LoginInput = z.infer<typeof logInUserFormDataSchema>;
 type SignUpUserInput = z.infer<typeof signUpUserFormDataSchema>;
 type ResetPasswordInput = z.infer<typeof resetPasswordFormDataSchema>;
+
+const tokensSchema = z.object({
+  accessToken: z.string(),
+  refreshToken: z.string(),
+  accessTokenExpireTime: z.string(),
+  refreshTokenExpireTime: z.string(),
+});
 
 const authSessionSchema = tokensSchema.extend({
   user: userSchema,
@@ -88,7 +95,7 @@ export async function refreshTokensApi(refreshToken: string) {
 
 function createServerAuthApiFetch(accessToken?: string) {
   return createAuthApiFetch({
-    baseUrl: AUTH_API_BACKEND_BASE_URL,
+    baseUrl: API_BACKEND_BASE_URL,
     defaultHeaders: {
       "Content-Type": "application/json",
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),

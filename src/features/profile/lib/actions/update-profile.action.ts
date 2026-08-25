@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import {
   accessTokenName,
   requireAuthenticatedUser,
-} from "@/features/auth/lib/session";
+} from "@/shared/session/session";
 import { updateUserProfileSchema } from "../../schemas";
 import { updateUserApi } from "../api/profile.api";
 

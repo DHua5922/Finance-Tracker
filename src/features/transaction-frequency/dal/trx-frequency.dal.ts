@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/shared/database/config.database";
+import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
 import { parseDatabaseErrorMessage } from "@/shared/utilities/database.utilities";
 
 const transactionFrequencySchema = z
@@ -15,7 +16,6 @@ const transactionFrequencySchema = z
     toMonthlyMultiplier: to_monthly_multiplier,
   }));
 
-export type TransactionFrequency = z.infer<typeof transactionFrequencySchema>;
 export type TransactionFrequenciesResult =
   | { success: true; data: TransactionFrequency[] }
   | { success: false; data: null; errorMessage: string };

@@ -8,9 +8,9 @@ export default function convertTimeToMaxAge(
   const unit = match[2];
 
   const multipliers: Record<string, number> = {
-    m: 60, // 1 minute = 60 seconds
-    h: 60 * 60, // 1 hour = 3,600 seconds
-    d: 60 * 60 * 24, // 1 day = 86,400 seconds
+    m: 60,
+    h: 60 * 60,
+    d: 60 * 60 * 24,
   };
 
   return value * multipliers[unit];

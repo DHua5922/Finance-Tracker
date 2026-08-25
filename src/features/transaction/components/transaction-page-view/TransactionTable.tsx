@@ -1,4 +1,4 @@
-import type { TransactionFrequency } from "@/features/transaction-frequency/dal/trx-frequency.dal";
+import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
 import type { Transaction } from "../../lib/dal/get-trx.dal";
 import DeleteTransactionButton from "../delete-transaction-modal/DeleteTransactionButton";
 import UpsertTransactionButton from "../upsert-transaction-modal/UpsertTransactionButton";

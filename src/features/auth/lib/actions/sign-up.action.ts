@@ -2,9 +2,9 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { setUserSession } from "@/shared/session/session";
 import { signUpUserFormDataSchema } from "../../schemas";
 import { signUpUserApi } from "../api/auth.api";
-import { setUserSession } from "../session";
 
 interface SignUpActionState {
   isError: boolean;

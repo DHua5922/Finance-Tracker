@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getAuthenticatedUser } from "@/features/auth/lib/session";
 import TransactionPageView from "@/features/transaction/components/transaction-page-view/TransactionPageView";
 import { getTransactionsDal } from "@/features/transaction/lib/dal/get-trx.dal";
 import { getTransactionFrequenciesDal } from "@/features/transaction-frequency/dal/trx-frequency.dal";
+import { getAuthenticatedUser } from "@/shared/session/session";
 
 interface Props {
   searchParams: Promise<{
