@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { z } from "zod";
-import { db } from "@/shared/database/config";
-import { parseDatabaseErrorMessage } from "@/shared/utilities/database";
+import { db } from "@/shared/database/config.database";
+import { parseDatabaseErrorMessage } from "@/shared/utilities/database.utilities";
 
 const dalResultSchema = z.object({
   id: z.coerce.number(),

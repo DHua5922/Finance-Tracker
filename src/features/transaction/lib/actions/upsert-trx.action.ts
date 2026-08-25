@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getAuthenticatedUser } from "@/features/auth/lib/session";
-import { upsertTransactionDal } from "../database/upsert-trx.dal";
+import { upsertTransactionDal } from "../dal/upsert-trx.dal";
 
 const upsertTransactionFormDataSchema = z.object({
   id: z.coerce.number().int().nonnegative(),

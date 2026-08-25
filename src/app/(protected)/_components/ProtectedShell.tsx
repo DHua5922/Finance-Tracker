@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Header from "@/app/_components/header/PrivateHeader";
 import LogoutButton from "@/app/_components/LogoutButton";
 import DesktopSidebar from "@/app/_components/sidebar/DesktopSidebar";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
+import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
 import MobileNavigation from "./MobileNavigation";
 import styles from "./ProtectedShell.module.css";
 
@@ -10,7 +10,10 @@ interface Props {
   children: ReactNode;
 }
 
-const navigationItems = [{ href: "/transaction", label: "Transactions" }];
+const navigationItems = [
+  { href: "/transaction", label: "Transactions" },
+  { href: "/dashboard", label: "Dashboard" },
+];
 
 export default function ProtectedShell({ children }: Props) {
   return (

@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { revalidatePath } from "next/cache";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import TransactionPage from "@/app/(protected)/transaction/page";
-import { db } from "@/shared/database/config";
-import { mockAuthenticatedUser } from "@/shared/test/integration/auth.mock";
+import { db } from "@/shared/database/config.database";
+import { mockAuthenticatedUser } from "@/shared/test/integrations/auth.integrations.mock";
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
@@ -13,7 +13,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-vi.mock("@/shared/database/config", () => ({
+vi.mock("@/shared/database/config.database", () => ({
   db: { execute: vi.fn() },
 }));
 

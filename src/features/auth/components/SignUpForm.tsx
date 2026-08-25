@@ -5,7 +5,7 @@ import { signUpUserAction } from "@/features/auth/lib/actions/sign-up.action";
 import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 
 const initialState: Parameters<typeof signUpUserAction>[0] = {
   isError: false,
@@ -128,7 +128,7 @@ export default function SignUpForm() {
 
       <Button
         type="submit"
-        className="w-full rounded-full bg-slate-900 py-2.5 text-white hover:bg-slate-700"
+        className="w-full rounded-full bg-foreground py-2.5 text-background hover:bg-foreground/80"
         isLoading={isPending}
         loadingText="Creating account..."
       >

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import convertTimeToMaxAge from "./cookie";
+import convertTimeToMaxAge from "./cookie.utilities";
 
 describe("convertTimeToMaxAge", () => {
   test("should convert minutes to seconds", () => {

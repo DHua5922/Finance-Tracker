@@ -1,16 +1,16 @@
 "use client";
 
 import { useActionState, useEffect, useId } from "react";
-import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
+import type { TransactionFrequency } from "@/features/transaction-frequency/dal/trx-frequency.dal";
 import Button from "@/shared/components/Button";
 import Field from "@/shared/components/Field";
 import Input from "@/shared/components/Input";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 import {
   type UpsertTransactionActionState,
   upsertTransactionAction,
 } from "../../lib/actions/upsert-trx.action";
-import type { Transaction } from "../../lib/database/get-trx.dal";
+import type { Transaction } from "../../lib/dal/get-trx.dal";
 
 interface Props {
   transaction?: Transaction;

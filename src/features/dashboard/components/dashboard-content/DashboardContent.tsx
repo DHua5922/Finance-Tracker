@@ -1,4 +1,4 @@
-import type { DashboardStats } from "../../database/dal";
+import type { DashboardStats } from "../../database/dal.database";
 import LazyDashboardCharts from "../dashboard-charts/LazyDashboardCharts";
 import InsightBar from "../insight-bar/InsightBar";
 import StatCard from "../stat-card/StatCard";

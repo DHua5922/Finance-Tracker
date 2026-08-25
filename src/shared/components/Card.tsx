@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { cn } from "../utilities/css";
+import { cn } from "../utilities/css.utilities";
 
 export default function Card({
   className,

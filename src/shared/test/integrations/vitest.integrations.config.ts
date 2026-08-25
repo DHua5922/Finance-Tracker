@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("../../", import.meta.url)),
+      "@": fileURLToPath(new URL("../../../", import.meta.url)),
     },
   },
   test: {
@@ -12,7 +12,7 @@ export default defineConfig({
     clearMocks: true,
     restoreMocks: true,
     mockReset: true,
-    include: ["**/*.component.test.tsx"],
-    setupFiles: ["src/shared/test/component/setup.ts"],
+    include: ["**/*.integrations.test.tsx"],
+    setupFiles: ["src/shared/test/integrations/setup.integrations.ts"],
   },
 });

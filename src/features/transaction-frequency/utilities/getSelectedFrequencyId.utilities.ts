@@ -1,4 +1,4 @@
-import type { TransactionFrequency } from "../database/dal";
+import type { TransactionFrequency } from "../dal/trx-frequency.dal";
 
 const defaultFrequencyId = 1;
 

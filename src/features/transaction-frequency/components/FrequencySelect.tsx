@@ -1,6 +1,6 @@
 "use client";
 
-import type { TransactionFrequency } from "../database/dal";
+import type { TransactionFrequency } from "../dal/trx-frequency.dal";
 import styles from "./TransactionFrequencyChooser.module.css";
 
 interface Props {

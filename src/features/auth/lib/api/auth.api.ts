@@ -5,7 +5,7 @@ import {
   type signUpUserFormDataSchema,
   tokensSchema,
 } from "@/features/auth/schemas";
-import { throwIfResponseFailed } from "@/shared/utilities/api";
+import { throwIfResponseFailed } from "@/shared/utilities/api.utilities";
 import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "../constants";
 import { createAuthApiFetch } from "./config.api";
 

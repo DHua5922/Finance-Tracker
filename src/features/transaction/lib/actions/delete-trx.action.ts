@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getAuthenticatedUser } from "@/features/auth/lib/session";
-import { deleteTransactionDal } from "../database/delete-trx.dal";
+import { deleteTransactionDal } from "../dal/delete-trx.dal";
 
 export interface DeleteTransactionActionState {
   isError: boolean;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "@dhua5922/react-kit/style.css";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
+import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
 import "./globals.css";
 import Footer from "./_components/Footer";
 import ThemeToggle from "./_components/ThemeToggle";

@@ -1,5 +1,5 @@
-import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
-import type { getTransactionsDal } from "../../lib/database/get-trx.dal";
+import type { TransactionFrequency } from "@/features/transaction-frequency/dal/trx-frequency.dal";
+import type { getTransactionsDal } from "../../lib/dal/get-trx.dal";
 import { filterTransactions } from "../../utilities/filterTransactions.utilities";
 import UpsertTransactionButton from "../upsert-transaction-modal/UpsertTransactionButton";
 import styles from "./TransactionPageView.module.css";

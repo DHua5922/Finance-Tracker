@@ -1,4 +1,4 @@
-import { createFetchInstance } from "@/shared/utilities/api";
+import { createFetchInstance } from "@/shared/utilities/api.utilities";
 
 export function buildAuthApiUrl(path: string, baseUrl?: string) {
   const normalizedBaseUrl = baseUrl?.replace(/\/$/, "") ?? "";

@@ -7,7 +7,7 @@ export default defineConfig({
     "../../features/transaction/tests/accessibility",
   ),
   testMatch: "*.accessibility.test.ts",
-  globalSetup: path.resolve(__dirname, "./e2e/setup.ts"),
+  globalSetup: path.resolve(__dirname, "./e2e/setup.e2e.ts"),
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

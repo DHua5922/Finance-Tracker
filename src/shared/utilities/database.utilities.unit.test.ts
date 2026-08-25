@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseDatabaseErrorMessage } from "./database";
+import { parseDatabaseErrorMessage } from "./database.utilities";
 
 describe("parseDatabaseErrorMessage", () => {
   it("returns the default fallback for an empty response", () => {

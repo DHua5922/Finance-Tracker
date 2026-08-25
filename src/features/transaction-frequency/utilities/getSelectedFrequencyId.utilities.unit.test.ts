@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { TransactionFrequency } from "../database/dal";
-import { getSelectedFrequencyId } from "./getSelectedFrequencyId";
+import type { TransactionFrequency } from "../dal/trx-frequency.dal";
+import { getSelectedFrequencyId } from "./getSelectedFrequencyId.utilities";
 
 const frequencies: TransactionFrequency[] = [
   {

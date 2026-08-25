@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseFetchErrorMessage, throwIfResponseFailed } from "./api";
+import { parseFetchErrorMessage, throwIfResponseFailed } from "./api.utilities";
 
 describe("parseFetchErrorMessage", () => {
   it("returns the message from a JSON response", async () => {

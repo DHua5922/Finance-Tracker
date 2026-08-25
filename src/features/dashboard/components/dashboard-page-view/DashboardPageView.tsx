@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { getDashboardStatsDal } from "../../database/dal";
+import type { getDashboardStatsDal } from "../../database/dal.database";
 import { DashboardContent } from "../dashboard-content/DashboardContent";
 import styles from "./DashboardPageView.module.css";
 

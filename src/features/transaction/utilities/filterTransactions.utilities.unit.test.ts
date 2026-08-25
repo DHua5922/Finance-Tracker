@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { Transaction } from "../lib/database/get-trx.dal";
+import type { Transaction } from "../lib/dal/get-trx.dal";
 import { filterTransactions } from "./filterTransactions.utilities";
 
 const transactions: Transaction[] = [
