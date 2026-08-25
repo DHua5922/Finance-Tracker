@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 import { loginUserApi, signUpUserApi } from "@/features/auth/lib/api/auth.api";
 import { deleteUserApi } from "@/features/profile/lib/api/profile.api";
+import { logIn } from "@/shared/test/e2e/auth.utilities.e2e";
 
 test("transaction page and form have no WCAG A or AA violations", async ({
   page,
@@ -36,20 +37,6 @@ test("transaction page and form have no WCAG A or AA violations", async ({
     await cleanUpAccount(email, password);
   }
 });
-
-async function logIn(page: Page, email: string, password: string) {
-  await page.goto("/");
-  await page
-    .locator("#main-content")
-    .getByRole("button", { name: /get started/i })
-    .click();
-
-  const authDialog = page.getByRole("dialog");
-  await authDialog.getByLabel("Email").fill(email);
-  await authDialog.getByLabel("Password").fill(password);
-  await authDialog.getByRole("button", { name: /^log in$/i }).click();
-  await expect(page).toHaveURL(/\/dashboard$/);
-}
 
 async function expectTransactionAccessibility(page: Page) {
   const results = await new AxeBuilder({ page })
