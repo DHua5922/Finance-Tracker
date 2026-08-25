@@ -31,19 +31,23 @@ describe("TransactionFrequencyChooser", () => {
       />,
     );
 
-    expect(
-      screen.getByRole("combobox", { name: "Transaction frequency" }),
-    ).toHaveValue("2");
+    const select = screen.getByRole("combobox", {
+      name: "Transaction frequency",
+    });
+
+    expect(select).toHaveValue("2");
+    expect(select.closest("form")).toHaveAttribute("action", "/dashboard");
+    expect(select.closest("form")).toHaveAttribute("method", "get");
     expect(
       screen.getByRole("option", { name: frequencyList[0].name }),
     ).toBeVisible();
     expect(
       screen.getByRole("option", { name: frequencyList[1].name }),
     ).toBeVisible();
-    expect(screen.getByRole("button", { name: "Apply" })).toHaveAttribute(
-      "type",
-      "submit",
-    );
+    expect(
+      screen.getByText("Selecting a frequency reloads the dashboard."),
+    ).toBeInTheDocument();
+
     await expectNoA11yViolations(container);
   });
 

@@ -77,7 +77,7 @@ function BarChartCard({ totalIncome, totalExpenses }: BarChartCardProps) {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid stroke="var(--border)" strokeDasharray="4 4" />
-          
+
           <XAxis dataKey="name" stroke="var(--muted-foreground)" />
 
           <YAxis

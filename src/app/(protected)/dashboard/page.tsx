@@ -21,16 +21,21 @@ export default async function DashboardPage({ searchParams }: Props) {
     searchParams ?? defaultSearchParams,
   ]);
 
+  const frequencies = frequenciesResult.success ? frequenciesResult.data : [];
   const selectedFrequencyId = getSelectedFrequencyId(
-    frequenciesResult.success ? frequenciesResult.data : [],
+    frequencies,
     resolvedSearchParams.frequencyId,
   );
+  const selectedFrequencyName =
+    frequencies.find(({ id }) => id === selectedFrequencyId)?.name ??
+    "Unknown frequency";
   const statsResult = await getDashboardStatsDal(user._id, selectedFrequencyId);
 
   return (
     <DashboardPageView
       username={user.username}
       statsResult={statsResult}
+      selectedFrequencyName={selectedFrequencyName}
       frequencyChooser={
         <TransactionFrequencyChooser
           action="/dashboard"

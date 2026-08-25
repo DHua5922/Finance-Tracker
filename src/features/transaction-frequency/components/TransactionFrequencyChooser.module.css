@@ -10,20 +10,3 @@
     outline-offset: 2px;
   }
 }
-
-.button {
-  border-radius: 0.5rem;
-  background: #34d399;
-  padding: 0.625rem 1rem;
-  font-weight: 700;
-  color: #020617;
-
-  &:hover {
-    background: #6ee7b7;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--foreground);
-    outline-offset: 2px;
-  }
-}

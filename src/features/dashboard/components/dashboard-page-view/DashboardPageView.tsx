@@ -7,10 +7,12 @@ import styles from "./DashboardPageView.module.css";
 export default function DashboardPageView({
   username,
   statsResult,
+  selectedFrequencyName,
   frequencyChooser,
 }: {
   username: string;
   statsResult: Awaited<ReturnType<typeof getDashboardStatsDal>>;
+  selectedFrequencyName: string;
   frequencyChooser?: ReactNode;
 }) {
   return (
@@ -36,6 +38,15 @@ export default function DashboardPageView({
       </header>
 
       {frequencyChooser}
+
+      <output
+        className="text-sm text-muted-foreground"
+        aria-label={`Viewing ${selectedFrequencyName} transactions`}
+      >
+        Viewing{" "}
+        <strong className="text-foreground">{selectedFrequencyName}</strong>{" "}
+        transactions
+      </output>
 
       {statsResult.success ? (
         <DashboardContent stats={statsResult.data} />
