@@ -1,8 +1,12 @@
 "use server";
 
-import { passwordResetEmailSchema } from "../../schemas";
+import { z } from "zod";
 import { getAccessTokenByEmailApi } from "../api/auth.api";
 import { sendPasswordResetEmail } from "../email";
+
+const passwordResetEmailSchema = z.object({
+  email: z.email({ message: "Invalid email address" }),
+});
 
 interface RequestPasswordResetState {
   isError: boolean;
