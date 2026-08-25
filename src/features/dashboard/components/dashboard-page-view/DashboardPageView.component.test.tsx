@@ -9,6 +9,7 @@ describe("DashboardPageView", () => {
     const { container } = render(
       <DashboardPageView
         username={username}
+        selectedFrequencyName="Monthly"
         statsResult={{
           success: true,
           data: {
@@ -28,6 +29,13 @@ describe("DashboardPageView", () => {
     expect(screen.getByText("$1,000.00")).toBeInTheDocument();
     expect(screen.getByText("$400.00")).toBeInTheDocument();
     expect(screen.getByText("$600.00")).toBeInTheDocument();
+    expect(screen.getByText("Monthly")).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Income versus expenses" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("img")).toHaveAccessibleName(
+      "Bar chart showing $1,000 income and $400 expenses",
+    );
     expect(
       screen.getByRole("progressbar", { name: "Savings rate" }),
     ).toHaveAttribute("aria-valuenow", "60");
@@ -42,6 +50,7 @@ describe("DashboardPageView", () => {
     render(
       <DashboardPageView
         username="Jane"
+        selectedFrequencyName="Monthly"
         statsResult={{
           success: false,
           data: null,

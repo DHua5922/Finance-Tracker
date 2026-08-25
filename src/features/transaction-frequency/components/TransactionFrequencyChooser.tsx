@@ -1,5 +1,5 @@
 import type { TransactionFrequenciesResult } from "../database/dal";
-import styles from "./TransactionFrequencyChooser.module.css";
+import FrequencySelect from "./FrequencySelect";
 
 interface Props {
   action: string;
@@ -31,23 +31,15 @@ export default function TransactionFrequencyChooser({
           Transaction frequency
         </label>
 
-        <select
-          className={styles.select}
-          id="frequencyId"
-          name="frequencyId"
-          defaultValue={selectedFrequencyId}
-        >
-          {frequenciesResult.data.map((frequency) => (
-            <option key={frequency.id} value={frequency.id}>
-              {frequency.name}
-            </option>
-          ))}
-        </select>
-      </div>
+        <FrequencySelect
+          frequencies={frequenciesResult.data}
+          selectedFrequencyId={selectedFrequencyId}
+        />
 
-      <button className={styles.button} type="submit">
-        Apply
-      </button>
+        <p id="frequency-help" className="text-xs text-muted-foreground">
+          Selecting a frequency reloads the dashboard.
+        </p>
+      </div>
     </form>
   );
 }

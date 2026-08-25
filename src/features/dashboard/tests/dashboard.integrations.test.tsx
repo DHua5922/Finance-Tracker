@@ -29,6 +29,12 @@ describe("Dashboard", () => {
           description: "One month",
           to_monthly_multiplier: "1",
         },
+        {
+          id: "2",
+          name: "Weekly",
+          description: "One week",
+          to_monthly_multiplier: "4.33",
+        },
       ] as never)
       .mockResolvedValueOnce([
         {
@@ -40,7 +46,11 @@ describe("Dashboard", () => {
         },
       ] as never);
 
-    render(await DashboardPage());
+    render(
+      await DashboardPage({
+        searchParams: Promise.resolve({ frequencyId: "2" }),
+      }),
+    );
 
     expect(
       screen.getByRole("heading", { name: "Welcome back, Jane" }),
@@ -48,7 +58,10 @@ describe("Dashboard", () => {
     expect(db.execute).toHaveBeenCalledTimes(2);
     expect(
       screen.getByRole("combobox", { name: "Transaction frequency" }),
-    ).toHaveValue("1");
+    ).toHaveValue("2");
+    expect(
+      screen.getByRole("status", { name: "Viewing Weekly transactions" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("$2,000.00")).toBeInTheDocument();
     expect(screen.getByText("$750.25")).toBeInTheDocument();
     expect(screen.getByText("$1,249.75")).toBeInTheDocument();
@@ -69,7 +82,7 @@ describe("Dashboard", () => {
       ] as never)
       .mockRejectedValueOnce(databaseError);
 
-    render(await DashboardPage());
+    render(await DashboardPage({}));
 
     expect(screen.getByRole("alert")).toHaveTextContent(
       "We could not load your overview",
