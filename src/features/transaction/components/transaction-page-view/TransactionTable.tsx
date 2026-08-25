@@ -88,7 +88,7 @@ function TableRows({
               : currencyFormatter.format(transaction.unitAmount)}
           </td>
 
-          <td>{dateFormatter.format(transaction.transactionDate)}</td>
+          <td>{formatTransactionDate(transaction.transactionDate)}</td>
 
           <td>{transaction.transactionFrequencyName}</td>
 
@@ -107,4 +107,14 @@ function TableRows({
       ))}
     </tbody>
   );
+}
+
+function formatTransactionDate(date: Date) {
+  const localDate = new Date(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+  );
+
+  return dateFormatter.format(localDate);
 }

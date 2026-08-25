@@ -11,6 +11,14 @@ interface QueryParams {
   transactionType: "income" | "expense" | null;
 }
 
+const transactionDateSchema = z.preprocess(
+  (value) =>
+    typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+      ? `${value}T00:00:00.000Z`
+      : value,
+  z.coerce.date(),
+);
+
 const transactionDalResultSchema = z
   .object({
     id: z.coerce.number(),
@@ -22,7 +30,7 @@ const transactionDalResultSchema = z
       .transform((desc) => desc || ""),
     amount: z.coerce.number(),
     unit_amount: z.coerce.number().nullable(),
-    transaction_date: z.coerce.date(),
+    transaction_date: transactionDateSchema,
     trx_freq_id: z.coerce.number().nullable(),
     transaction_frequency_name: z.string(),
   })

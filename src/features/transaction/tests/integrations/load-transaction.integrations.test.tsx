@@ -23,7 +23,7 @@ const databaseRows = [
     description: "Main job",
     amount: "5000.50",
     unit_amount: "5000.50",
-    transaction_date: "2026-01-15T12:00:00Z",
+    transaction_date: "2026-08-01",
     trx_freq_id: "1",
     transaction_frequency_name: "Monthly",
     to_monthly_multiplier: "1",
@@ -73,6 +73,7 @@ describe("Get Transactions", () => {
     expect(db.execute).toHaveBeenCalledTimes(2);
     expect(screen.getByText("Monthly salary")).toBeVisible();
     expect(screen.getByText("$5,000.50")).toBeVisible();
+    expect(screen.getByText("Aug 1, 2026")).toBeVisible();
     expect(screen.getByText("Freelance project")).toBeVisible();
     expect(screen.getAllByRole("button", { name: "Edit" })).toHaveLength(2);
   });
