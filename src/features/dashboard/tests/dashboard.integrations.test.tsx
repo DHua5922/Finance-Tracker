@@ -40,7 +40,7 @@ describe("Dashboard", () => {
         },
       ] as never);
 
-    render(await DashboardPage());
+    render(await DashboardPage({}));
 
     expect(
       screen.getByRole("heading", { name: "Welcome back, Jane" }),
@@ -69,7 +69,7 @@ describe("Dashboard", () => {
       ] as never)
       .mockRejectedValueOnce(databaseError);
 
-    render(await DashboardPage());
+    render(await DashboardPage({}));
 
     expect(screen.getByRole("alert")).toHaveTextContent(
       "We could not load your overview",

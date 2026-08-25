@@ -1,4 +1,5 @@
 import type { DashboardStats } from "../../database/dal";
+import LazyDashboardCharts from "../dashboard-charts/LazyDashboardCharts";
 import InsightBar from "../insight-bar/InsightBar";
 import StatCard from "../stat-card/StatCard";
 import styles from "./DashboardContent.module.css";
@@ -43,6 +44,11 @@ export function DashboardContent({ stats }: { stats: DashboardStats }) {
           />
         </div>
       </section>
+
+      <LazyDashboardCharts
+        totalIncome={stats.total_income_amount}
+        totalExpenses={stats.total_expenses_amount}
+      />
 
       <section className={styles.insights} aria-labelledby="insights-heading">
         <div>

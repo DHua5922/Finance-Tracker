@@ -13,7 +13,7 @@ interface ResolvedSearchParams {
   frequencyId?: string;
 }
 
-export default async function DashboardPage({ searchParams }: Props = {}) {
+export default async function DashboardPage({ searchParams }: Props) {
   const user = await requireAuthenticatedUser("/dashboard");
   const defaultSearchParams = Promise.resolve<ResolvedSearchParams>({});
   const [frequenciesResult, resolvedSearchParams] = await Promise.all([

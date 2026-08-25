@@ -182,8 +182,9 @@ pnpm test:integrations
 pnpm test:accessibility
 ```
 
-The production JavaScript limit is 200 KB for each file matched by the bundle
-size check.
+The production JavaScript limit is 300 KB for the files matched by the bundle
+size check. Heavy client features, such as dashboard charts, are loaded only
+when they are needed.
 
 ## Deployment
 
