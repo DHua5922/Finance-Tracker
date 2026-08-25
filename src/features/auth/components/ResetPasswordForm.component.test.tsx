@@ -5,7 +5,7 @@ import ResetPasswordForm from "./ResetPasswordForm";
 
 test("should show a field error when the passwords do not match", async () => {
   const user = userEvent.setup();
-  
+
   render(<ResetPasswordForm token="password-reset-token" />);
 
   await user.type(screen.getByLabelText("New password*"), "new-password");

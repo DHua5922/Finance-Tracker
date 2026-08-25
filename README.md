@@ -88,6 +88,8 @@ APP_BASE_URL=http://localhost:3000
 AUTH_API_BACKEND_BASE_URL=http://localhost:8080
 DATABASE_URL=postgresql://username:password@localhost:5432/finance_tracker
 RESEND_API_KEY=your_resend_api_key
+GUEST_USER_EMAIL=guest@example.com
+GUEST_USER_PASSWORD=your_guest_password
 ```
 
 `APP_BASE_URL` is the frontend address. Password reset emails use it to build
@@ -101,6 +103,9 @@ is not set, the app uses `http://localhost:8080`.
 dashboard and transaction data.
 
 `RESEND_API_KEY` is required when sending password reset emails.
+
+`GUEST_USER_EMAIL` and `GUEST_USER_PASSWORD` are used only on the server when a
+visitor chooses guest login. Do not prefix either name with `NEXT_PUBLIC_`.
 
 Do not commit `.env` files. They may contain private values.
 

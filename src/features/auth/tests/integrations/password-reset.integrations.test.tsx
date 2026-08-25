@@ -89,7 +89,7 @@ describe("Password reset", () => {
 
   it("should show an expired-link error from the API", async () => {
     const user = userEvent.setup();
-    
+
     mockPasswordResetFailure();
     render(<ResetPasswordForm token="expired-token" />);
 

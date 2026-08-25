@@ -22,7 +22,7 @@ beforeEach(() => {
 describe("Registration", () => {
   it("should submit signup form successfully", async () => {
     const user = userEvent.setup();
-    
+
     mockSuccessfulRegistration((body) => {
       receivedRequestBody = body;
     });

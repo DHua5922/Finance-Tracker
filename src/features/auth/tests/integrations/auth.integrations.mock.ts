@@ -59,9 +59,10 @@ export function mockRegistrationFailure(
   );
 }
 
-export function mockSuccessfulLogin() {
+export function mockSuccessfulLogin(onRequest?: (body: unknown) => void) {
   server.use(
-    http.post(LOGIN_URL, async () => {
+    http.post(LOGIN_URL, async ({ request }) => {
+      onRequest?.(await request.json());
       return HttpResponse.json(
         {
           user: {

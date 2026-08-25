@@ -13,7 +13,7 @@ vi.mock("next/headers", () => ({
 
 it("should clear the session and redirect home", async () => {
   const user = userEvent.setup();
-  
+
   render(<LogoutButton placement="desktop-header" />);
 
   await user.click(screen.getByRole("button", { name: "Log out" }));
