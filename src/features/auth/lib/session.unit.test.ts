@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getMeApi } from "./api/auth.api";
+import { getMeApi } from "@/shared/api/user.api";
 import { getUserSessionStatus, requireAuthenticatedUser } from "./session";
 
 const { cookieValues } = vi.hoisted(() => ({
@@ -17,7 +17,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-vi.mock("./api/auth.api");
+vi.mock("@/shared/api/user.api", () => ({ getMeApi: vi.fn() }));
 
 vi.mock("next/navigation", () => ({
   redirect: vi.fn(),

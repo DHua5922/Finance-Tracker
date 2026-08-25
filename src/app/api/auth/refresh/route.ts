@@ -1,12 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getMeApi, refreshTokensApi } from "@/features/auth/lib/api/auth.api";
+import { refreshTokensApi } from "@/features/auth/lib/api/auth.api";
 import {
   accessTokenName,
   createUserSessionCookies,
   refreshTokenName,
 } from "@/features/auth/lib/session";
+import { getMeApi } from "@/shared/api/user.api";
 
-const allowedReturnPaths = new Set(["/dashboard", "/transaction"]);
+const allowedReturnPaths = new Set(["/dashboard", "/profile", "/transaction"]);
 
 export async function GET(request: NextRequest) {
   const requestedReturnPath = request.nextUrl.searchParams.get("returnTo");
