@@ -1,10 +1,14 @@
-import GetStartedButton from "@/features/auth/components/GetStartedButton";
+import type { ReactNode } from "react";
 import Card from "@/shared/components/Card";
 import styles from "./Hero.module.css";
 
 const barHeights = [48, 64, 52, 70, 60, 82, 100];
 
-export default function Hero() {
+interface Props {
+  primaryAction: ReactNode;
+}
+
+export default function Hero({ primaryAction }: Props) {
   return (
     <section className={styles.heroSection}>
       <div>
@@ -19,9 +23,7 @@ export default function Hero() {
           dashboard designed to help you stay on top of every dollar.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <GetStartedButton className={styles.ctaButton} />
-        </div>
+        <div className={styles.ctaContainer}>{primaryAction}</div>
 
         <div className={styles.metricsRow}>
           <MetricPill label="faster planning" value="2.4x" />

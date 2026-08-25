@@ -1,9 +1,9 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { setUserSession } from "@/shared/session/session";
 import { logInUserFormDataSchema } from "../../schemas";
 import { loginUserApi } from "../api/auth.api";
-import { setUserSession } from "../session";
 
 interface GuestLogInActionState {
   isError: boolean;

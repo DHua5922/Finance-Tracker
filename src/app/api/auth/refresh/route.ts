@@ -1,11 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { refreshTokensApi } from "@/features/auth/lib/api/auth.api";
+import { getMeApi } from "@/shared/api/user.api";
 import {
   accessTokenName,
   createUserSessionCookies,
   refreshTokenName,
-} from "@/features/auth/lib/session";
-import { getMeApi } from "@/shared/api/user.api";
+} from "@/shared/session/session";
 
 const allowedReturnPaths = new Set(["/dashboard", "/profile", "/transaction"]);
 

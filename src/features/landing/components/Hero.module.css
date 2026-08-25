@@ -38,22 +38,30 @@
   color: var(--muted-foreground);
 }
 
-.ctaButton {
-  border-radius: 9999px;
-  background: #34d399;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: #020617;
+.ctaContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 
-  &:hover {
-    background: #6ee7b7;
-  }
+  & > button {
+    border-radius: 9999px;
+    background: #34d399;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #020617;
 
-  &:focus-visible {
-    outline: 3px solid var(--focus-outline);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 6px var(--focus-halo);
+    &:hover {
+      background: #6ee7b7;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px var(--focus-halo);
+    }
   }
 }
 

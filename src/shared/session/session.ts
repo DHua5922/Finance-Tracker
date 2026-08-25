@@ -1,9 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import type { z } from "zod";
 import { getMeApi } from "@/shared/api/user.api";
-import type { tokensSchema } from "../schemas";
-import convertTimeToMaxAge from "../utilities/cookie.utilities";
+import convertTimeToMaxAge from "./cookie.utilities";
 
 export const accessTokenName = "accessToken";
 export const refreshTokenName = "refreshToken";
@@ -13,7 +11,12 @@ type UserSessionStatus =
   | "refresh-required"
   | "unauthenticated";
 
-type Tokens = z.infer<typeof tokensSchema>;
+interface SessionTokens {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpireTime: string;
+  refreshTokenExpireTime: string;
+}
 
 export async function getAuthenticatedUser() {
   const accessToken = (await cookies()).get(accessTokenName)?.value;
@@ -42,7 +45,7 @@ export async function getUserSessionStatus(): Promise<UserSessionStatus> {
     : "unauthenticated";
 }
 
-export async function setUserSession(tokens: Tokens) {
+export async function setUserSession(tokens: SessionTokens) {
   const cookieStore = await cookies();
 
   for (const sessionCookie of createUserSessionCookies(tokens))
@@ -60,7 +63,7 @@ export function createUserSessionCookies({
   refreshToken,
   accessTokenExpireTime,
   refreshTokenExpireTime,
-}: Tokens) {
+}: SessionTokens) {
   const secure = process.env.NODE_ENV === "production";
 
   return [
