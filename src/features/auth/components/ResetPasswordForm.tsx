@@ -23,14 +23,15 @@ export default function ResetPasswordForm({ token }: Props) {
     resetPasswordAction,
     initialState,
   );
+  const resolvedState = state ?? initialState;
 
   return (
     <form action={formAction} className="space-y-4">
       <input type="hidden" name="token" value={token} />
 
-      {state.message && (
+      {resolvedState.message && (
         <p role="alert" className="text-red-600">
-          {state.message}
+          {resolvedState.message}
         </p>
       )}
 
@@ -38,8 +39,8 @@ export default function ResetPasswordForm({ token }: Props) {
         label="New password"
         htmlFor={passwordInputId}
         required
-        isError={Boolean(state.fieldErrors.password)}
-        errorMessage={state.fieldErrors.password?.[0] ?? ""}
+        isError={Boolean(resolvedState.fieldErrors.password)}
+        errorMessage={resolvedState.fieldErrors.password?.[0] ?? ""}
       >
         <Input
           id={passwordInputId}
@@ -47,7 +48,7 @@ export default function ResetPasswordForm({ token }: Props) {
           type="password"
           autoComplete="new-password"
           required
-          aria-invalid={Boolean(state.fieldErrors.password)}
+          aria-invalid={Boolean(resolvedState.fieldErrors.password)}
         />
       </Field>
 
@@ -55,8 +56,8 @@ export default function ResetPasswordForm({ token }: Props) {
         label="Confirm password"
         htmlFor={confirmPasswordInputId}
         required
-        isError={Boolean(state.fieldErrors.confirmPassword)}
-        errorMessage={state.fieldErrors.confirmPassword?.[0] ?? ""}
+        isError={Boolean(resolvedState.fieldErrors.confirmPassword)}
+        errorMessage={resolvedState.fieldErrors.confirmPassword?.[0] ?? ""}
       >
         <Input
           id={confirmPasswordInputId}
@@ -64,7 +65,7 @@ export default function ResetPasswordForm({ token }: Props) {
           type="password"
           autoComplete="new-password"
           required
-          aria-invalid={Boolean(state.fieldErrors.confirmPassword)}
+          aria-invalid={Boolean(resolvedState.fieldErrors.confirmPassword)}
         />
       </Field>
 
