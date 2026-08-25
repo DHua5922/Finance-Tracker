@@ -1,4 +1,4 @@
-import type { TransactionFrequenciesResult } from "../database/dal";
+import type { TransactionFrequenciesResult } from "../dal/trx-frequency.dal";
 import FrequencySelect from "./FrequencySelect";
 
 interface Props {

@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { z } from "zod";
 import type { tokensSchema } from "../schemas";
-import convertTimeToMaxAge from "../utilities/cookie";
+import convertTimeToMaxAge from "../utilities/cookie.utilities";
 import { getMeApi } from "./api/auth.api";
 
 export const accessTokenName = "accessToken";

@@ -1,7 +1,7 @@
 import PublicHeader from "@/app/_components/header/PublicHeader";
 import Features from "@/features/landing/components/Features";
 import Hero from "@/features/landing/components/Hero";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility";
+import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
 
 interface Props {
   showLogin?: boolean;

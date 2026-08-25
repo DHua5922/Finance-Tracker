@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from "react";
-import { cn } from "../utilities/css";
+import { cn } from "../utilities/css.utilities";
 import styles from "./Input.module.css";
 
 export default function Input({

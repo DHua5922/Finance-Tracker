@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 
 import { buildAuthApiUrl } from "@/features/auth/lib/api/config.api";
-import { server } from "@/shared/test/integration/server";
+import { server } from "@/shared/test/integrations/server.integrations";
 import { AUTH_API_ROUTES } from "../../lib/constants";
 
 const REGISTER_URL = `*${buildAuthApiUrl(AUTH_API_ROUTES.register)}`;

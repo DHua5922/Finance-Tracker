@@ -2,8 +2,8 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useId } from "react";
-import type { TransactionFrequency } from "@/features/transaction-frequency/database/dal";
-import type { Transaction } from "../../lib/database/get-trx.dal";
+import type { TransactionFrequency } from "@/features/transaction-frequency/dal/trx-frequency.dal";
+import type { Transaction } from "../../lib/dal/get-trx.dal";
 import UpsertTransactionForm from "./UpsertTransactionForm";
 
 interface Props {
@@ -29,7 +29,7 @@ export default function UpsertTransactionModal({
       open={open}
       onOpenChange={onOpenChange}
       aria-labelledby={titleId}
-      className="w-[min(92vw,32rem)] rounded-2xl border border-foreground/15 bg-background p-0 text-foreground shadow-2xl"
+      className="w-[min(92vw,32rem)] rounded-2xl border border-border bg-surface p-0 text-foreground shadow-2xl"
     >
       <Modal.Header className="flex items-start justify-between border-b border-foreground/10 p-6">
         <div>

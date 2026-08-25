@@ -3,7 +3,7 @@
 import { useState } from "react";
 import AuthModal from "@/features/auth/components/AuthModal";
 import Button from "@/shared/components/Button";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 
 interface Props {
   className?: string;

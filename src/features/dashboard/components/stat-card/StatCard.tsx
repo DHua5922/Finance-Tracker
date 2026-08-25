@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { HTMLAttributes } from "react";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 import styles from "./StatCard.module.css";
 
 interface Props extends HTMLAttributes<HTMLElement> {

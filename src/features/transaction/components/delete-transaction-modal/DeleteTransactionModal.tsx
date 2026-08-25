@@ -2,7 +2,7 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useId } from "react";
-import type { Transaction } from "../../lib/database/get-trx.dal";
+import type { Transaction } from "../../lib/dal/get-trx.dal";
 import DeleteTransactionForm from "./DeleteTransactionForm";
 
 interface Props {
@@ -25,7 +25,7 @@ export default function DeleteTransactionModal({
       onOpenChange={onOpenChange}
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      className="w-[min(92vw,28rem)] rounded-2xl border border-foreground/15 bg-background p-0 text-foreground shadow-2xl"
+      className="w-[min(92vw,28rem)] rounded-2xl border border-border bg-surface p-0 text-foreground shadow-2xl"
     >
       <Modal.Header className="flex items-start justify-between border-b border-foreground/10 p-6">
         <div>

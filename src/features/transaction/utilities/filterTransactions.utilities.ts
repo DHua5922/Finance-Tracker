@@ -1,4 +1,4 @@
-import type { Transaction } from "../lib/database/get-trx.dal";
+import type { Transaction } from "../lib/dal/get-trx.dal";
 
 export function filterTransactions(transactions: Transaction[], query: string) {
   const normalizedQuery = query.trim().toLocaleLowerCase();

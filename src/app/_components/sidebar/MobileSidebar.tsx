@@ -1,5 +1,5 @@
 import type { ReactNode, RefObject } from "react";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 import NavigationIcon from "../navigation/NavigationIcon";
 import NavLinks from "../navigation/NavLinks";
 import styles from "./MobileSidebar.module.css";

@@ -3,7 +3,7 @@ import { cleanup } from "@testing-library/react";
 import * as axe from "axe-core";
 import { afterAll, afterEach, beforeAll, expect } from "vitest";
 
-import { server } from "../integration/server";
+import { server } from "../integrations/server.integrations";
 
 export async function expectNoA11yViolations(
   container: HTMLElement | Document,

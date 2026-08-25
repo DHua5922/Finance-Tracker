@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Transaction } from "../../lib/database/get-trx.dal";
+import type { Transaction } from "../../lib/dal/get-trx.dal";
 import DeleteTransactionModal from "./DeleteTransactionModal";
 
 export default function DeleteTransactionButton({

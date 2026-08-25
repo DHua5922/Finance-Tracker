@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import NavigationIcon from "@/app/_components/navigation/NavigationIcon";
 import MobileSidebar from "@/app/_components/sidebar/MobileSidebar";
-import { cn } from "@/shared/utilities/css";
+import { cn } from "@/shared/utilities/css.utilities";
 import styles from "./MobileNavigation.module.css";
 
 interface Props {

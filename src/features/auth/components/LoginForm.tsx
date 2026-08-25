@@ -53,7 +53,7 @@ export default function LoginForm() {
       <div className="text-right">
         <Link
           href="/forgot-password"
-          className="text-sm text-slate-700 underline underline-offset-2 hover:text-slate-950"
+          className="text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground"
         >
           Forgot password?
         </Link>
