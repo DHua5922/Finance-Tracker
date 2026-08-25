@@ -32,7 +32,7 @@ describe("Login", () => {
   it("should log in with the guest account", async () => {
     const user = userEvent.setup();
     let requestBody: unknown;
-    
+
     mockSuccessfulLogin((body) => {
       requestBody = body;
     });
