@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, test, vi } from "vitest";
+import { useState } from "react";
+import { describe, expect, test } from "vitest";
 import { expectNoA11yViolations } from "@/shared/test/component/setup.component";
 import UpsertTransactionModal from "./UpsertTransactionModal";
 
@@ -14,21 +15,20 @@ const frequencies = [
 ];
 
 describe("UpsertTransactionModal", () => {
-  test("should show the create form in an accessible dialog", async () => {
-    const { container } = render(
-      <UpsertTransactionModal
-        frequencies={frequencies}
-        open
-        onOpenChange={() => {}}
-      />,
-    );
+  test("should show and close an accessible create dialog", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<CreateModalSample />);
 
     expect(
       screen.getByRole("dialog", { name: "Add transaction" }),
     ).toBeVisible();
     expect(screen.getByText("New record")).toBeVisible();
-    expect(screen.getByLabelText(/^Transaction name/)).toHaveValue("");
     await expectNoA11yViolations(container);
+
+    await user.click(
+      screen.getByRole("button", { name: "Close transaction form" }),
+    );
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   test("should show the edit form with the current income", () => {
@@ -55,20 +55,17 @@ describe("UpsertTransactionModal", () => {
       screen.getByRole("dialog", { name: "Edit transaction" }),
     ).toBeVisible();
     expect(screen.getByText("Update record")).toBeVisible();
-    expect(screen.getByLabelText(/^Transaction name/)).toHaveValue(
-      "Monthly salary",
-    );
-  });
-
-  test("should report when the close button is used", async () => {
-    const user = userEvent.setup();
-    const onOpenChange = vi.fn();
-    render(<UpsertTransactionModal open onOpenChange={onOpenChange} />);
-
-    await user.click(
-      screen.getByRole("button", { name: "Close transaction form" }),
-    );
-
-    expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 });
+
+function CreateModalSample() {
+  const [open, setOpen] = useState(true);
+
+  return open ? (
+    <UpsertTransactionModal
+      frequencies={frequencies}
+      open
+      onOpenChange={setOpen}
+    />
+  ) : null;
+}

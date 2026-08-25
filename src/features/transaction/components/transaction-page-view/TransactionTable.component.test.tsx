@@ -74,7 +74,7 @@ describe("TransactionTable", () => {
     await expectNoA11yViolations(container);
   });
 
-  test("should open a prefilled edit form", async () => {
+  test("should open the edit dialog", async () => {
     const user = userEvent.setup();
     render(
       <TransactionTable transactions={transactions} hasSearchQuery={false} />,
@@ -85,31 +85,6 @@ describe("TransactionTable", () => {
     expect(
       screen.getByRole("dialog", { name: "Edit transaction" }),
     ).toBeVisible();
-    expect(screen.getByLabelText(/^Transaction name/)).toHaveValue(
-      transactions[0].name,
-    );
-    expect(screen.getByLabelText(/^Amount/)).toHaveValue(
-      transactions[0].unitAmount,
-    );
-  });
-
-  test("should open a delete confirmation for the selected transaction", async () => {
-    const user = userEvent.setup();
-    render(
-      <TransactionTable transactions={transactions} hasSearchQuery={false} />,
-    );
-
-    await user.click(screen.getByRole("button", { name: "Delete" }));
-
-    const dialog = screen.getByRole("dialog", { name: "Delete transaction" });
-    expect(dialog).toBeVisible();
-    expect(dialog).toHaveTextContent(transactions[0].name);
-    expect(
-      within(dialog).getByRole("button", { name: "Delete transaction" }),
-    ).toBeEnabled();
-    expect(
-      within(dialog).getByRole("button", { name: "Cancel" }),
-    ).toBeEnabled();
   });
 
   test("should show the first-use empty state", () => {

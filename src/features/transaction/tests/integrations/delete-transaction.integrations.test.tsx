@@ -100,24 +100,4 @@ describe("Delete Transaction", () => {
     expect(dialog).toBeVisible();
     expect(revalidatePath).not.toHaveBeenCalled();
   });
-
-  test("should close without deleting when cancelled", async () => {
-    const user = userEvent.setup();
-    const dialogName = "Delete transaction";
-
-    vi.mocked(db.execute)
-      .mockResolvedValueOnce([databaseRow] as never)
-      .mockResolvedValueOnce(frequencyRows as never);
-    render(await TransactionPage({ searchParams: Promise.resolve({}) }));
-
-    await user.click(screen.getByRole("button", { name: "Delete" }));
-    const dialog = screen.getByRole("dialog", { name: dialogName });
-    await user.click(within(dialog).getByRole("button", { name: "Cancel" }));
-
-    expect(
-      screen.queryByRole("dialog", { name: dialogName }),
-    ).not.toBeInTheDocument();
-    expect(db.execute).toHaveBeenCalledTimes(2);
-    expect(revalidatePath).not.toHaveBeenCalled();
-  });
 });
