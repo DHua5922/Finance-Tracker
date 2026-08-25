@@ -3,12 +3,7 @@ name: E2E Tests
 on:
   schedule:
     - cron: "0 0 * * *"  # every day at midnight (00:00 UTC)
-      
-env:
-  AUTH_API_BACKEND_BASE_URL: ${{ secrets.AUTH_API_BACKEND_BASE_URL }}
-  JWT_SECRET: ${{ secrets.JWT_SECRET }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      
+
 jobs:
   test:
     timeout-minutes: 60
