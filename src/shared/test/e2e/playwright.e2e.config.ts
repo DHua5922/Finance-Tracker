@@ -7,8 +7,8 @@ import { z } from "zod";
 const appBaseUrl = z.url().parse(process.env.APP_BASE_URL);
 
 export default defineConfig({
-  testDir: path.resolve(__dirname, "../../../features"),
-  testMatch: "**/tests/e2e/*.e2e.test.{ts,tsx}",
+  testDir: path.resolve(__dirname, "../../../.."),
+  testMatch: "**/*.e2e.test.{ts,tsx}",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

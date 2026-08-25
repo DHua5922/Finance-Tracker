@@ -10,7 +10,7 @@
     "test:component": "vitest run --config src/shared/test/component/vitest.component.config.ts",
     "test:integrations": "vitest run --config src/shared/test/integrations/vitest.integrations.config.ts",
     "test:e2e": "playwright test",
-    "test:accessibility": "playwright test --config src/shared/test/playwright.accessibility.config.ts",
+    "test:accessibility": "playwright test --config src/shared/test/accessibility/playwright.accessibility.config.ts",
     "start": "next start",
     "lint": "biome check",
     "format": "biome check --write",

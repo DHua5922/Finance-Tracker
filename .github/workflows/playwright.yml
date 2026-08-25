@@ -27,7 +27,7 @@ jobs:
       run: pnpm exec playwright test
 
     - name: Run Playwright accessibility tests
-      run: pnpm exec playwright test --config src/shared/test/playwright.accessibility.config.ts
+      run: pnpm test:accessibility
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
