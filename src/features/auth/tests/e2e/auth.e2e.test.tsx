@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { closeAccountApi, loginUserApi } from "../../lib/api/auth.api";
+import { deleteUserApi } from "@/features/profile/lib/api/profile.api";
+import { loginUserApi } from "../../lib/api/auth.api";
 
 test("user can sign up and the created account is cleaned up", async ({
   page,
@@ -47,7 +48,7 @@ test("user can sign up and the created account is cleaned up", async ({
     return;
   }
 
-  const closeResponse = await closeAccountApi({ userId, accessToken });
+  const closeResponse = await deleteUserApi({ userId, accessToken });
 
   expect(closeResponse.status).not.toBe(401);
   expect(closeResponse.status).toBeLessThan(500);

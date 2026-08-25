@@ -1,10 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
-import {
-  closeAccountApi,
-  loginUserApi,
-  signUpUserApi,
-} from "@/features/auth/lib/api/auth.api";
+import { loginUserApi, signUpUserApi } from "@/features/auth/lib/api/auth.api";
+import { deleteUserApi } from "@/features/profile/lib/api/profile.api";
 
 test("transaction page and form have no WCAG A or AA violations", async ({
   page,
@@ -68,7 +65,7 @@ async function cleanUpAccount(email: string, password: string) {
 
   if (typeof userId !== "string" || !/^[a-f\d]{24}$/i.test(userId)) return;
 
-  const response = await closeAccountApi({
+  const response = await deleteUserApi({
     userId,
     accessToken: loginPayload.accessToken,
   });

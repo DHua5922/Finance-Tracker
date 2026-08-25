@@ -4,12 +4,12 @@ import styles from "./PrivateHeader.module.css";
 
 interface Props {
   mobileNavigation: ReactNode;
-  logoutButton: ReactNode;
+  accountMenu: ReactNode;
 }
 
 export default function PrivateHeader({
   mobileNavigation,
-  logoutButton,
+  accountMenu,
 }: Props) {
   return (
     <header className={styles.header}>
@@ -23,7 +23,7 @@ export default function PrivateHeader({
           </span>
         </Link>
 
-        {logoutButton}
+        {accountMenu}
       </div>
     </header>
   );

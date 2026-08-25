@@ -1,12 +1,13 @@
 import { NextRequest } from "next/server";
 import { expect, test, vi } from "vitest";
-import { getMeApi, refreshTokensApi } from "@/features/auth/lib/api/auth.api";
+import { refreshTokensApi } from "@/features/auth/lib/api/auth.api";
+import { getMeApi } from "@/shared/api/user.api";
 import { GET } from "./route";
 
 vi.mock("@/features/auth/lib/api/auth.api", () => ({
   refreshTokensApi: vi.fn(),
-  getMeApi: vi.fn(),
 }));
+vi.mock("@/shared/api/user.api", () => ({ getMeApi: vi.fn() }));
 
 const refreshedTokens = {
   accessToken: "new-access-token",

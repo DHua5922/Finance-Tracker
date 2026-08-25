@@ -3,10 +3,9 @@ export const AUTH_API_ROUTES = {
   login: "/login",
   accessTokenByEmail: "/access-token-by-email",
   refreshTokens: "/tokens/new",
-  me: "/me",
   resetPassword: "/reset-password",
-  closeAccount: (userId: string) => `/close-account/${userId}`,
 } as const;
 
-export const AUTH_API_BACKEND_BASE_URL =
-  process.env.AUTH_API_BACKEND_BASE_URL ?? "http://localhost:8080";
+export const AUTH_API_BACKEND_BASE_URL = API_BACKEND_BASE_URL;
+
+import { API_BACKEND_BASE_URL } from "@/shared/constants/api.constants";

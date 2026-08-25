@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const passwordResetEmailEnvironmentSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
-  APP_URL: z.url(),
+  APP_BASE_URL: z.url(),
 });
 
 export async function sendPasswordResetEmail(
@@ -12,7 +12,7 @@ export async function sendPasswordResetEmail(
   accessTokenExpireTime: string,
 ) {
   const environment = passwordResetEmailEnvironmentSchema.parse(process.env);
-  const resetUrl = new URL("/reset-password", environment.APP_URL);
+  const resetUrl = new URL("/reset-password", environment.APP_BASE_URL);
   resetUrl.searchParams.set("token", accessToken);
 
   const { error } = await new Resend(environment.RESEND_API_KEY).emails.send({

@@ -5,6 +5,7 @@ import {
   type signUpUserFormDataSchema,
   tokensSchema,
 } from "@/features/auth/schemas";
+import { userSchema } from "@/shared/api/user.api";
 import { throwIfResponseFailed } from "@/shared/utilities/api.utilities";
 import { AUTH_API_BACKEND_BASE_URL, AUTH_API_ROUTES } from "../constants";
 import { createAuthApiFetch } from "./config.api";
@@ -12,12 +13,6 @@ import { createAuthApiFetch } from "./config.api";
 type LoginInput = z.infer<typeof logInUserFormDataSchema>;
 type SignUpUserInput = z.infer<typeof signUpUserFormDataSchema>;
 type ResetPasswordInput = z.infer<typeof resetPasswordFormDataSchema>;
-
-const userSchema = z.object({
-  _id: z.string(),
-  username: z.string(),
-  email: z.email(),
-});
 
 const authSessionSchema = tokensSchema.extend({
   user: userSchema,
@@ -42,16 +37,6 @@ export async function signUpUserApi(input: SignUpUserInput) {
 
   await throwIfResponseFailed(response);
   return authSessionSchema.parse(await response.json());
-}
-
-export async function getMeApi(accessToken: string) {
-  const response = await createServerAuthApiFetch(accessToken)(
-    AUTH_API_ROUTES.me,
-    { method: "GET" },
-  );
-
-  await throwIfResponseFailed(response);
-  return userSchema.parse(await response.json());
 }
 
 export async function getAccessTokenByEmailApi(email: string) {
@@ -99,20 +84,6 @@ export async function refreshTokensApi(refreshToken: string) {
 
   await throwIfResponseFailed(response);
   return tokensSchema.parse(await response.json());
-}
-
-interface CloseAccountArgs {
-  userId: string;
-  accessToken: string;
-}
-export async function closeAccountApi({
-  userId,
-  accessToken,
-}: CloseAccountArgs) {
-  return createServerAuthApiFetch(accessToken)(
-    AUTH_API_ROUTES.closeAccount(userId),
-    { method: "DELETE" },
-  );
 }
 
 function createServerAuthApiFetch(accessToken?: string) {

@@ -6,14 +6,25 @@ import ProtectedShell from "./ProtectedShell";
 
 describe("ProtectedShell", () => {
   it("renders accessible protected navigation", async () => {
-    const { container } = render(<ProtectedShell>Page content</ProtectedShell>);
+    const user = userEvent.setup();
+    const { container } = render(
+      <ProtectedShell
+        accountUser={{ username: "guestUser", email: "guest@example.com" }}
+      >
+        Page content
+      </ProtectedShell>,
+    );
 
     for (const link of screen.getAllByRole("link", { name: "Transactions" })) {
       expect(link).toHaveAttribute("href", "/transaction");
     }
 
     expect(screen.getByRole("main")).toHaveTextContent("Page content");
-    expect(screen.getAllByRole("button", { name: "Log out" })).toHaveLength(2);
+    await user.click(screen.getByRole("button", { name: "Open account menu" }));
+    expect(screen.getByText("guestUser")).toBeVisible();
+    expect(screen.getByText("guest@example.com")).toBeVisible();
+    expect(screen.getByRole("menuitem", { name: "Profile" })).toBeVisible();
+    expect(screen.getByRole("menuitem", { name: "Log out" })).toBeVisible();
     await expectNoA11yViolations(container);
   });
 

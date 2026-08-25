@@ -1,9 +1,7 @@
 import { HttpResponse, http } from "msw";
-import { buildAuthApiUrl } from "@/features/auth/lib/api/config.api";
-import { AUTH_API_ROUTES } from "@/features/auth/lib/constants";
 import { server } from "./server.integrations";
 
-const ME_URL = `*${buildAuthApiUrl(AUTH_API_ROUTES.me)}`;
+const ME_URL = "*/api/v1/users/me";
 
 export function mockAuthenticatedUser() {
   server.use(

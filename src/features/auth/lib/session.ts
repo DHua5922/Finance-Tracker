@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { z } from "zod";
+import { getMeApi } from "@/shared/api/user.api";
 import type { tokensSchema } from "../schemas";
 import convertTimeToMaxAge from "../utilities/cookie.utilities";
-import { getMeApi } from "./api/auth.api";
 
 export const accessTokenName = "accessToken";
 export const refreshTokenName = "refreshToken";
@@ -47,6 +47,12 @@ export async function setUserSession(tokens: Tokens) {
 
   for (const sessionCookie of createUserSessionCookies(tokens))
     cookieStore.set(sessionCookie);
+}
+
+export async function clearUserSession() {
+  const cookieStore = await cookies();
+  cookieStore.delete(accessTokenName);
+  cookieStore.delete(refreshTokenName);
 }
 
 export function createUserSessionCookies({
