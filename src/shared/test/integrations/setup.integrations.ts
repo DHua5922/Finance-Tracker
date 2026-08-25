@@ -5,6 +5,8 @@ import { afterAll, afterEach, beforeAll } from "vitest";
 import { server } from "./server.integrations";
 
 process.env.AUTH_API_BACKEND_BASE_URL ??= "http://localhost:8080";
+process.env.APP_BASE_URL ??= "http://localhost:3000";
+process.env.RESEND_API_KEY ??= "test-resend-api-key";
 
 if (typeof HTMLDialogElement !== "undefined") {
   HTMLDialogElement.prototype.showModal ??= function showModal() {
