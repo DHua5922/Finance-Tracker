@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 0 * * *"  # every day at midnight (00:00 UTC)
 
+env:
+  APP_BASE_URL: ${{ secrets.APP_BASE_URL }}
+
 jobs:
   test:
     timeout-minutes: 60
