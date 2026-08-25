@@ -10,28 +10,10 @@
   display: flex;
   max-width: 72rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--muted-foreground);
-}
-
-.contactButton {
-  transition: color 150ms ease;
-
-  &:hover {
-    color: var(--foreground);
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: 3px solid var(--focus-outline);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 6px var(--focus-halo);
-  }
 }
