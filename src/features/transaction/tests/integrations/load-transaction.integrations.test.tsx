@@ -97,30 +97,8 @@ describe("Get Transactions", () => {
     ).toHaveValue(searchQuery);
   });
 
-  test("should wire the selected transaction type to the transaction results", async () => {
+  test("should wire the selected filters to the transaction results", async () => {
     const transactionType = "expense";
-
-    vi.mocked(db.execute)
-      .mockResolvedValueOnce([databaseRows[1]] as never)
-      .mockResolvedValueOnce(frequencyRows as never);
-
-    render(
-      await TransactionPage({
-        searchParams: Promise.resolve({ transactionType }),
-      }),
-    );
-
-    expect(screen.getByLabelText("Transaction type")).toHaveValue(
-      transactionType,
-    );
-    expect(screen.getByText("Freelance project")).toBeVisible();
-    expect(
-      within(screen.getByRole("table")).getByText("Expense"),
-    ).toBeVisible();
-    expect(screen.queryByText("Monthly salary")).not.toBeInTheDocument();
-  });
-
-  test("should wire the selected frequency to the transaction results", async () => {
     const frequencyId = "2";
 
     vi.mocked(db.execute)
@@ -129,14 +107,20 @@ describe("Get Transactions", () => {
 
     render(
       await TransactionPage({
-        searchParams: Promise.resolve({ frequencyId }),
+        searchParams: Promise.resolve({ transactionType, frequencyId }),
       }),
     );
 
+    expect(screen.getByLabelText("Transaction type")).toHaveValue(
+      transactionType,
+    );
     expect(screen.getByLabelText("Transaction frequency")).toHaveValue(
       frequencyId,
     );
     expect(screen.getByText("Freelance project")).toBeVisible();
+    expect(
+      within(screen.getByRole("table")).getByText("Expense"),
+    ).toBeVisible();
     expect(within(screen.getByRole("table")).getByText("Weekly")).toBeVisible();
     expect(screen.queryByText("Monthly salary")).not.toBeInTheDocument();
   });

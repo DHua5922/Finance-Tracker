@@ -11,8 +11,8 @@ interface Props {
 }
 
 const navigationItems = [
-  { href: "/transaction", label: "Transactions" },
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/transaction", label: "Transactions" },
 ];
 
 export default function ProtectedShell({ children }: Props) {

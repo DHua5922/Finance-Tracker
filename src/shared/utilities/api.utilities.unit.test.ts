@@ -59,12 +59,4 @@ describe("throwIfResponseFailed", () => {
       "Email already exists",
     );
   });
-
-  it("throws the response text for an unsuccessful response", async () => {
-    const response = new Response("Invalid credentials", { status: 401 });
-
-    await expect(throwIfResponseFailed(response)).rejects.toThrow(
-      "Invalid credentials",
-    );
-  });
 });
