@@ -22,7 +22,30 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["@/features/*/*"],
+                "message": "Import from the feature's public index.ts instead."
+              },
+              {
+                "group": [
+                  "@/shared/*/*",
+                  "!@/shared/test/accessibility",
+                  "!@/shared/test/component",
+                  "!@/shared/test/e2e",
+                  "!@/shared/test/integrations"
+                ],
+                "message": "Import from the shared folder's public index.ts instead."
+              }
+            ]
+          }
+        }
+      }
     },
     "domains": {
       "next": "recommended",

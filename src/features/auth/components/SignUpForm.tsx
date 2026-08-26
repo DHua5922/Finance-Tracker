@@ -1,9 +1,9 @@
 "use client";
 
 import { useActionState, useId } from "react";
-import { signUpUserAction } from "@/features/auth/lib/actions/sign-up.action";
 import { Button, Field, Input } from "@/shared/components";
 import { cn } from "@/shared/utilities";
+import { signUpUserAction } from "../lib/actions/sign-up.action";
 
 const initialState: Parameters<typeof signUpUserAction>[0] = {
   isError: false,

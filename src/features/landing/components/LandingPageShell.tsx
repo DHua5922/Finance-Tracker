@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import Features from "@/features/landing/components/Features";
-import Hero from "@/features/landing/components/Hero";
 import { MAIN_CONTENT_ID } from "@/shared/constants";
+import Features from "./Features";
+import Hero from "./Hero";
 
 interface Props {
   primaryAction: ReactNode;
