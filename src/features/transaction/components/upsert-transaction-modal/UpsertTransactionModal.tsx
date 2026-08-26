@@ -42,7 +42,7 @@ export default function UpsertTransactionModal({
         </div>
         <Modal.CloseButton
           aria-label="Close transaction form"
-          className="rounded-md border border-foreground/15 px-2 py-1 text-muted-foreground hover:bg-foreground/10"
+          className="rounded-md border border-foreground/15 px-2 py-1 text-muted-foreground hover:bg-foreground/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-outline)] focus-visible:shadow-[0_0_0_4px_var(--focus-halo)]"
         />
       </Modal.Header>
 

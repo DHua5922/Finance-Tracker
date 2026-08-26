@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/shared/components";
 import type { Transaction } from "../../lib/dal/get-trx.dal";
 import DeleteTransactionModal from "./DeleteTransactionModal";
 
@@ -13,9 +14,13 @@ export default function DeleteTransactionButton({
 
   return (
     <>
-      <button type="button" onClick={() => setIsOpen(true)}>
+      <Button
+        className="border border-foreground/15 bg-transparent text-foreground hover:bg-foreground/10"
+        type="button"
+        onClick={() => setIsOpen(true)}
+      >
         Delete
-      </button>
+      </Button>
 
       {isOpen && (
         <DeleteTransactionModal

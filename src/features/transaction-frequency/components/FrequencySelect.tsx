@@ -1,7 +1,7 @@
 "use client";
 
+import { Select } from "@/shared/components";
 import type { TransactionFrequency } from "@/shared/types";
-import styles from "./TransactionFrequencyChooser.module.css";
 
 interface Props {
   frequencies: TransactionFrequency[];
@@ -13,8 +13,7 @@ export default function FrequencySelect({
   selectedFrequencyId,
 }: Props) {
   return (
-    <select
-      className={styles.select}
+    <Select
       id="frequencyId"
       name="frequencyId"
       aria-describedby="frequency-help"
@@ -26,6 +25,6 @@ export default function FrequencySelect({
           {frequency.name}
         </option>
       ))}
-    </select>
+    </Select>
   );
 }
