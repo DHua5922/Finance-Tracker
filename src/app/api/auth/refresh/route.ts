@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { refreshTokensApi } from "@/features/auth/lib/api/auth.api";
+import { refreshTokensApi } from "@/features/auth";
 import { getMeApi } from "@/shared/api";
 import {
   accessTokenName,

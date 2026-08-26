@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import CloseAccount from "@/features/profile/components/CloseAccount";
-import ProfileForm from "@/features/profile/components/ProfileForm";
+import { CloseAccount, ProfileForm } from "@/features/profile";
 import { requireAuthenticatedUser } from "@/shared/session";
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PublicHeader from "@/app/_components/header/PublicHeader";
-import ResetPasswordForm from "@/features/auth/components/ResetPasswordForm";
+import { ResetPasswordForm } from "@/features/auth";
 import { MAIN_CONTENT_ID } from "@/shared/constants";
 
 interface Props {

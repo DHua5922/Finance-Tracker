@@ -2,7 +2,7 @@
 
 import { Menu } from "@dhua5922/react-kit";
 import { useTransition } from "react";
-import { logOutAction } from "@/features/auth/lib/actions/logout.action";
+import { logOutAction } from "@/features/auth";
 import styles from "./AccountMenu.module.css";
 
 interface Props {
