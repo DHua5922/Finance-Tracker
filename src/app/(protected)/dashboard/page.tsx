@@ -1,9 +1,10 @@
-import DashboardPageView from "@/features/dashboard/components/dashboard-page-view/DashboardPageView";
-import { getDashboardStatsDal } from "@/features/dashboard/database/dal.database";
-import TransactionFrequencyChooser from "@/features/transaction-frequency/components/TransactionFrequencyChooser";
-import { getTransactionFrequenciesDal } from "@/features/transaction-frequency/dal/trx-frequency.dal";
-import { getSelectedFrequencyId } from "@/features/transaction-frequency/utilities/getSelectedFrequencyId.utilities";
-import { requireAuthenticatedUser } from "@/shared/session/session";
+import { DashboardPageView, getDashboardStatsDal } from "@/features/dashboard";
+import {
+  getSelectedFrequencyId,
+  getTransactionFrequenciesDal,
+  TransactionFrequencyChooser,
+} from "@/features/transaction-frequency";
+import { requireAuthenticatedUser } from "@/shared/session";
 
 interface Props {
   searchParams?: Promise<{ frequencyId?: string }>;

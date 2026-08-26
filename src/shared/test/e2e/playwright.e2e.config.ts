@@ -3,6 +3,7 @@ import "dotenv/config";
 import path from "node:path";
 import { defineConfig, devices } from "@playwright/test";
 import { z } from "zod";
+import { playwrightWebServers } from "./playwright.web-servers";
 
 const appBaseUrl = z.url().parse(process.env.APP_BASE_URL);
 
@@ -12,7 +13,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 2,
   reporter: "html",
   use: {
     baseURL: appBaseUrl,
@@ -45,10 +46,5 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  webServer: playwrightWebServers,
 });

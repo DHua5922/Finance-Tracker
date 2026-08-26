@@ -2,7 +2,7 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useId } from "react";
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
+import type { TransactionFrequency } from "@/shared/types";
 import type { Transaction } from "../../lib/dal/get-trx.dal";
 import UpsertTransactionForm from "./UpsertTransactionForm";
 

@@ -1,4 +1,4 @@
-import GetStartedButton from "@/features/auth/components/GetStartedButton";
+import { GetStartedButton } from "@/features/auth";
 import styles from "./PublicHeader.module.css";
 
 interface Props {

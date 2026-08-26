@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import AuthModal from "@/features/auth/components/AuthModal";
-import Button from "@/shared/components/Button";
-import { cn } from "@/shared/utilities/css.utilities";
+import { Button } from "@/shared/components";
+import { cn } from "@/shared/utilities";
+import AuthModal from "./AuthModal";
 
 interface Props {
   className?: string;

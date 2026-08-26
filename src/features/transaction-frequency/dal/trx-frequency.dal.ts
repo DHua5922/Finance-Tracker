@@ -1,8 +1,8 @@
 import { sql } from "drizzle-orm";
 import { z } from "zod";
-import { db } from "@/shared/database/config.database";
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
-import { parseDatabaseErrorMessage } from "@/shared/utilities/database.utilities";
+import { db } from "@/shared/database";
+import type { TransactionFrequency } from "@/shared/types";
+import { parseDatabaseErrorMessage } from "@/shared/utilities";
 
 const transactionFrequencySchema = z
   .object({

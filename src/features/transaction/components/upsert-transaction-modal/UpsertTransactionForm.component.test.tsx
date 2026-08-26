@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import { expectNoA11yViolations } from "@/shared/test/component/setup.component";
+import { expectNoA11yViolations } from "@/shared/test/component";
 import UpsertTransactionForm from "./UpsertTransactionForm";
 
 const frequencies = [

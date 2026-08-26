@@ -3,6 +3,7 @@ import "dotenv/config";
 import path from "node:path";
 import { defineConfig, devices } from "@playwright/test";
 import { z } from "zod";
+import { playwrightWebServers } from "../e2e/playwright.web-servers";
 
 const appBaseUrl = z.url().parse(process.env.APP_BASE_URL);
 
@@ -25,10 +26,5 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
-  webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  webServer: playwrightWebServers,
 });

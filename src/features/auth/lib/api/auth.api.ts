@@ -1,12 +1,12 @@
 import { z } from "zod";
+import { userSchema } from "@/shared/api";
+import { API_BACKEND_BASE_URL } from "@/shared/constants";
+import { throwIfResponseFailed } from "@/shared/utilities";
 import type {
   logInUserFormDataSchema,
   resetPasswordFormDataSchema,
   signUpUserFormDataSchema,
-} from "@/features/auth/schemas";
-import { userSchema } from "@/shared/api/user.api";
-import { API_BACKEND_BASE_URL } from "@/shared/constants/api.constants";
-import { throwIfResponseFailed } from "@/shared/utilities/api.utilities";
+} from "../../schemas";
 import { AUTH_API_ROUTES } from "../constants";
 import { createAuthApiFetch } from "./config.api";
 

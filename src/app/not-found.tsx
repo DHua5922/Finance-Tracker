@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
+import { MAIN_CONTENT_ID } from "@/shared/constants";
 import styles from "./not-found.module.css";
 
 export default function NotFound() {

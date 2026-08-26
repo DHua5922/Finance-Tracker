@@ -1,4 +1,4 @@
-import { deleteAllUserTransactionsDal } from "@/features/profile/lib/dal/delete-all-transactions.dal";
+import { deleteAllUserTransactionsDal } from "@/features/profile";
 import { inngest } from "./client";
 
 export const deleteUserTransactions = inngest.createFunction(

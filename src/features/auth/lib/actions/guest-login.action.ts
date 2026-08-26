@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { setUserSession } from "@/shared/session/session";
+import { setUserSession } from "@/shared/session";
 import { logInUserFormDataSchema } from "../../schemas";
 import { loginUserApi } from "../api/auth.api";
 

@@ -1,9 +1,6 @@
 import type { z } from "zod";
-import { API_BACKEND_BASE_URL } from "@/shared/constants/api.constants";
-import {
-  createFetchInstance,
-  throwIfResponseFailed,
-} from "@/shared/utilities/api.utilities";
+import { API_BACKEND_BASE_URL } from "@/shared/constants";
+import { createFetchInstance, throwIfResponseFailed } from "@/shared/utilities";
 import type { updateUserProfileSchema } from "../../schemas";
 
 type UpdateUserInput = z.infer<typeof updateUserProfileSchema>;

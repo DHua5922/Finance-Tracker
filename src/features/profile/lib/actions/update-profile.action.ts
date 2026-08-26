@@ -2,10 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import {
-  accessTokenName,
-  requireAuthenticatedUser,
-} from "@/shared/session/session";
+import { accessTokenName, requireAuthenticatedUser } from "@/shared/session";
 import { updateUserProfileSchema } from "../../schemas";
 import { updateUserApi } from "../api/profile.api";
 

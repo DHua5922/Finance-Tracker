@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { getAuthenticatedUser } from "@/shared/session/session";
+import { getAuthenticatedUser } from "@/shared/session";
 import { deleteTransactionDal } from "../dal/delete-trx.dal";
 
 export interface DeleteTransactionActionState {

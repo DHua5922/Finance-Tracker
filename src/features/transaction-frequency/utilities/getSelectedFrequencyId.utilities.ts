@@ -1,4 +1,4 @@
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
+import type { TransactionFrequency } from "@/shared/types";
 
 const defaultFrequencyId = 1;
 

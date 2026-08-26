@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Button from "@/shared/components/Button";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
+import { Button } from "@/shared/components";
+import { MAIN_CONTENT_ID } from "@/shared/constants";
 import styles from "./error.module.css";
 
 interface Props {

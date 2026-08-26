@@ -1,4 +1,4 @@
-import Card from "@/shared/components/Card";
+import { Card } from "@/shared/components";
 import styles from "./Features.module.css";
 
 const features = [

@@ -1,8 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import TransactionPage from "@/app/(protected)/transaction/page";
-import { db } from "@/shared/database/config.database";
-import { mockAuthenticatedUser } from "@/shared/test/integrations/auth.integrations.mock";
+import { db } from "@/shared/database";
+import { mockAuthenticatedUser } from "@/shared/test/integrations";
 
 vi.mock("next/headers", () => ({
   cookies: async () => ({
@@ -11,7 +11,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-vi.mock("@/shared/database/config.database", () => ({
+vi.mock("@/shared/database", () => ({
   db: { execute: vi.fn() },
 }));
 

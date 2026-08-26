@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { closeAccount, signUp } from "@/shared/test/e2e/auth.utilities.e2e";
+import { closeAccount, signUp } from "@/shared/test/e2e";
 
 test("dashboard should load without crashing", async ({ page }, testInfo) => {
   const runId = `${Date.now()}${testInfo.parallelIndex}`;

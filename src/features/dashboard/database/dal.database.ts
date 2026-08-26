@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { z } from "zod";
-import { db } from "@/shared/database/config.database";
-import { parseDatabaseErrorMessage } from "@/shared/utilities/database.utilities";
+import { db } from "@/shared/database";
+import { parseDatabaseErrorMessage } from "@/shared/utilities";
 
 const dashboardStatsSchema = z.object({
   expenses_count: z.coerce.number(),

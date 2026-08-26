@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { setUserSession } from "@/shared/session/session";
+import { setUserSession } from "@/shared/session";
 import { signUpUserFormDataSchema } from "../../schemas";
 import { signUpUserApi } from "../api/auth.api";
 

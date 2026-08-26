@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getMeApi } from "@/shared/api/user.api";
+import { getMeApi } from "@/shared/api";
 import convertTimeToMaxAge from "./cookie.utilities";
 
 export const accessTokenName = "accessToken";

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Card from "@/shared/components/Card";
+import { Card } from "@/shared/components";
 import styles from "./Hero.module.css";
 
 const barHeights = [48, 64, 52, 70, 60, 82, 100];
