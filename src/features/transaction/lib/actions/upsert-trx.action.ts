@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { getAuthenticatedUser } from "@/shared/session/session";
+import { getAuthenticatedUser } from "@/shared/session";
 import { upsertTransactionDal } from "../dal/upsert-trx.dal";
 
 const upsertTransactionFormDataSchema = z.object({

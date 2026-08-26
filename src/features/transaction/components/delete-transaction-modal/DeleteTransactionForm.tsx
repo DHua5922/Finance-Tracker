@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import Button from "@/shared/components/Button";
+import { Button } from "@/shared/components";
 import {
   type DeleteTransactionActionState,
   deleteTransactionAction,

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { getAuthenticatedUser } from "@/shared/session/session";
+import { getAuthenticatedUser } from "@/shared/session";
 import ProtectedShell from "./_components/ProtectedShell";
 
 interface Props {

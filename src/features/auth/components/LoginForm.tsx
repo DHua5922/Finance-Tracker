@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useActionState, useId } from "react";
 import { guestLogInAction } from "@/features/auth/lib/actions/guest-login.action";
 import { logInAction } from "@/features/auth/lib/actions/login.action";
-import Button from "@/shared/components/Button";
-import Field from "@/shared/components/Field";
-import Input from "@/shared/components/Input";
+import { Button, Field, Input } from "@/shared/components";
 
 const initialState: Parameters<typeof logInAction>[0] = {
   isError: false,

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PublicHeader from "@/app/_components/header/PublicHeader";
 import RequestPasswordResetForm from "@/features/auth/components/RequestPasswordResetForm";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
+import { MAIN_CONTENT_ID } from "@/shared/constants";
 
 export default function ForgotPasswordPage() {
   return (

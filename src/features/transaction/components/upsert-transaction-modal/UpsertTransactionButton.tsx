@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/shared/components/Button";
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
+import { Button } from "@/shared/components";
+import type { TransactionFrequency } from "@/shared/types";
 import type { Transaction } from "../../lib/dal/get-trx.dal";
 import UpsertTransactionModal from "./UpsertTransactionModal";
 

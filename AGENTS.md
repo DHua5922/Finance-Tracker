@@ -21,5 +21,6 @@
 - **Database Code / DAL Structure**: Anything that will be used globally, such as database configuration, should be placed in `shared/database`. DAL calls to Supabase for a specific feature should be placed in `features/{feature name}/database/dal.ts`. If the code in `dal.ts` is too long, split that file into files using `{dal function name}.dal.ts` and group them by `dal` folder.
 - **Utilities Code Structure**: Anything pure functions that will be used in more than 1 file or needs to be extracted out should be placed in `utilities` folder and named as `{function name}.utilities.ts`.
 - **README**: After making code changes, check if README needs to be updated. If so, make the update.
+- **Public API Pattern**: In `features/[feature]` where `[feature]` is name of a feature folder, create `index.ts` in the folder for that feature. Anything in `index.ts` can be used but others within that feature folder cannot be used directly. In `shared` folder, each folder should have `index.ts` that follow the same pattern as the feature. For instance, `index.ts` for shared `shared/components` folder, `index.ts` for `shared/hooks`, etc.
 
 <!-- END:nextjs-agent-rules -->

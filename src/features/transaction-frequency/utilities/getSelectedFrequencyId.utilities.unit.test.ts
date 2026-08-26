@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
+import type { TransactionFrequency } from "@/shared/types";
 import { getSelectedFrequencyId } from "./getSelectedFrequencyId.utilities";
 
 const frequencies: TransactionFrequency[] = [

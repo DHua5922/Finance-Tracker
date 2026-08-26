@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Features from "@/features/landing/components/Features";
 import Hero from "@/features/landing/components/Hero";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
+import { MAIN_CONTENT_ID } from "@/shared/constants";
 
 interface Props {
   primaryAction: ReactNode;

@@ -1,9 +1,7 @@
 "use client";
 
 import { useActionState, useId } from "react";
-import Button from "@/shared/components/Button";
-import Field from "@/shared/components/Field";
-import Input from "@/shared/components/Input";
+import { Button, Field, Input } from "@/shared/components";
 import { requestPasswordResetAction } from "../lib/actions/request-password-reset.action";
 
 const initialState: Parameters<typeof requestPasswordResetAction>[0] = {

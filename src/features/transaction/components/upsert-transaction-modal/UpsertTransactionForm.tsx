@@ -1,11 +1,9 @@
 "use client";
 
 import { useActionState, useEffect, useId } from "react";
-import Button from "@/shared/components/Button";
-import Field from "@/shared/components/Field";
-import Input from "@/shared/components/Input";
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
-import { cn } from "@/shared/utilities/css.utilities";
+import { Button, Field, Input } from "@/shared/components";
+import type { TransactionFrequency } from "@/shared/types";
+import { cn } from "@/shared/utilities";
 import {
   type UpsertTransactionActionState,
   upsertTransactionAction,

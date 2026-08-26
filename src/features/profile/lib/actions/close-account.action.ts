@@ -6,7 +6,7 @@ import {
   accessTokenName,
   clearUserSession,
   requireAuthenticatedUser,
-} from "@/shared/session/session";
+} from "@/shared/session";
 import { deleteUserApi } from "../api/profile.api";
 
 export interface CloseAccountActionState {

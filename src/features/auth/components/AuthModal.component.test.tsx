@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, it } from "vitest";
-import { expectNoA11yViolations } from "@/shared/test/component/setup.component";
+import { expectNoA11yViolations } from "@/shared/test/component";
 import AuthModal from "./AuthModal";
 
 it("renders login mode and switches from the top tab", async () => {

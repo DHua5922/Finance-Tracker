@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import AccountMenu from "@/app/_components/account-menu/AccountMenu";
 import Header from "@/app/_components/header/PrivateHeader";
 import DesktopSidebar from "@/app/_components/sidebar/DesktopSidebar";
-import { MAIN_CONTENT_ID } from "@/shared/constants/accessibility.constants";
+import { MAIN_CONTENT_ID } from "@/shared/constants";
 import MobileNavigation from "./MobileNavigation";
 import styles from "./ProtectedShell.module.css";
 

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { expectNoAccessibilityViolations } from "@/shared/test/accessibility/accessibility.utilities.e2e";
-import { closeAccount, signUp } from "@/shared/test/e2e/auth.utilities.e2e";
+import { expectNoAccessibilityViolations } from "@/shared/test/accessibility";
+import { closeAccount, signUp } from "@/shared/test/e2e";
 
 test("dashboard should have no WCAG A or AA violations", async ({
   page,

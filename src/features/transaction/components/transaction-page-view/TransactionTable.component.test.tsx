@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
-import { expectNoA11yViolations } from "@/shared/test/component/setup.component";
+import { expectNoA11yViolations } from "@/shared/test/component";
 import type { Transaction } from "../../lib/dal/get-trx.dal";
 import TransactionTable from "./TransactionTable";
 

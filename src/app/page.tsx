@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import PublicHeader from "@/app/_components/header/PublicHeader";
 import GetStartedButton from "@/features/auth/components/GetStartedButton";
 import LandingPageShell from "@/features/landing/components/LandingPageShell";
-import { getUserSessionStatus } from "@/shared/session/session";
+import { getUserSessionStatus } from "@/shared/session";
 
 interface Props {
   searchParams: Promise<{ login?: string }>;

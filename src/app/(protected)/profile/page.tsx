@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import CloseAccount from "@/features/profile/components/CloseAccount";
 import ProfileForm from "@/features/profile/components/ProfileForm";
-import { requireAuthenticatedUser } from "@/shared/session/session";
+import { requireAuthenticatedUser } from "@/shared/session";
 
 export const metadata: Metadata = {
   title: "Profile | FinanceFlow",

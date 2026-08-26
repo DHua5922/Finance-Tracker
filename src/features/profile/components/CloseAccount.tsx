@@ -2,7 +2,7 @@
 
 import { Modal } from "@dhua5922/react-kit";
 import { useActionState, useId, useState } from "react";
-import Button from "@/shared/components/Button";
+import { Button } from "@/shared/components";
 import { closeAccountAction } from "../lib/actions/close-account.action";
 
 const initialState = { errorMessage: "" };

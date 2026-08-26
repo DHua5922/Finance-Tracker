@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import NavigationIcon from "@/app/_components/navigation/NavigationIcon";
 import MobileSidebar from "@/app/_components/sidebar/MobileSidebar";
-import { cn } from "@/shared/utilities/css.utilities";
+import { cn } from "@/shared/utilities";
 import styles from "./MobileNavigation.module.css";
 
 interface Props {

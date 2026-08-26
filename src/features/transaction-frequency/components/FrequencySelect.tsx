@@ -1,6 +1,6 @@
 "use client";
 
-import type { TransactionFrequency } from "@/shared/types/transaction-frequency.types";
+import type { TransactionFrequency } from "@/shared/types";
 import styles from "./TransactionFrequencyChooser.module.css";
 
 interface Props {

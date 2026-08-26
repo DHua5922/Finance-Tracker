@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Button from "@/shared/components/Button";
-import { cn } from "@/shared/utilities/css.utilities";
+import { Button } from "@/shared/components";
+import { cn } from "@/shared/utilities";
 import styles from "./ThemeToggle.module.css";
 
 type Theme = "light" | "dark";

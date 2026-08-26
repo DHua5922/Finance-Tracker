@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import { expectNoA11yViolations } from "@/shared/test/component/setup.component";
+import { expectNoA11yViolations } from "@/shared/test/component";
 import TransactionFrequencyChooser from "./TransactionFrequencyChooser";
 
 describe("TransactionFrequencyChooser", () => {

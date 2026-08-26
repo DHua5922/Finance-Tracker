@@ -1,9 +1,5 @@
 import { type Page, test } from "@playwright/test";
-import {
-  closeAccount,
-  logIn,
-  signUp,
-} from "@/shared/test/e2e/auth.utilities.e2e";
+import { closeAccount, logIn, signUp } from "@/shared/test/e2e";
 import {
   cleanUpTransactions,
   createTransaction,

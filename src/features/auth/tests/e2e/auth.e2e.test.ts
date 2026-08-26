@@ -1,9 +1,5 @@
 import { expect, test } from "@playwright/test";
-import {
-  closeAccount,
-  logIn,
-  signUp,
-} from "@/shared/test/e2e/auth.utilities.e2e";
+import { closeAccount, logIn, signUp } from "@/shared/test/e2e";
 
 test("user should be able to log in as a guest", async ({ page }) => {
   await page.goto("/");

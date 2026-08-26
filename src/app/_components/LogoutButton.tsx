@@ -1,5 +1,5 @@
 import { logOutAction } from "@/features/auth/lib/actions/logout.action";
-import { cn } from "@/shared/utilities/css.utilities";
+import { cn } from "@/shared/utilities";
 import styles from "./LogoutButton.module.css";
 
 interface Props {

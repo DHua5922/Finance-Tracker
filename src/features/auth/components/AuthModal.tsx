@@ -1,8 +1,7 @@
 import { Modal as DefaultModal } from "@dhua5922/react-kit";
 import type { ComponentProps } from "react";
-import Button from "@/shared/components/Button";
-import Modal from "@/shared/components/Modal";
-import { cn } from "@/shared/utilities/css.utilities";
+import { Button, Modal } from "@/shared/components";
+import { cn } from "@/shared/utilities";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
