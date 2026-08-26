@@ -16,7 +16,8 @@
     background-color 150ms ease,
     color 150ms ease;
 
-  &:hover {
+  &:hover,
+  &.navigationLinkActive {
     background: #34d399;
     color: #020617;
   }

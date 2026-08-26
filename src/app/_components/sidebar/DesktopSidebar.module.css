@@ -1,5 +1,6 @@
 .desktopSidebar {
   display: none;
+  flex: 0 0 16rem;
   width: 16rem;
   border-right: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
   background: var(--background);

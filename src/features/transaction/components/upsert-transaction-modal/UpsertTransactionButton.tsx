@@ -22,9 +22,13 @@ export default function UpsertTransactionButton({
   return (
     <>
       {transaction ? (
-        <button type="button" onClick={() => setIsOpen(true)}>
+        <Button
+          className="border border-foreground/15 bg-transparent text-foreground hover:bg-foreground/10"
+          type="button"
+          onClick={() => setIsOpen(true)}
+        >
           Edit
-        </button>
+        </Button>
       ) : (
         <Button
           type="button"
