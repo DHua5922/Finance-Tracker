@@ -71,6 +71,10 @@ Install these tools before you begin:
 - A PostgreSQL database
 - The authentication API used by this app
 
+The Playwright configuration starts the Next.js and Inngest development
+servers automatically. Start the authentication API separately before running
+end-to-end or accessibility tests.
+
 ### Install the project
 
 ```bash
@@ -140,6 +144,34 @@ browser bundle small.
 
 Feature code stays inside its feature folder. Tests and styles are kept close
 to the code they cover.
+
+### Public APIs
+
+Code outside a feature or shared folder imports from one of its public
+`index.ts` files. It does not import implementation files from folders such as
+`components` or `lib`.
+
+Most imports use the folder's root entry point:
+
+```ts
+import { GetStartedButton } from "@/features/auth";
+import { Button, Card } from "@/shared/components";
+```
+
+Client-only and server-only code use separate public entry points when one
+barrel would mix both environments:
+
+```ts
+import { logOutAction } from "@/features/auth/server";
+import { Modal } from "@/shared/components/client";
+```
+
+These paths still resolve to `index.ts` files. The split prevents server code
+from entering the client bundle and prevents browser-only libraries from being
+evaluated while Next.js renders server components. Biome blocks deeper imports
+and allows only these named public entry points. Biome cannot discover public
+APIs automatically, so new entry points must also be added to its restricted
+import configuration.
 
 ## How authentication works
 
@@ -278,9 +310,15 @@ pnpm test:integrations
 pnpm test:accessibility
 ```
 
-The production JavaScript limit is 300 KB for the files matched by the bundle
-size check. Heavy client features, such as dashboard charts, are loaded only
-when they are needed.
+The production JavaScript limit is 300 KB for all files matched by the bundle
+size check. The check uses `@size-limit/preset-app` and includes compressed size,
+estimated loading time, and JavaScript running time. It launches a headless
+Chrome browser, so Chrome must be available locally and in CI.
+
+The current wildcard adds all generated chunks together. It is a conservative
+project-wide budget, not the amount downloaded by one page. Lazy loading still
+helps users because it delays route-specific code, even though lazy chunks are
+included in this combined total.
 
 ## Deployment
 

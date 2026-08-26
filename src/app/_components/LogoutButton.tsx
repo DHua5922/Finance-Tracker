@@ -1,4 +1,4 @@
-import { logOutAction } from "@/features/auth";
+import { logOutAction } from "@/features/auth/server";
 import { cn } from "@/shared/utilities";
 import styles from "./LogoutButton.module.css";
 

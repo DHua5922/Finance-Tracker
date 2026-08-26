@@ -29,12 +29,13 @@
           "options": {
             "patterns": [
               {
-                "group": ["@/features/*/*"],
+                "group": ["@/features/*/*", "!@/features/*/server"],
                 "message": "Import from the feature's public index.ts instead."
               },
               {
                 "group": [
                   "@/shared/*/*",
+                  "!@/shared/components/client",
                   "!@/shared/test/accessibility",
                   "!@/shared/test/component",
                   "!@/shared/test/e2e",

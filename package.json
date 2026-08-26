@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:inngest": "inngest dev -u http://localhost:3000/api/inngest -u http://localhost:8080/api/inngest",
     "build": "next build",
     "quality:check": "pnpm lint && pnpm check:unused && pnpm typescript:check",
     "test:unit": "vitest run --config src/shared/test/vitest.unit.config.ts",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^19",
     "axe-core": "^4.13.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "inngest-cli": "^1.43.0",
     "jsdom": "^30.0.1",
     "knip": "^6.32.2",
     "msw": "^2.15.0",

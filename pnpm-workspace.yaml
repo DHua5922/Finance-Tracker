@@ -1,6 +1,7 @@
 allowBuilds:
   esbuild: false
   iltorb: set this to true or false
+  inngest-cli: true
   msw: false
   protobufjs: false
   sharp: false
